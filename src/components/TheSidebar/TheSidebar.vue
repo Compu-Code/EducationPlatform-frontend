@@ -2,52 +2,16 @@
   <div
     class="bg-light-primary-color h-screen pt-6 duration-300 overflow-x-hidden scrollbar"
     :class="OpenMenuWidth"
-    @mouseover="isMenuOpen = true"
-    @mouseleave="isMenuOpen = false"
+    @mouseover="toggleOpen('over')"
+    @mouseleave="toggleOpen('leave')"
   >
-    <section class="pl-4 relative flex">
-      <div class="inline-flex">
-        <IconLogo class="cursor-pointer text-4xl float-left block mr-2" />
-        <h1
-          class="text-light-text-color origin-left font-medium duration-300 text-lg pt-1"
-          :class="{ 'scale-0': !isMenuOpen }"
-        >
-          Dashboard
-        </h1>
-      </div>
-      <span class="absolute right-3 top-1" :class="{ hidden: !isMenuOpen }">
-        <input
-          type="radio"
-          name=""
-          id=""
-          class="custom-radio"
-          :class="{ highlight: isRadioChecked }"
-          v-model="isRadioChecked"
-          @click="toggleOpen"
-        />
-      </span>
-    </section>
+    <!-- sidebar header (logo , dashboard, radiobutton) -->
+    <SidebarHeader :isMenuOpen="isMenuOpen" @isSidebarPinned="sidebarPin" />
 
-    <section class="pl-5 pr-5">
-      <div
-        class="flex items-center rounded-md bg-light-primary-color mt-2 py-1 border-light-text-color duration-100"
-        :class="{ border: isMenuOpen, SearchPaddingInClose }"
-      >
-        <IconSearch
-          class="block float-left cursor-pointer ml-1"
-          :class="SearchIconMarginInClose"
-        />
-        <input
-          type="search"
-          name=""
-          id=""
-          placeholder="Search"
-          class="text-base bg-transparent w-full text-light-text-color focus:outline-none"
-          :class="{ hidden: !isMenuOpen }"
-        />
-      </div>
-    </section>
+    <!-- sidebar search box  -->
+    <SearchBox :isMenuOpen="isMenuOpen" />
 
+    <!-- sidebar Lists (Menus)  -->
     <ul class="pt-2">
       <!-- TODO: Make every list a router link not only the text of list -->
       <li
@@ -100,10 +64,10 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
 import MainMenu from "../../core/config/MainMenuConfig";
+import SearchBox from "./SearchBox.vue";
+import SidebarHeader from "./SidebarHeader.vue";
 import IconArrow from "../icons/IconArrow.vue";
 import IconDoubleArrow from "../icons/IconDarrow.vue";
-import IconLogo from "../icons/IconLogo.vue";
-import IconSearch from "../icons/IconSearch.vue";
 import IconDashboard from "../icons/IconDashboard.vue";
 import IconUsers from "../icons/IconUsers.vue";
 import IconCourses from "../icons/IconCourses.vue";
@@ -126,8 +90,6 @@ import IconStudents from "../icons/IconStudents.vue";
 export default {
   components: {
     IconDoubleArrow,
-    IconLogo,
-    IconSearch,
     IconDashboard,
     IconArrow,
     IconUsers,
@@ -148,12 +110,14 @@ export default {
     IconHistory,
     IconStudents,
     MainMenu,
+    SearchBox,
+    SidebarHeader,
   },
   data() {
     return {
-      isMenuOpen: true,
+      isMenuOpen: false,
       isSubmenuOpen: false,
-      isRadioChecked: true,
+      isSidebarPinned: null,
       Menus: MainMenu,
     };
   },
@@ -165,23 +129,23 @@ export default {
         return "w-16";
       }
     },
-    SearchPaddingInClose() {
-      if (this.isMenuOpen) {
-        return "px-2.5";
-      } else {
-        return "px-4";
-      }
-    },
-    SearchIconMarginInClose() {
-      if (this.isMenuOpen) {
-        return "mr-2";
-      }
-    },
   },
   methods: {
-    toggleOpen() {
-      this.isMenuOpen = !this.isMenuOpen;
-      this.isRadioChecked = !this.isRadioChecked;
+    sidebarPin(pinned) {
+      this.isSidebarPinned = pinned;
+      this.isMenuOpen = pinned;
+    },
+
+    toggleOpen(mouseEvent) {
+      if (this.isSidebarPinned) {
+        this.isMenuOpen = true;
+      } else {
+        if (mouseEvent === "over") {
+          this.isMenuOpen = true;
+        } else if (mouseEvent === "leave") {
+          this.isMenuOpen = false;
+        }
+      }
     },
     testRoute(link) {
       this.$router.push(link);
@@ -194,27 +158,6 @@ export default {
 </script>
 
 <style scoped>
-.custom-radio {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-  margin-right: 8px;
-  vertical-align: middle;
-  position: relative;
-  top: -1px;
-  cursor: pointer;
-}
-
-.highlight {
-  background-color: #4286e5;
-  color: #fff;
-}
-
 .scrollbar::-webkit-scrollbar {
   width: 5px;
   /* height: 6px; */
