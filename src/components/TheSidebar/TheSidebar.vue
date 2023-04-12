@@ -194,9 +194,6 @@ export default {
 </script>
 
 <style scoped>
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 .custom-radio {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -218,27 +215,25 @@ export default {
   color: #fff;
 }
 
-@layer utilities {
-  .scrollbar::-webkit-scrollbar {
-    width: 5px;
-    /* height: 6px; */
-  }
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+  /* height: 6px; */
+}
 
-  .scrollbar::-webkit-scrollbar-track {
-    border-radius: 100vh;
-    background: #dae6f9;
-  }
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #dae6f9;
+}
 
-  .scrollbar::-webkit-scrollbar-thumb {
-    background: #c1bfbf;
-    border-radius: 100vh;
-    /* border: 3px solid #f6f7ed; */
-  }
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #c1bfbf;
+  border-radius: 100vh;
+  /* border: 3px solid #f6f7ed; */
+}
 
-  .scrollbar::-webkit-scrollbar-thumb:hover {
-    width: 12px;
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  width: 12px;
 
-    background: #d7d5d5;
-  }
+  background: #d7d5d5;
 }
 </style>
