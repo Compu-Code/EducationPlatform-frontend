@@ -2,7 +2,7 @@
 // spacing: true,
 
 const AdminsMenus = [
-  { title: "Dashboard", link: "/AdminDashboard", icon: "IconDashboard" },
+  { title: "Dashboard", link: "/Admin/Dashboard", icon: "IconDashboard" },
   { title: "Users", link: "/Users", icon: "IconUsers" },
   {
     title: "Courses",

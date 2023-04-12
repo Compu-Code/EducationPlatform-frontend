@@ -117,6 +117,11 @@ import IconNews from "../icons/IconNews.vue";
 import IconChat from "../icons/IconChat.vue";
 import IconActivity from "../icons/IconActivity.vue";
 import IconSponsors from "../icons/IconSponsors.vue";
+import IconMycourses from "../icons/IconMycourses.vue";
+import IconCalender from "../icons/IconCalender.vue";
+import IconConfirm from "../icons/IconConfirm.vue";
+import IconHistory from "../icons/Iconhistory.vue";
+import IconStudents from "../icons/IconStudents.vue";
 
 export default {
   components: {
@@ -137,6 +142,11 @@ export default {
     IconChat,
     IconActivity,
     IconSponsors,
+    IconMycourses,
+    IconCalender,
+    IconConfirm,
+    IconHistory,
+    IconStudents,
     MainMenu,
   },
   data() {
@@ -144,53 +154,7 @@ export default {
       isMenuOpen: true,
       isSubmenuOpen: false,
       isRadioChecked: true,
-      Menus: [
-        { title: "Dashboard", link: "/AdminDashboard", icon: "IconDashboard" },
-        { title: "Users", link: "/Users", icon: "IconUsers" },
-        {
-          title: "Courses",
-          link: "/Courses",
-          icon: "IconCourses",
-        },
-        {
-          title: "Transactions",
-          // submenu: true,
-          icon: "IconTransactions",
-          submenuItem: [
-            {
-              title: "Pending",
-              link: "/Transactions/pending",
-              icon: "IconDashboard",
-            },
-            {
-              title: "Completed",
-              link: "/Transactions/completed",
-              icon: "IconDashboard",
-            },
-          ],
-        },
-        {
-          title: "Orders",
-          icon: "IconOrders",
-        },
-        { title: "Errors Log", link: "/ErrorsLog", icon: "IconErrors" },
-        {
-          title: "Roles",
-          link: "/Roles",
-          icon: "IconRoles",
-        },
-        {
-          title: "Forms",
-          link: "/FormsResponses",
-          icon: "IconForms",
-        },
-
-        { title: "Rating", link: "/Rating", icon: "IconRating" },
-        { title: "News & Events", link: "/News&Events", icon: "IconNews" },
-        { title: "Chat", link: "/Support", icon: "IconChat" },
-        { title: "Activity Log", link: "/ActivityLog", icon: "IconActivity" },
-        { title: "Sponsors", link: "/Sponsors", icon: "IconSponsors" },
-      ],
+      Menus: MainMenu,
     };
   },
   computed: {

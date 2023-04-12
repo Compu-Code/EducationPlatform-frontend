@@ -1,6 +1,7 @@
 // dashboard include a charts
 const LecturersMenus = [
-  { title: "Dashboard", link: "/LecturerDashboard", icon: "IconDashboard" },
+  { title: "Dashboard", link: "/Lecturer/Dashboard", icon: "IconDashboard" },
+  { title: "Students", link: "/Lecturer/Students", icon: "IconStudents" },
   { title: "Courses", link: "/Lecturer/Courses", icon: "IconCourses" },
   {
     title: "Chat",
