@@ -1,0 +1,92 @@
+<template>
+  <section class="pl-4 relative flex">
+    <div class="inline-flex">
+      <IconLogo class="cursor-pointer text-4xl float-left block mr-2" />
+      <h1
+        class="text-light-text-color origin-left font-medium duration-300 text-lg pt-1"
+        :class="{ 'scale-0': !isMenuOpen }"
+      >
+        Dashboard
+      </h1>
+    </div>
+    <span class="absolute right-3 top-1" :class="{ hidden: !isMenuOpen }">
+      <input
+        type="radio"
+        name=""
+        id=""
+        class="custom-radio"
+        :class="{ highlight: isRadioChecked }"
+        v-model="isRadioChecked"
+        @click="
+          togglePin();
+          changeSidebarPin();
+        "
+      />
+    </span>
+  </section>
+</template>
+
+<script>
+import IconLogo from "../icons/IconLogo.vue";
+export default {
+  components: {
+    IconLogo,
+  },
+  props: ["isMenuOpen"],
+  data() {
+    return {
+      isRadioChecked: false,
+      isSidebarPinned: false,
+    };
+  },
+  methods: {
+    togglePin() {
+      this.isSidebarPinned = !this.isSidebarPinned;
+      this.isRadioChecked = !this.isRadioChecked;
+    },
+    changeSidebarPin() {
+      this.$emit("isSidebarPinned", this.isSidebarPinned);
+    },
+  },
+  watch: {
+    isSidebarPinned: function () {
+      localStorage.setItem(
+        "isSidebarPinned",
+        JSON.stringify(this.isSidebarPinned)
+      );
+    },
+  },
+  created() {
+    if (localStorage.getItem("isSidebarPinned")) {
+      this.isSidebarPinned = JSON.parse(
+        localStorage.getItem("isSidebarPinned")
+      );
+      this.isRadioChecked = JSON.parse(localStorage.getItem("isSidebarPinned"));
+    }
+    this.changeSidebarPin();
+  },
+};
+</script>
+
+<style scoped>
+.custom-radio {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  margin-right: 8px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  cursor: pointer;
+}
+
+.highlight {
+  background-color: #4286e5;
+  color: #fff;
+}
+</style>
