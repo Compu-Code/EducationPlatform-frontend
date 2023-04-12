@@ -10,10 +10,6 @@ const Roles = {
 
 let MainMenu = null;
 
-console.log(AdminsMenus);
-console.log(LecturersMenus);
-console.log(StudentsMenus);
-
 if (Roles.AdminRole === true) {
   MainMenu = AdminsMenus;
 } else if (Roles.LecturerRole === true) {
@@ -21,5 +17,5 @@ if (Roles.AdminRole === true) {
 } else if (Roles.StudentRole === true) {
   MainMenu = StudentsMenus;
 }
-console.log(MainMenu);
+
 export default MainMenu;
