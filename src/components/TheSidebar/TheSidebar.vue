@@ -20,6 +20,7 @@
     <!-- sidebar Lists (Menus)  -->
     <ul class="pt-2">
       <!-- TODO: Make every list a router link not only the text of list -->
+      <!-- TODO: put a new component inside li and its props will be Menu -->
       <li
         v-for="Menu in Menus"
         class="duration-300"
