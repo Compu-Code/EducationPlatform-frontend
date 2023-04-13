@@ -165,27 +165,25 @@ export default {
 
 <style scoped>
 .scrollbar::-webkit-scrollbar {
-  width: 5px;
-  /* height: 6px; */
+  width: 12px;
 }
 
 .scrollbar::-webkit-scrollbar-track {
-  border-radius: 100vh;
-  background: #dae6f9;
+  box-shadow: inset 0 0 10px 10px #dae6f9;
+  border: solid 4px transparent;
+  border-radius: 20px;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: #c1bfbf;
-  border-radius: 100vh;
-  /* border: 3px solid #f6f7ed; */
+  box-shadow: inset 0 0 10px 10px rgba(0, 0, 0, 0.2);
+  border: solid 4px transparent;
+  border-radius: 20px;
 }
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
-  width: 12px;
-
-  background: #d7d5d5;
+  box-shadow: inset 0 0 10px 10px rgba(0, 0, 0, 0.286);
+  border-left: solid 3.4px transparent;
 }
-
 .sidebar-shadow-on-hover {
   -moz-box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
