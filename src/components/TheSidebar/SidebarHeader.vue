@@ -12,10 +12,9 @@
     <span class="absolute right-3 top-1" :class="{ hidden: !isMenuOpen }">
       <input
         type="radio"
-        name=""
-        id=""
+        name="test2"
         class="custom-radio"
-        :class="{ highlight: isRadioChecked }"
+        :class="{ checked: isRadioChecked }"
         v-model="isRadioChecked"
         @click="
           togglePin();
@@ -74,19 +73,18 @@ export default {
   -moz-appearance: none;
   appearance: none;
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  border: 2px solid #ccc;
+  border: 2.5px solid #dae6f9;
+  outline: 2px solid #01041b;
   margin-right: 8px;
   vertical-align: middle;
   position: relative;
   top: -1px;
   cursor: pointer;
 }
-
-.highlight {
-  background-color: #4286e5;
-  color: #fff;
+.checked {
+  background-color: #01041b;
 }
 </style>
