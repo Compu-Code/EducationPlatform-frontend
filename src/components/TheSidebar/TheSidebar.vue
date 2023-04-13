@@ -1,7 +1,13 @@
 <template>
   <div
     class="bg-light-primary-color h-screen pt-6 duration-300 overflow-x-hidden scrollbar"
-    :class="OpenMenuWidth"
+    :class="[
+      {
+        'sidebar-shadow-on-hover':
+          isMenuOpen === true && isSidebarPinned === false,
+      },
+      OpenMenuWidth,
+    ]"
     @mouseover="toggleOpen('over')"
     @mouseleave="toggleOpen('leave')"
   >
@@ -178,5 +184,11 @@ export default {
   width: 12px;
 
   background: #d7d5d5;
+}
+
+.sidebar-shadow-on-hover {
+  -moz-box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
 }
 </style>
