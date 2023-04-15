@@ -23,4 +23,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+@import "./styles/variables.css";
+</style>
