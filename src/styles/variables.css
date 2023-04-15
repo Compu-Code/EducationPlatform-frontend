@@ -1,0 +1,15 @@
+:root {
+  --light-primary-color: "#DAE6F9";
+  --light-secondary-color: "#C8DDFF";
+  --light-text-color: "#01041B";
+
+  --dark-primary-color: "#01041B";
+  --dark-secondary-color: "#01062D";
+  --dark-text-color: "#DAE6F9";
+
+  --gradient-light-mode: #1570fe -53.97%, #76acff 43.01%, #8458e8 97.28%,
+    #876cd2 149.05%;
+  --gradient-dark-mode: rgba(21, 112, 254, 0.72) -53.97%,
+    rgba(118, 172, 255, 0.54) 43.01%, rgba(132, 88, 232, 0.75) 97.28%,
+    rgba(135, 108, 210, 0.82) 149.05%;
+}
