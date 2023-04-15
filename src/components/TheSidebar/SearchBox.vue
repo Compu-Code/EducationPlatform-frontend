@@ -27,7 +27,7 @@ export default {
   components: {
     IconSearch,
   },
-  props: ["isMenuOpen"],
+  inject: ["isMenuOpen"],
   data() {
     return {};
   },

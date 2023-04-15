@@ -1,17 +1,21 @@
 <template>
-  <div class="flex">
+  <!-- <div class="flex">
     <TheSidebar />
     <RouterView />
-  </div>
+  </div> -->
+  <TheNavbar />
+  <RouterView />
 </template>
 
 <script>
 import { RouterLink, RouterView } from "vue-router";
 import TheSidebar from "./components/TheSidebar/TheSidebar.vue";
+import TheNavbar from "./components/NavbarComponents/TheNavbar.vue";
 
 export default {
   components: {
     TheSidebar,
+    TheNavbar,
   },
   data() {
     return {};

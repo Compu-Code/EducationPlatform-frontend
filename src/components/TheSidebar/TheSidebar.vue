@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-light-primary-color h-screen pt-6 duration-300 overflow-x-hidden scrollbar"
+    class="bg-light-primary-color h-screen duration-300 overflow-x-hidden scrollbar"
     :class="[
       {
         'sidebar-shadow-on-hover':
@@ -11,11 +11,12 @@
     @mouseover="toggleOpen('over')"
     @mouseleave="toggleOpen('leave')"
   >
-    <!-- sidebar header (logo , dashboard, radiobutton) -->
-    <SidebarHeader :isMenuOpen="isMenuOpen" @isSidebarPinned="sidebarPin" />
+    <!-- TODO: change props values to pinia stores -->
+    <!-- <SidebarBeginning :isMenuOpen="isMenuOpen" @isSidebarPinned="sidebarPin" />
+    <SearchBox :isMenuOpen="isMenuOpen" /> -->
 
-    <!-- sidebar search box  -->
-    <SearchBox :isMenuOpen="isMenuOpen" />
+    <!-- sidebar header (logo , dashboard, radiobutton,search box) -->
+    <SidebarHeader />
 
     <!-- sidebar Lists (Menus)  -->
     <ul class="pt-2">
@@ -70,9 +71,8 @@
 
 <script>
 import { RouterLink, RouterView } from "vue-router";
+import { useSidebarStore } from "../../stores/SidebarStore";
 import MainMenu from "../../core/config/MainMenuConfig";
-import SearchBox from "./SearchBox.vue";
-import SidebarHeader from "./SidebarHeader.vue";
 import IconArrow from "../icons/IconArrow.vue";
 import IconDoubleArrow from "../icons/IconDarrow.vue";
 import IconDashboard from "../icons/IconDashboard.vue";
@@ -93,6 +93,7 @@ import IconCalender from "../icons/IconCalender.vue";
 import IconConfirm from "../icons/IconConfirm.vue";
 import IconHistory from "../icons/Iconhistory.vue";
 import IconStudents from "../icons/IconStudents.vue";
+import SidebarHeader from "./SidebarHeader.vue";
 
 export default {
   components: {
@@ -117,7 +118,6 @@ export default {
     IconHistory,
     IconStudents,
     MainMenu,
-    SearchBox,
     SidebarHeader,
   },
   data() {
@@ -126,6 +126,12 @@ export default {
       isSubmenuOpen: false,
       isSidebarPinned: null,
       Menus: MainMenu,
+    };
+  },
+  provide() {
+    return {
+      isMenuOpen: this.isMenuOpen,
+      sidebarPin: this.sidebarPin(),
     };
   },
   computed: {
