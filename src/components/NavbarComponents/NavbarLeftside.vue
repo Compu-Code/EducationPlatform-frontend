@@ -1,23 +1,33 @@
 <template>
-  <section class="flex flex-row items-center">
+  <section
+    class="flex flex-row items-center"
+    :class="{ 'text-dark-text-color': navbarStore.darkMode }"
+  >
     <div class="font-bold text-2xl">Logo</div>
-    <div class="divider mx-3"></div>
+    <div
+      class="divider mx-3 border border-light-text-color"
+      :class="{ ' border-dark-text-color': navbarStore.darkMode }"
+    ></div>
     <ul>
       <li
         v-for="Menu in navbarStore.navbarMenus"
-        class="inline-flex navMenu pr-8 text-sm"
+        class="inline-flex navMenu pr-8"
         @click="navbarStore.setActive(Menu.id)"
       >
-        <RouterLink :to="'' + Menu.link" :class="{ active: Menu.isActive }">{{
-          Menu.title
-        }}</RouterLink>
+        <RouterLink
+          :to="'' + Menu.link"
+          :class="{
+            'active-light': Menu.isActive && !navbarStore.darkMode,
+            'active-dark': Menu.isActive && navbarStore.darkMode,
+          }"
+          >{{ Menu.title }}</RouterLink
+        >
       </li>
     </ul>
   </section>
 </template>
 
 <script>
-import { RouterLink } from "vue-router";
 import { useNavbarStore } from "../../stores/NavbarStore";
 
 export default {
@@ -32,28 +42,21 @@ export default {
 </script>
 
 <style scoped>
-.active {
-  background: linear-gradient(
-    104.06deg,
-    #1570fe -53.97%,
-    #76acff 43.01%,
-    #8458e8 97.28%,
-    #876cd2 149.05%
-  );
+.active-light {
+  background: linear-gradient(104.06deg, var(--gradient-light-mode));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.navMenu {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  line-height: 110%;
+.active-dark {
+  background: linear-gradient(104.06deg, var(--gradient-dark-mode));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .divider {
   width: 31px;
   height: 0px;
-  border: 1px solid #01041b;
   transform: rotate(90deg);
 }
 </style>

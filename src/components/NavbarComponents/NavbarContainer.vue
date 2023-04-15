@@ -1,5 +1,5 @@
 <template>
-  <div class="flex mx-auto container h-[40px]">
+  <div class="flex justify-between mx-auto container h-[40px]">
     <NavbarLeftside />
     <NavbarRightside />
   </div>

@@ -10,6 +10,7 @@ export const useNavbarStore = defineStore("navbarStore", {
       { id: 4, title: "Contact", link: "/Contact", isActive: false },
       { id: 5, title: "FAQs", link: "/FAQs", isActive: false },
     ]),
+    darkMode: useLocalStorage("darkMode", false),
   }),
   actions: {
     setActive(id) {
@@ -20,6 +21,9 @@ export const useNavbarStore = defineStore("navbarStore", {
         }
         menu.isActive = true;
       }
+    },
+    toggleMode() {
+      this.darkMode = !this.darkMode;
     },
   },
 });
