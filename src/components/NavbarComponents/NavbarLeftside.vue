@@ -5,8 +5,12 @@
   >
     <div class="font-bold text-2xl">Logo</div>
     <div
-      class="divider mx-3 border border-light-text-color"
-      :class="{ ' border-dark-text-color': navbarStore.darkMode }"
+      class="divider mx-3 border"
+      :class="[
+        navbarStore.darkMode
+          ? 'border-dark-text-color'
+          : 'border-light-text-color',
+      ]"
     ></div>
     <ul>
       <li
