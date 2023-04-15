@@ -36,6 +36,13 @@ import StudentChat from "./../views/StudentsAccess/StudentChat.vue";
 import StudentCalender from "./../views/StudentsAccess/StudentCalender.vue";
 import StudentConfirm from "./../views/StudentsAccess/StudentConfirm.vue";
 
+// import all files from UserAccess folder
+import HomePage from "../views/UserAccess/HomePage.vue";
+import AboutPage from "../views/UserAccess/AboutPage.vue";
+import LecturersPage from "../views/UserAccess/LecturersPage.vue";
+import ContactPage from "../views/UserAccess/ContactPage.vue";
+import FAQsPage from "../views/UserAccess/FAQsPage.vue";
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -149,6 +156,27 @@ const router = createRouter({
     {
       path: "/Student/Confirm",
       component: StudentConfirm,
+    },
+    //  User Routes
+    {
+      path: "/Home",
+      component: HomePage,
+    },
+    {
+      path: "/About",
+      component: AboutPage,
+    },
+    {
+      path: "/Lecturers",
+      component: LecturersPage,
+    },
+    {
+      path: "/Contact",
+      component: ContactPage,
+    },
+    {
+      path: "/FAQs",
+      component: FAQsPage,
     },
   ],
 });
