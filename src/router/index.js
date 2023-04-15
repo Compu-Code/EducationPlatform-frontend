@@ -42,6 +42,8 @@ import AboutPage from "../views/UserAccess/AboutPage.vue";
 import LecturersPage from "../views/UserAccess/LecturersPage.vue";
 import ContactPage from "../views/UserAccess/ContactPage.vue";
 import FAQsPage from "../views/UserAccess/FAQsPage.vue";
+import LoginPage from "../views/UserAccess/LoginPage.vue";
+import SignupPage from "../views/UserAccess/SignupPage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -177,6 +179,14 @@ const router = createRouter({
     {
       path: "/FAQs",
       component: FAQsPage,
+    },
+    {
+      path: "/login",
+      component: LoginPage,
+    },
+    {
+      path: "/signup",
+      component: SignupPage,
     },
   ],
 });
