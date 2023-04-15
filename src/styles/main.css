@@ -1,13 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* @import url("../fonts/inter/Roboto-Regular.ttf");
+@import url("../fonts/open sans/Roboto-Regular.ttf"); */
 
-@font-face {
+/* @font-face {
   font-family: "Roboto";
   src: url("../fonts/Roboto/Roboto-Regular.ttf") format("truetype");
-  /* You can add more font formats here */
+    You can add more font formats here 
+}*/
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter/Roboto-Regular.ttf") format("truetype");
 }
 
-html {
-  font-family: "Roboto", sans-serif;
+@font-face {
+  font-family: "OpenSans";
+  src: url("../fonts/Open_Sans/static/OpenSans/OpenSans-Regular.ttf")
+    format("truetype");
+}
+
+.containerD {
+  width: 800px;
 }
