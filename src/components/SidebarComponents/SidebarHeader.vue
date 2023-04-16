@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebarHeader sticky top-0 bg-light-primary-color pt-3">
+  <div class="sidebarHeader sticky top-0 bg-light-primary-color pt-3 z-10 pb-2">
     <SidebarBeginning />
     <SearchBox />
   </div>
