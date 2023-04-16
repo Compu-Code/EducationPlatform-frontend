@@ -4,67 +4,39 @@
       <IconLogo class="cursor-pointer text-4xl float-left block mr-2" />
       <h1
         class="text-light-text-color origin-left font-medium duration-300 text-lg pt-1"
-        :class="{ 'scale-0': !isMenuOpen }"
+        :class="{ 'scale-0': !sidebarStore.isMenuOpen }"
       >
         Dashboard
       </h1>
     </div>
-    <span class="absolute right-3 top-1" :class="{ hidden: !isMenuOpen }">
+    <span
+      class="absolute right-3 top-1"
+      :class="{ hidden: !sidebarStore.isMenuOpen }"
+    >
       <input
         type="radio"
         name="test2"
         class="custom-radio"
-        :class="{ checked: isRadioChecked }"
-        v-model="isRadioChecked"
-        @click="
-          togglePin();
-          changeSidebarPin();
-        "
+        :class="{ checked: sidebarStore.isRadioChecked }"
+        v-model="sidebarStore.isRadioChecked"
+        @click="sidebarStore.togglePinned()"
       />
     </span>
   </section>
 </template>
 
 <script>
+import { useSidebarStore } from "../../stores/SidebarStore";
+
 import IconLogo from "../icons/IconLogo.vue";
 export default {
   components: {
     IconLogo,
   },
 
-  emits: ["isSidebarPinned"],
-  inject: ["isMenuOpen"],
-  data() {
-    return {
-      isRadioChecked: false,
-      isSidebarPinned: false,
-    };
-  },
-  methods: {
-    togglePin() {
-      this.isSidebarPinned = !this.isSidebarPinned;
-      this.isRadioChecked = !this.isRadioChecked;
-    },
-    changeSidebarPin() {
-      this.$emit("isSidebarPinned", this.isSidebarPinned);
-    },
-  },
-  watch: {
-    isSidebarPinned: function () {
-      localStorage.setItem(
-        "isSidebarPinned",
-        JSON.stringify(this.isSidebarPinned)
-      );
-    },
-  },
-  created() {
-    if (localStorage.getItem("isSidebarPinned")) {
-      this.isSidebarPinned = JSON.parse(
-        localStorage.getItem("isSidebarPinned")
-      );
-      this.isRadioChecked = JSON.parse(localStorage.getItem("isSidebarPinned"));
-    }
-    this.changeSidebarPin();
+  setup() {
+    const sidebarStore = useSidebarStore();
+    return { sidebarStore };
   },
 };
 </script>
