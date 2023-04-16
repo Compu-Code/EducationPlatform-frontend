@@ -12,7 +12,7 @@
           : 'border-light-text-color',
       ]"
     ></div>
-    <ul>
+    <ul class="flex flex-nowrap">
       <li
         v-for="Menu in navbarStore.navbarMenus"
         class="inline-flex navMenu pr-8"
