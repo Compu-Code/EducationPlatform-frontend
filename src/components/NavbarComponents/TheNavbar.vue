@@ -1,6 +1,7 @@
 <template>
   <div
-    class="navbar font-inter w-screen px-[77px] py-[15px] text-sm"
+    id="navbar"
+    class="font-inter w-screen px-[77px] py-[15px] text-sm"
     :class="[
       navbarStore.darkMode ? 'bg-dark-primary-color' : 'bg-light-primary-color',
     ]"
@@ -26,7 +27,7 @@ export default {
 </script>
 
 <style scoped>
-.navbar {
+#navbar {
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
