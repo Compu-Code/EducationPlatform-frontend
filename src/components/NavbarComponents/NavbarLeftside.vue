@@ -16,16 +16,12 @@
       <li
         v-for="Menu in navbarStore.navbarMenus"
         class="inline-flex navMenu pr-8"
-        @click="navbarStore.setActive(Menu.id)"
       >
-        <RouterLink
-          :to="'' + Menu.link"
-          :class="{
+        <RouterLink :to="'' + Menu.link">{{ Menu.title }}</RouterLink>
+        <!-- :class="{
             'active-light': Menu.isActive && !navbarStore.darkMode,
             'active-dark': Menu.isActive && navbarStore.darkMode,
-          }"
-          >{{ Menu.title }}</RouterLink
-        >
+          }" -->
       </li>
     </ul>
   </section>
@@ -46,21 +42,25 @@ export default {
 </script>
 
 <style scoped>
-.active-light {
-  background: linear-gradient(104.06deg, var(--gradient-light-mode));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.active-dark {
+/* .active-light {
+  
+} */
+/* .active-dark {
   background: linear-gradient(104.06deg, var(--gradient-dark-mode));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-}
+} */
 .divider {
   width: 31px;
   height: 0px;
   transform: rotate(90deg);
+}
+
+a.router-link-active {
+  color: #355cef;
+}
+a:hover {
+  color: #2246cd;
 }
 </style>

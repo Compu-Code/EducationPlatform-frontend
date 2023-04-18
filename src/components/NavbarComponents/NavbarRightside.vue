@@ -1,29 +1,38 @@
 <template>
   <section class="flex items-center justify-center">
-    <div class="icons flex mr-6">
+    <div class="icons flex mr-6 items-center relative">
       <div class="mode pr-[5px]">
-        <IconDark
-          v-if="!navbarStore.darkMode"
-          class="cursor-pointer"
-          @click="navbarStore.toggleMode"
-        />
-        <IconLight
-          v-else-if="navbarStore.darkMode"
-          class="cursor-pointer"
-          @click="navbarStore.toggleMode"
-        />
+        <IconMode class="cursor-pointer" @click="navbarStore.toggleMode" />
       </div>
       <div class="pl-[5px]">
-        <IconLanguage class="cursor-pointer" />
+        <IconLanguage
+          class="cursor-pointer"
+          @click="navbarStore.toggleLanguageMenu"
+        />
       </div>
+      <ul
+        v-if="navbarStore.isLanguageMenuOpen"
+        class="language-menu absolute top-[3.325rem] right-0 z-10"
+        :class="[
+          navbarStore.darkMode
+            ? 'bg-dark-primary-color text-dark-text-color'
+            : 'bg-light-primary-color text-light-text-color',
+        ]"
+      >
+        <div class="py-5 px-[0.625rem]">
+          <li>
+            <button class="p-[0.625rem] w-full text-left mb-[0.625rem]">
+              Arabic
+            </button>
+          </li>
+          <li>
+            <button class="p-[0.625rem] w-full text-left">English</button>
+          </li>
+        </div>
+      </ul>
     </div>
     <div>
-      <router-link
-        to="/login"
-        class="login mr-3"
-        :class="[navbarStore.darkMode ? 'login-dark' : 'login-light']"
-        >Login</router-link
-      >
+      <router-link to="/login" class="login mr-3">Log In</router-link>
       <router-link to="/signup" class="signup text-white font-inter"
         >Sign Up</router-link
       >
@@ -32,13 +41,12 @@
 </template>
 
 <script>
-import IconLight from "../icons/IconLight.vue";
-import IconDark from "../icons/IconDark.vue";
 import IconLanguage from "../icons/IconLanguage.vue";
+import IconMode from "../icons/IconMode.vue";
 import { useNavbarStore } from "../../stores/NavbarStore";
 
 export default {
-  components: { IconLight, IconDark, IconLanguage },
+  components: { IconMode, IconLanguage },
   data() {
     return {};
   },
@@ -50,21 +58,30 @@ export default {
 </script>
 
 <style scoped>
-.login-light {
-  background: linear-gradient(104.06deg, var(--gradient-light-mode));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.login-dark {
-  background: linear-gradient(104.06deg, var(--gradient-dark-mode));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.login {
+  border: 2px solid #355cef;
+  color: #355cef;
+  border-radius: 8px;
+  padding: 8px 16px;
 }
 .signup {
-  background: linear-gradient(104.06deg, var(--gradient-light-mode));
+  background-color: #355cef;
   padding: 10px 24px;
   border-radius: 8px;
+}
+
+.signup:hover {
+  background-color: #2246cd;
+}
+.language-menu {
+  border-radius: 0 0 8px 8px;
+}
+
+.language-menu li {
+  width: 7.75rem;
+}
+.language-menu button:hover {
+  background-color: slategray;
+  border-radius: 2px;
 }
 </style>

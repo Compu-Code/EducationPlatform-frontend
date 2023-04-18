@@ -32,5 +32,7 @@ export default {
   font-style: normal;
   font-weight: 700;
   line-height: 110%;
+  letter-spacing: 0.5px;
+  user-select: none;
 }
 </style>
