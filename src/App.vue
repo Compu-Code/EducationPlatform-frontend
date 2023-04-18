@@ -1,11 +1,5 @@
 <template>
-  <div class="flex">
-    <TheSidebar />
-    <RouterView />
-  </div>
-
-  <!-- <TheNavbar />
-  <RouterView /> -->
+  <RouterView />
 </template>
 
 <script>
