@@ -3,27 +3,25 @@ import { useLocalStorage } from "@vueuse/core";
 
 export const useNavbarStore = defineStore("navbarStore", {
   state: () => ({
-    navbarMenus: useLocalStorage("navbarMenus", [
-      { id: 1, title: "Home", link: "/Home", isActive: true },
-      { id: 2, title: "About us", link: "/About", isActive: false },
-      { id: 3, title: "Lecturers", link: "/Lecturers", isActive: false },
-      { id: 4, title: "Contact", link: "/Contact", isActive: false },
-      { id: 5, title: "FAQs", link: "/FAQs", isActive: false },
-    ]),
+    navbarMenus: [
+      { id: 1, title: "Home", link: "/home" },
+      { id: 2, title: "About us", link: "/about" },
+      { id: 3, title: "Lecturers", link: "/lecturers" },
+      { id: 4, title: "Contact", link: "/contact" },
+      { id: 5, title: "FAQs", link: "/FAQs" },
+      // TODO: remove dashboard
+      { id: 6, title: "dashboard", link: "/dashboard/admin" }, // for testing
+    ],
     darkMode: useLocalStorage("darkMode", false),
+    isLanguageMenuOpen: false,
+    appLanguage: useLocalStorage("lang", "En"),
   }),
   actions: {
-    setActive(id) {
-      const menu = this.navbarMenus.find((m) => m.id === id);
-      if (!menu.isActive) {
-        for (let i = 0; i < this.navbarMenus.length; i++) {
-          this.navbarMenus[i].isActive = false;
-        }
-        menu.isActive = true;
-      }
-    },
     toggleMode() {
       this.darkMode = !this.darkMode;
+    },
+    toggleLanguageMenu() {
+      this.isLanguageMenuOpen = !this.isLanguageMenuOpen;
     },
   },
 });
