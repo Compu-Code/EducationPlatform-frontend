@@ -117,7 +117,7 @@ export default {
       confirmPass: "",
       uniName: "",
       major: "",
-      accType: "",
+      accType: null,
     };
   },
   methods: {
@@ -136,8 +136,14 @@ export default {
         .catch(() => {
           this.error = "error";
         });
-      this.enteredName = "";
-      this.chosenRating = null;
+      this.fName = "";
+      this.lName = "";
+      this.email = "";
+      this.pass = "";
+      this.confirmPass = "";
+      this.uniName = "";
+      this.major = "";
+      this.accType = null;
     },
   },
 };

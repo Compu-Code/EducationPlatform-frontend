@@ -12,9 +12,6 @@ export default {
     TheSidebar,
     TheNavbar,
   },
-  data() {
-    return {};
-  },
 };
 </script>
 
