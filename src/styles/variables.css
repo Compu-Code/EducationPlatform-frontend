@@ -1,18 +1,30 @@
 :root {
-  --light-primary-color: "#F0F4FF";
-  --light-secondary-color: "#C8DDFF";
-  --light-text-color: "#01041B";
+  /* colors for light mode (BG & text) */
+  --light-primary-color: #f0f4ff;
+  --light-secondary-color: #c8ddff;
+  --light-text-color: #01041b;
 
-  --dark-primary-color: "#01041B";
-  --dark-secondary-color: "#01062D";
-  --dark-text-color: "#F0F4FF";
+  /* colors for dark mode (BG & text) */
+  --dark-primary-color: #01041b;
+  --dark-secondary-color: #01062d;
+  --dark-text-color: #f0f4ff;
 
-  --text-hover-color: "#2246CD";
-  --text-clicked-color: "#355CEF";
+  /* colors for light mode hover menus */
+  --light-menu-hover: rgba(1, 4, 27, 0.05);
 
-  /* --gradient-light-mode: #1570fe -53.97%, #76acff 43.01%, #8458e8 97.28%,
-    #876cd2 149.05%;
-  --gradient-dark-mode: rgba(21, 112, 254, 0.72) -53.97%,
-    rgba(118, 172, 255, 0.54) 43.01%, rgba(132, 88, 232, 0.75) 97.28%,
-    rgba(135, 108, 210, 0.82) 149.05%; */
+  /* colors for dark mode hover menus */
+  --dark-menu-hover: rgba(240, 244, 255, 0.05);
+
+  /* colors for dark and light mode */
+  --button-hover-fill: rgba(34, 70, 205, 0.1);
+
+  /* blue colors for light mode */
+  --light-blue-normal: #355cef;
+  --light-blue-hover: #2246cd;
+  --light-blue-active: #1433ab;
+
+  /* blue colors for dark mode */
+  --dark-blue-normal: #6188ff;
+  --dark-blue-hover: #4b6fdd;
+  --dark-blue-active: #3858bb;
 }
