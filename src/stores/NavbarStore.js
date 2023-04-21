@@ -9,11 +9,10 @@ export const useNavbarStore = defineStore("navbarStore", {
       { id: 3, title: "Lecturers", link: "/lecturers" },
       { id: 4, title: "Contact", link: "/contact" },
       { id: 5, title: "FAQs", link: "/FAQs" },
-      // TODO: remove dashboard
-      { id: 6, title: "dashboard", link: "/dashboard/admin" }, // for testing
     ],
     darkMode: useLocalStorage("darkMode", false),
     isLanguageMenuOpen: false,
+    isProfileMenuOpen: false,
     appLanguage: useLocalStorage("lang", "En"),
   }),
   actions: {
@@ -22,6 +21,14 @@ export const useNavbarStore = defineStore("navbarStore", {
     },
     toggleLanguageMenu() {
       this.isLanguageMenuOpen = !this.isLanguageMenuOpen;
+    },
+    toggleProfileMenuOpen() {
+      this.isProfileMenuOpen = !this.isProfileMenuOpen;
+    },
+    toggleLanguage(Language) {
+      if (Language !== this.appLanguage) {
+        this.appLanguage = Language;
+      }
     },
   },
 });

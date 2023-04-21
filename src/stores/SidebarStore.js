@@ -1,9 +1,11 @@
 import { useLocalStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import MainMenu from "../core/config/MainMenuConfig";
+import { useUserStore } from "./UserStore";
 
 export const useSidebarStore = defineStore("sidebarStore", {
   state: () => ({
+    UserStore: useUserStore(),
     studentMenu: [
       { title: "Dashboard", link: "/Student/Dashboard", icon: "IconDashboard" },
       { title: "Courses", link: "/Student/Courses", icon: "IconCourses" },
@@ -134,6 +136,8 @@ export const useSidebarStore = defineStore("sidebarStore", {
       {
         title: "News & Events",
         link: "/News&Events",
+        //test
+        id: "ournews",
         icon: "IconNews",
         isActive: false,
       },
@@ -141,16 +145,22 @@ export const useSidebarStore = defineStore("sidebarStore", {
       {
         title: "Activity Log",
         link: "/ActivityLog",
+        // test
+        id: "activitylogs",
         icon: "IconActivity",
         isActive: false,
       },
       {
         title: "Sponsors",
         link: "/Sponsors",
+        id: "",
         icon: "IconSponsors",
         isActive: false,
       },
     ],
+    // for testing
+    testMenu: [],
+    // end testing
     // mainMenu: ad,
     isMenuOpen: useLocalStorage("isMenuOpen", false),
     isSidebarPinned: useLocalStorage("isSidebarPinned", false),
@@ -185,6 +195,18 @@ export const useSidebarStore = defineStore("sidebarStore", {
     togglePinned() {
       this.isSidebarPinned = !this.isSidebarPinned;
       this.isRadioChecked = !this.isRadioChecked;
+    },
+    async TESTgetUserPages() {
+      await this.UserStore.getUserData();
+
+      for (const page in this.UserStore.userRolesPermissions) {
+        for (const menu in this.mainMenu) {
+          if (this.mainMenu[menu].id === page) {
+            this.testMenu.push(this.mainMenu[menu]);
+          }
+        }
+      }
+      console.log(this.testMenu);
     },
   },
 });
