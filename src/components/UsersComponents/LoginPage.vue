@@ -3,15 +3,31 @@
     <div class="center">
       <div class="container">
         <div class="text">Login Form</div>
-        <form action="#">
+        <form @submit.prevent="submitLogin">
           <div class="data">
             <label>Email</label>
-            <input type="text" required />
+            <input type="text" required v-model="email" />
           </div>
           <div class="data">
             <label>Password</label>
-            <input type="password" required />
+            <input type="password" required v-model="password" />
           </div>
+
+          <!-- loading and message to user -->
+          <div
+            v-if="AuthStore.loginLoading"
+            class="text-light-text-color text-xl"
+          >
+            <p>Loading ...</p>
+          </div>
+          <div
+            v-else-if="!AuthStore.loginLoading && AuthStore.userToken"
+            class="text-green-700 text-xl"
+          >
+            <p>{{ AuthStore.loginMessage }}</p>
+          </div>
+          <!-- end loading and message to user -->
+
           <div class="btn">
             <div class="inner"></div>
             <button type="submit">login</button>
@@ -23,7 +39,31 @@
 </template>
 
 <script>
-export default {};
+import { useAuthStore } from "../../stores/AuthStore";
+
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  setup() {
+    const AuthStore = useAuthStore();
+    return { AuthStore };
+  },
+  methods: {
+    submitLogin() {
+      this.AuthStore.login({
+        email: this.email,
+        password: this.password,
+      });
+      this.email = "";
+      this.password = "";
+      this.$router.push("/dashboard/admin");
+    },
+  },
+};
 </script>
 
 <style scoped>

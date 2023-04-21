@@ -3,7 +3,7 @@
     <div class="container">
       <div class="title">Registration</div>
       <div class="content">
-        <form @submit.prevent="submitSurvey">
+        <form @submit.prevent="submitSignup">
           <div class="user-details">
             <div class="input-box">
               <span class="details">First Name</span>
@@ -11,7 +11,7 @@
                 type="text"
                 placeholder="Enter your name"
                 required
-                v-model.trim="fName"
+                v-model.trim="firstName"
               />
             </div>
             <div class="input-box">
@@ -20,7 +20,7 @@
                 type="text"
                 placeholder="Enter your name"
                 required
-                v-model.trim="lName"
+                v-model.trim="lastName"
               />
             </div>
             <div class="input-box">
@@ -56,7 +56,7 @@
                 type="text"
                 placeholder="University Name"
                 required
-                v-model.trim="uniName"
+                v-model.trim="universityName"
               />
             </div>
             <div class="input-box">
@@ -75,14 +75,14 @@
               name="account-type"
               id="dot-1"
               value="1"
-              v-model="accType"
+              v-model="accountType"
             />
             <input
               type="radio"
               name="account-type"
               id="dot-2"
               value="2"
-              v-model="accType"
+              v-model="accountType"
             />
             <span class="account-type-title">account-type</span>
             <div class="category">
@@ -96,6 +96,22 @@
               </label>
             </div>
           </div>
+
+          <!-- loading and message to user -->
+          <div
+            v-if="AuthStore.signupLoading"
+            class="text-light-text-color text-xl"
+          >
+            <p>Loading ...</p>
+          </div>
+          <div
+            v-else-if="!AuthStore.signupLoading"
+            class="text-green-700 text-xl"
+          >
+            <p>{{ AuthStore.signupMessage }}</p>
+          </div>
+          <!-- end loading and message to user -->
+
           <div class="button">
             <input type="submit" value="Register" />
           </div>
@@ -106,44 +122,47 @@
 </template>
 
 <script>
-import axios from "axios";
+import { useAuthStore } from "../../stores/AuthStore";
+// import { useCookies } from "vue3-cookies";
 export default {
   data() {
     return {
-      fName: "",
-      lName: "",
+      firstName: "",
+      lastName: "",
       email: "",
       pass: "",
       confirmPass: "",
-      uniName: "",
+      universityName: "",
       major: "",
-      accType: null,
+      accountType: "",
     };
   },
+  setup() {
+    const AuthStore = useAuthStore();
+    return { AuthStore };
+  },
   methods: {
-    submitSurvey() {
-      axios
-        .post("https://test-cce81-default-rtdb.firebaseio.com/test.json", {
-          fname: this.fName,
-          lname: this.lName,
-          email: this.email,
-          pass: this.pass,
-          "confirm-pass": this.confirmPass,
-          "uni-name": this.uniName,
-          major: this.major,
-          "acc-type": this.accType,
-        })
-        .catch(() => {
-          this.error = "error";
-        });
-      this.fName = "";
-      this.lName = "";
+    submitSignup() {
+      //to get user token
+      // let result = document.cookie.match(/\#(.+?)\#/g)[0].split("#")[1];
+      // console.log(result[0].split("#")[1]);
+      this.AuthStore.signup({
+        first_name: this.firstName,
+        last_name: this.lastName,
+        email: this.email,
+        password: this.pass,
+        university_name: this.universityName,
+        major: this.major,
+        acc_type: this.accountType,
+      });
+      this.firstName = "";
+      this.lastName = "";
       this.email = "";
       this.pass = "";
       this.confirmPass = "";
-      this.uniName = "";
+      this.universityName = "";
       this.major = "";
-      this.accType = null;
+      this.accountType = "";
     },
   },
 };
