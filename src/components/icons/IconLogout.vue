@@ -1,0 +1,34 @@
+<template>
+  <svg
+    width="10"
+    height="11"
+    viewBox="0 0 10 11"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M8.77778 5.5L6.55556 3.27778M8.77778 5.5L6.55556 7.72222M8.77778 5.5H3.22222M6 10.5C5.34339 10.5 4.69321 10.3707 4.08658 10.1194C3.47996 9.86812 2.92876 9.49983 2.46447 9.03553C2.00017 8.57124 1.63188 8.02004 1.3806 7.41342C1.12933 6.80679 1 6.15661 1 5.5C1 4.84339 1.12933 4.19321 1.3806 3.58658C1.63188 2.97995 2.00017 2.42876 2.46447 1.96447C2.92876 1.50017 3.47996 1.13188 4.08658 0.880602C4.69321 0.629329 5.34339 0.5 6 0.5"
+      :stroke="toggleColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</template>
+<script>
+import { useNavbarStore } from "../../stores/NavbarStore";
+export default {
+  setup() {
+    const navbarStore = useNavbarStore();
+    return { navbarStore };
+  },
+  computed: {
+    toggleColor() {
+      if (this.navbarStore.darkMode) {
+        return "#F0F4FF";
+      } else {
+        return "#01041B";
+      }
+    },
+  },
+};
+</script>
