@@ -33,6 +33,6 @@ export default {
   font-weight: 700;
   line-height: 110%;
   letter-spacing: 0.5px;
-  user-select: none;
+  border-bottom: 1px solid #b2c4e4;
 }
 </style>

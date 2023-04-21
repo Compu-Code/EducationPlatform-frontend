@@ -18,10 +18,6 @@
         class="inline-flex navMenu pr-8"
       >
         <RouterLink :to="'' + Menu.link">{{ Menu.title }}</RouterLink>
-        <!-- :class="{
-            'active-light': Menu.isActive && !navbarStore.darkMode,
-            'active-dark': Menu.isActive && navbarStore.darkMode,
-          }" -->
       </li>
     </ul>
   </section>
@@ -38,19 +34,26 @@ export default {
     const navbarStore = useNavbarStore();
     return { navbarStore };
   },
+  computed: {
+    changeActiveColor() {
+      if (this.navbarStore.darkMode) {
+        return "#3858bb";
+      } else {
+        return "#1433ab";
+      }
+    },
+    changeHoverColor() {
+      if (this.navbarStore.darkMode) {
+        return "#4b6fdd";
+      } else {
+        return "#2246cd";
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
-/* .active-light {
-  
-} */
-/* .active-dark {
-  background: linear-gradient(104.06deg, var(--gradient-dark-mode));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-} */
 .divider {
   width: 31px;
   height: 0px;
@@ -58,9 +61,10 @@ export default {
 }
 
 a.router-link-active {
-  color: #355cef;
+  color: v-bind("changeActiveColor");
 }
+
 a:hover {
-  color: #2246cd;
+  color: v-bind("changeHoverColor");
 }
 </style>

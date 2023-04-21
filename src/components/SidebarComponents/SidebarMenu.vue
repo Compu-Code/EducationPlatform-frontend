@@ -1,40 +1,46 @@
 <template>
-  <div
-    class="relative pl-4 items-center flex mt-2 p-2 hover:bg-light-secondary-color rounded-r-3xl cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
-    :class="{ isActive: Menu.isActive, isSubmenuActive: Menu.isSubmenuActive }"
-    @click="
-      sidebarStore.setActive(Menu.title);
-      sidebarStore.toggleSubmenu(Menu.title);
-    "
-  >
-    <!-- Menu Icon -->
-    <span class="text-2xl block float-left ml-2 duration-300">
-      <component :is="Menu.icon"></component>
-    </span>
+  <RouterLink :to="'' + Menu.link">
+    <div
+      class="relative pl-4 items-center flex mt-2 p-2 hover:bg-light-secondary-color rounded-r-3xl cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
+      :class="{
+        isActive: Menu.isActive,
+        isSubmenuActive: Menu.isSubmenuActive,
+      }"
+      @click="
+        sidebarStore.setActive(Menu.title);
+        sidebarStore.toggleSubmenu(Menu.title);
+      "
+    >
+      <!-- Menu Icon -->
+      <span class="text-2xl block float-left ml-2 duration-300">
+        <component :is="Menu.icon"></component>
+      </span>
 
-    <!-- Menu Title -->
-    <span
-      class="text-base font-medium duration-300"
-      :class="{ hidden: !sidebarStore.isMenuOpen }"
-      ><router-link
-        :to="'' + Menu.link"
-        class="text-light-text-color items-start gap-x-4 ml-2 duration-150"
-        >{{ Menu.title }}</router-link
-      ></span
-    >
-    <!-- Menu Submenu // if have -->
-    <span
-      v-if="Menu.submenu && sidebarStore.isMenuOpen"
-      class="duration-150 absolute right-4"
-    >
-      <IconArrow
-        :class="{
-          'rotate-90': Menu.isSubmenuActive && sidebarStore.isMenuOpen,
-        }"
-        class="duration-150 self-end"
-      />
-    </span>
-  </div>
+      <!-- Menu Title -->
+      <span
+        class="text-base font-medium duration-300"
+        :class="{ hidden: !sidebarStore.isMenuOpen }"
+      >
+        <button
+          class="text-light-text-color items-start gap-x-4 ml-2 duration-150"
+        >
+          {{ Menu.title }}
+        </button>
+      </span>
+      <!-- Menu Submenu // if have -->
+      <span
+        v-if="Menu.submenu && sidebarStore.isMenuOpen"
+        class="duration-150 absolute right-4"
+      >
+        <IconArrow
+          :class="{
+            'rotate-90': Menu.isSubmenuActive && sidebarStore.isMenuOpen,
+          }"
+          class="duration-150 self-end"
+        />
+      </span>
+    </div>
+  </RouterLink>
 
   <!-- Submenu -->
   <SidebarSubmenu

@@ -1,7 +1,7 @@
 <template>
   <div
     id="sidebar"
-    class="bg-light-primary-color h-screen duration-300 overflow-x-hidden scrollbar"
+    class="bg-light-primary-color h-screen duration-300 overflow-x-hidden scrollbar z-10"
     :class="[
       {
         'sidebar-shadow-on-hover':
@@ -62,6 +62,9 @@ export default {
       }
     },
   },
+  // created() {
+  //   this.sidebarStore.TESTgetUserPages();
+  // },
 };
 </script>
 

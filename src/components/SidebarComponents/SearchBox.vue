@@ -4,10 +4,13 @@
       class="flex items-center rounded-md bg-light-primary-color mt-2 py-1 border-light-text-color duration-100"
       :class="{ border: sidebarStore.isMenuOpen, SearchPaddingInClose }"
     >
-      <IconSearch
+      <div
         class="block float-left cursor-pointer ml-1"
         :class="SearchIconMarginInClose"
-      />
+      >
+        <IconSearch />
+      </div>
+
       <input
         type="search"
         name=""
