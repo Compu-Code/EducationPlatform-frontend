@@ -158,6 +158,135 @@ export const useSidebarStore = defineStore("sidebarStore", {
         isActive: false,
       },
     ],
+    /// testing
+    allMenus: [
+      {
+        title: "Dashboard",
+        name: "dashboard",
+        icon: "IconDashboard",
+      },
+      { title: "Users", name: "admin-users", icon: "IconUsers" },
+      {
+        title: "Courses",
+        name: "admin-courses",
+        icon: "IconCourses",
+      },
+      {
+        title: "Transactions",
+        icon: "IconTransactions",
+        submenu: true,
+        isSubmenuActive: false,
+        submenuItem: [
+          {
+            title: "Pending",
+            name: "admin-pending-transactions",
+            icon: "IconDashboard",
+          },
+          {
+            title: "Completed",
+            name: "admin-completed-transactions",
+            icon: "IconDashboard",
+          },
+        ],
+      },
+      {
+        title: "Orders",
+        icon: "IconOrders",
+        submenu: true,
+        isSubmenuActive: false,
+        submenuItem: [
+          {
+            title: "Pending",
+            name: "admin-pending-orders",
+            icon: "IconDashboard",
+          },
+          {
+            title: "Completed",
+            name: "admin-completed-orders",
+            icon: "IconDashboard",
+          },
+        ],
+      },
+      {
+        title: "Errors Log",
+        name: "admin-errors-log",
+        icon: "IconErrors",
+      },
+      {
+        title: "Roles",
+        name: "admin-roles",
+        icon: "IconRoles",
+      },
+      {
+        title: "Forms",
+        name: "admin-forms-responses",
+        icon: "IconForms",
+      },
+
+      { title: "Rating", name: "admin-rating", icon: "IconRating" },
+      {
+        title: "News & Events",
+        name: "admin-news-events",
+        icon: "IconNews",
+      },
+      { title: "Chat", name: "admin-support", icon: "IconChat" },
+      {
+        title: "Activity Log",
+        name: "admin-activity-log",
+        icon: "IconActivity",
+      },
+      {
+        title: "Sponsors",
+        name: "admin-sponsors",
+        icon: "IconSponsors",
+      },
+      //lecturers
+      { title: "Students", name: "lecturer-students", icon: "IconStudents" },
+      { title: "Courses", name: "lecturer-courses", icon: "IconCourses" },
+      {
+        title: "Chat",
+        name: "lecturer-chat",
+        icon: "IconChat",
+      },
+      {
+        title: "Calender",
+        name: "lecturer-calender",
+        icon: "IconCalender",
+      },
+      {
+        title: "Courses History",
+        name: "lecturer-courses-history",
+        icon: "IconHistory",
+      },
+      {
+        title: "Confirm Give Lecture",
+        name: "lecturer-confirm",
+        icon: "IconConfirm",
+      },
+      // students
+      { title: "Courses", name: "student-courses", icon: "IconCourses" },
+      {
+        title: "Chat",
+        name: "student-chat",
+        icon: "IconChat",
+      },
+      {
+        title: "Calender",
+        name: "student-calender",
+        icon: "IconCalender",
+      },
+      {
+        title: "My Courses",
+        name: "student-my-courses",
+        icon: "IconMycourses",
+      },
+      {
+        title: "Confirm Take Lecture",
+        name: "student-confirm",
+        icon: "IconConfirm",
+      },
+    ],
+    // testing
     // for testing
     testMenu: [],
     // end testing
@@ -180,16 +309,16 @@ export const useSidebarStore = defineStore("sidebarStore", {
       }
     },
     setActive(title) {
-      const menu = this.mainMenu.find((m) => m.title === title);
+      const menu = this.allMenu.find((m) => m.title === title);
       if (!menu.isActive) {
-        for (let i = 0; i < this.mainMenu.length; i++) {
-          this.mainMenu[i].isActive = false;
+        for (let i = 0; i < this.allMenu.length; i++) {
+          this.allMenu[i].isActive = false;
         }
         menu.isActive = true;
       }
     },
     toggleSubmenu(title) {
-      const Submenu = this.mainMenu.find((m) => m.title === title);
+      const Submenu = this.allMenus.find((m) => m.title === title);
       Submenu.isSubmenuActive = !Submenu.isSubmenuActive;
     },
     togglePinned() {

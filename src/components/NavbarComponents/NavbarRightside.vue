@@ -70,16 +70,16 @@
             <IconAvatar class="w-10 h-10" />
             <div class="ml-[0.5rem] px-[0.625rem]">
               <p class="font-bold text-s">
-                {{ UserStore.userFullName }}
+                {{ AuthStore.userFullName }}
               </p>
               <p class="font-normal text-xs mt-[0.125rem]">
-                {{ UserStore.userRoles[0] }}
+                {{ AuthStore.userRoles[0] }}
               </p>
             </div>
           </div>
           <div>
             <li>
-              <RouterLink to="/dashboard/admin">
+              <RouterLink to="/dashboard">
                 <button
                   class="py-[0.625rem] pl-4 w-full text-left mb-[0.625rem] flex items-center"
                   @click="navbarStore.toggleProfileMenuOpen"
@@ -221,9 +221,9 @@ export default {
       this.AuthStore.logout();
     },
   },
-  mounted() {
-    this.UserStore.getUserData();
-  },
+  // mounted() {
+  //   this.UserStore.getUserData();
+  // },
 };
 </script>
 

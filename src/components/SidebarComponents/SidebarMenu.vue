@@ -1,15 +1,16 @@
 <template>
-  <RouterLink :to="'' + Menu.link">
+  <RouterLink v-if="!Menu.submenu" :to="{ name: Menu.name }">
     <div
-      class="relative pl-4 items-center flex mt-2 p-2 hover:bg-light-secondary-color rounded-r-3xl cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
-      :class="{
-        isActive: Menu.isActive,
-        isSubmenuActive: Menu.isSubmenuActive,
-      }"
-      @click="
-        sidebarStore.setActive(Menu.title);
-        sidebarStore.toggleSubmenu(Menu.title);
-      "
+      class="relative pl-4 items-center flex mt-2 p-2 rounded-r-3xl cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
+      :class="[
+        {
+          isSubmenuActive: Menu.isSubmenuActive,
+        },
+        navbarStore.darkMode
+          ? 'hover:bg-dark-menu-hover'
+          : 'hover:bg-light-menu-hover',
+      ]"
+      @click="sidebarStore.toggleSubmenu(Menu.title)"
     >
       <!-- Menu Icon -->
       <span class="text-2xl block float-left ml-2 duration-300">
@@ -22,7 +23,12 @@
         :class="{ hidden: !sidebarStore.isMenuOpen }"
       >
         <button
-          class="text-light-text-color items-start gap-x-4 ml-2 duration-150"
+          class="items-start gap-x-4 ml-2 duration-150"
+          :class="[
+            navbarStore.darkMode
+              ? 'text-dark-text-color'
+              : 'text-light-text-color',
+          ]"
         >
           {{ Menu.title }}
         </button>
@@ -42,19 +48,68 @@
     </div>
   </RouterLink>
 
+  <div
+    v-else-if="Menu.submenu"
+    class="relative pl-4 items-center flex mt-2 p-2 rounded-r-3xl cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap"
+    :class="[
+      {
+        isSubmenuActive: Menu.isSubmenuActive,
+      },
+      navbarStore.darkMode
+        ? 'hover:bg-dark-menu-hover'
+        : 'hover:bg-light-menu-hover',
+    ]"
+    @click="sidebarStore.toggleSubmenu(Menu.title)"
+  >
+    <!-- Menu Icon -->
+    <span class="text-2xl block float-left ml-2 duration-300">
+      <component :is="Menu.icon"></component>
+    </span>
+
+    <!-- Menu Title -->
+    <span
+      class="text-base font-medium duration-300"
+      :class="{ hidden: !sidebarStore.isMenuOpen }"
+    >
+      <button
+        class="items-start gap-x-4 ml-2 duration-150"
+        :class="[
+          navbarStore.darkMode
+            ? 'text-dark-text-color'
+            : 'text-light-text-color',
+        ]"
+      >
+        {{ Menu.title }}
+      </button>
+    </span>
+    <!-- Menu Submenu // if have -->
+    <span
+      v-if="Menu.submenu && sidebarStore.isMenuOpen"
+      class="duration-150 absolute right-4"
+    >
+      <IconArrow
+        :class="{
+          'rotate-90': Menu.isSubmenuActive && sidebarStore.isMenuOpen,
+        }"
+        class="duration-150 self-end"
+      />
+    </span>
+  </div>
+
   <!-- Submenu -->
-  <SidebarSubmenu
-    v-if="Menu.isSubmenuActive && Menu.submenu && sidebarStore.isMenuOpen"
-    :list="Menu"
-  />
+  <ul v-if="Menu.isSubmenuActive && Menu.submenu && sidebarStore.isMenuOpen">
+    <li v-for="submenu in Menu.submenuItem" :key="submenu.title">
+      <SidebarSubmenu :submenu="submenu" />
+    </li>
+  </ul>
 </template>
 
 <script>
 import { useSidebarStore } from "../../stores/SidebarStore";
+import { useNavbarStore } from "../../stores/NavbarStore";
 import SidebarSubmenu from "./SidebarSubmenu.vue";
 // ICONS FOR MENUS
 import IconArrow from "../icons/IconArrow.vue";
-import IconDoubleArrow from "../icons/IconDarrow.vue";
 import IconDashboard from "../icons/IconDashboard.vue";
 import IconUsers from "../icons/IconUsers.vue";
 import IconCourses from "../icons/IconCourses.vue";
@@ -71,13 +126,12 @@ import IconSponsors from "../icons/IconSponsors.vue";
 import IconMycourses from "../icons/IconMycourses.vue";
 import IconCalender from "../icons/IconCalender.vue";
 import IconConfirm from "../icons/IconConfirm.vue";
-import IconHistory from "../icons/Iconhistory.vue";
+import IconHistory from "../icons/IconHistory.vue";
 import IconStudents from "../icons/IconStudents.vue";
 // END OF ICONS
 
 export default {
   components: {
-    IconDoubleArrow,
     IconDashboard,
     IconArrow,
     IconUsers,
@@ -105,16 +159,23 @@ export default {
   },
   setup() {
     const sidebarStore = useSidebarStore();
-    return { sidebarStore };
+    const navbarStore = useNavbarStore();
+    return { sidebarStore, navbarStore };
+  },
+  computed: {
+    changeActiveColor() {
+      if (this.navbarStore.darkMode) {
+        return "#3858bb";
+      } else {
+        return "#1433ab";
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
-.isActive {
-  /* background-color: salmon; */
-}
-.isSubmenuActive {
-  /* background-color: seagreen; */
+a.router-link-exact-active div {
+  background-color: v-bind("changeActiveColor");
 }
 </style>

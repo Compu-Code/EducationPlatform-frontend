@@ -1,8 +1,13 @@
 <template>
   <section class="pl-5 pr-5">
     <div
-      class="flex items-center rounded-md bg-light-primary-color mt-2 py-1 border-light-text-color duration-100"
-      :class="{ border: sidebarStore.isMenuOpen, SearchPaddingInClose }"
+      class="flex items-center rounded-md mt-2 py-1 duration-300"
+      :class="[
+        { border: sidebarStore.isMenuOpen, SearchPaddingInClose },
+        navbarStore.darkMode
+          ? 'bg-dark-primary-color border-dark-text-color'
+          : 'bg-light-primary-color border-light-text-color',
+      ]"
     >
       <div
         class="block float-left cursor-pointer ml-1"
@@ -16,14 +21,20 @@
         name=""
         id=""
         placeholder="Search"
-        class="text-base bg-transparent w-full text-light-text-color focus:outline-none"
-        :class="{ hidden: !sidebarStore.isMenuOpen }"
+        class="text-base bg-transparent w-full focus:outline-none ml-1"
+        :class="[
+          { hidden: !sidebarStore.isMenuOpen },
+          navbarStore.darkMode
+            ? 'text-dark-text-color'
+            : 'text-light-text-color',
+        ]"
       />
     </div>
   </section>
 </template>
 
 <script>
+import { useNavbarStore } from "../../stores/NavbarStore";
 import { useSidebarStore } from "../../stores/SidebarStore";
 import IconSearch from "../icons/IconSearch.vue";
 
@@ -33,7 +44,8 @@ export default {
   },
   setup() {
     const sidebarStore = useSidebarStore();
-    return { sidebarStore };
+    const navbarStore = useNavbarStore();
+    return { sidebarStore, navbarStore };
   },
   data() {
     return {};

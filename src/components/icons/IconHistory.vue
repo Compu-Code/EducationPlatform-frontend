@@ -8,7 +8,27 @@
   >
     <path
       d="M12.5 0C19.4036 0 25 5.59644 25 12.5C25 19.4036 19.4036 25 12.5 25C5.59644 25 0 19.4036 0 12.5C0 5.59644 5.59644 0 12.5 0ZM12.5001 5.55556C11.7878 5.55556 11.2008 6.09173 11.1206 6.78247L11.1112 6.94444V12.481C11.1072 12.7825 11.2007 13.085 11.3916 13.3372L11.5179 13.4821L14.4421 16.4062C14.9846 16.9487 15.8639 16.9487 16.4062 16.4062C16.907 15.9056 16.9455 15.1179 16.5218 14.5729L16.4062 14.4421L13.889 11.9249V6.94444C13.889 6.17739 13.2672 5.55556 12.5001 5.55556Z"
-      fill="#01041B"
+      :fill="toggleIconColor"
     />
   </svg>
 </template>
+
+<script>
+import { useNavbarStore } from "../../stores/NavbarStore";
+
+export default {
+  setup() {
+    const navbarStore = useNavbarStore();
+    return { navbarStore };
+  },
+  computed: {
+    toggleIconColor() {
+      if (this.navbarStore.darkMode) {
+        return "#DAE6F9";
+      } else {
+        return "#01041B";
+      }
+    },
+  },
+};
+</script>

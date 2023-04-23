@@ -1,7 +1,7 @@
 <template>
   <div
     id="sidebar"
-    class="bg-light-primary-color h-screen duration-300 overflow-x-hidden scrollbar z-10"
+    class="h-screen duration-300 overflow-x-hidden scrollbar z-10"
     :class="[
       {
         'sidebar-shadow-on-hover':
@@ -9,6 +9,8 @@
           sidebarStore.isSidebarPinned === false,
       },
       OpenMenuWidth,
+
+      navbarStore.darkMode ? 'bg-dark-primary-color' : 'bg-light-primary-color',
     ]"
     @mouseover="sidebarStore.toggleOpen('over')"
     @mouseleave="sidebarStore.toggleOpen('leave')"
@@ -18,16 +20,12 @@
 
     <!-- sidebar Lists (Menus)  -->
     <ul>
-      <!-- TODO: Make every list a router link not only the text of list -->
       <li
-        v-for="Menu in sidebarStore.mainMenu"
+        v-for="Menu in sidebarStore.allMenus"
         :key="Menu.title"
         class="duration-300"
         :class="Menu.spacing ? 'mt-9' : 'mt-2'"
-        @click="testRoute(Menu.link)"
       >
-        <!-- testRoute(Menu.link);
-      sidebarStore.toggleSubmenu(Menu.title); -->
         <SidebarMenu :Menu="Menu" />
       </li>
     </ul>
@@ -35,6 +33,7 @@
 </template>
 
 <script>
+import { useNavbarStore } from "../../stores/NavbarStore";
 import { useSidebarStore } from "../../stores/SidebarStore";
 import SidebarHeader from "./SidebarHeader.vue";
 import SidebarMenu from "./SidebarMenu.vue";
@@ -46,13 +45,10 @@ export default {
   },
   setup() {
     const sidebarStore = useSidebarStore();
-    return { sidebarStore };
+    const navbarStore = useNavbarStore();
+    return { sidebarStore, navbarStore };
   },
-  methods: {
-    testRoute(link) {
-      this.$router.push(link);
-    },
-  },
+  methods: {},
   computed: {
     OpenMenuWidth() {
       if (this.sidebarStore.isMenuOpen) {

@@ -11,6 +11,29 @@
     viewBox="0 0 24 24"
     style=""
   >
-    <path fill="currentColor" d="M8.59 16.58L13.17 12L8.59 7.41L10 6l6 6l-6 6l-1.41-1.42Z"></path>
+    <path
+      :fill="toggleIconColor"
+      d="M8.59 16.58L13.17 12L8.59 7.41L10 6l6 6l-6 6l-1.41-1.42Z"
+    ></path>
   </svg>
 </template>
+
+<script>
+import { useNavbarStore } from "../../stores/NavbarStore";
+
+export default {
+  setup() {
+    const navbarStore = useNavbarStore();
+    return { navbarStore };
+  },
+  computed: {
+    toggleIconColor() {
+      if (this.navbarStore.darkMode) {
+        return "#DAE6F9";
+      } else {
+        return "#01041B";
+      }
+    },
+  },
+};
+</script>

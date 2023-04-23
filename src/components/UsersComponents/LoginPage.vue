@@ -58,9 +58,9 @@ export default {
         email: this.email,
         password: this.password,
       });
+      // if()
       this.email = "";
       this.password = "";
-      this.$router.push("/dashboard/admin");
     },
   },
 };

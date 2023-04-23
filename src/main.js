@@ -1,4 +1,4 @@
-import { createApp } from "vue";
+import { createApp, markRaw } from "vue";
 import { createPinia } from "pinia";
 
 import App from "./App.vue";
@@ -15,5 +15,9 @@ app.component("TheSidebar", TheSidebar).component("TheNavbar", TheNavbar);
 
 app.use(router, axios);
 // VueCookies;
-app.use(createPinia());
+app.use(
+  createPinia().use(({ store }) => {
+    store.$router = markRaw(router);
+  })
+);
 app.mount("#app");

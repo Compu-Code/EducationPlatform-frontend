@@ -20,6 +20,7 @@ import SponsorsPage from "../views/AdminsAccess/SponsorsPage.vue";
 // import all files from LecturerAccess folder
 import LecturerDashboard from "../views/LecturersAccess/LecturerDashboard.vue";
 import LecturerCourses from "../views/LecturersAccess/LecturerCourses.vue";
+import LecturerStudents from "../views/LecturersAccess/LecturerStudents.vue";
 import LecturerChistory from "../views/LecturersAccess/LecturerChistory.vue";
 import LecturerChat from "../views/LecturersAccess/LecturerChat.vue";
 import LecturerCalender from "../views/LecturersAccess/LecturerCalender.vue";
@@ -81,8 +82,59 @@ const router = createRouter({
     },
     {
       // Admin Dashboard Pages
-      name: "admin-dashboard",
-      path: "/dashboard/admin",
+      // name: "admin-dashboard",
+      // path: "/dashboard/admin",
+      // component: Dashboard,
+      // children: [
+      //   { name: "admin-users", path: "/users", component: Users },
+      //   { name: "admin-courses", path: "/courses", component: Courses },
+      //   {
+      //     name: "admin-pending-transactions",
+      //     path: "/transactions/pending",
+      //     component: PendingTransactions,
+      //   },
+      //   {
+      //     name: "admin-completed-transactions",
+      //     path: "/transactions/completed",
+      //     component: CompletedTransactions,
+      //   },
+      //   {
+      //     name: "admin-pending-orders",
+      //     path: "/orders/pending",
+      //     component: PendingOrders,
+      //   },
+      //   {
+      //     name: "admin-completed-orders",
+      //     path: "/orders/completed",
+      //     component: CompletedOrders,
+      //   },
+      //   { name: "admin-errors-log", path: "/errorlog", component: ErrorsLog },
+      //   {
+      //     name: "admin-forms-responses",
+      //     path: "/formsresponses",
+      //     component: FormsResponses,
+      //   },
+      //   { name: "admin-roles", path: "/roles", component: RolesPage },
+      //   {
+      //     name: "admin-news-events",
+      //     path: "/news&events",
+      //     component: NewsPage,
+      //   },
+      //   { name: "admin-rating", path: "/rating", component: RatingPage },
+      //   { name: "admin-support", path: "/support", component: SupportPage },
+      //   {
+      //     name: "admin-activity-log",
+      //     path: "/activitylog",
+      //     component: ActivityLog,
+      //   },
+      //   { name: "admin-sponsors", path: "/sponsors", component: SponsorsPage },
+      // ],
+    },
+
+    // for test
+    {
+      name: "dashboard",
+      path: "/dashboard",
       component: Dashboard,
       children: [
         { name: "admin-users", path: "/users", component: Users },
@@ -127,8 +179,59 @@ const router = createRouter({
           component: ActivityLog,
         },
         { name: "admin-sponsors", path: "/sponsors", component: SponsorsPage },
+        // lecturers
+        {
+          name: "lecturer-students",
+          path: "/mystudents",
+          component: LecturerStudents,
+        },
+        {
+          name: "lecturer-courses",
+          path: "/lecturercourses",
+          component: LecturerCourses,
+        },
+        {
+          name: "lecturer-courses-history",
+          path: "/courseshistory",
+          component: LecturerChistory,
+        },
+        { name: "lecturer-chat", path: "/chat", component: LecturerChat },
+        {
+          name: "lecturer-calender",
+          path: "/calender",
+          component: LecturerCalender,
+        },
+        {
+          name: "lecturer-confirm",
+          path: "/confirm",
+          component: LecturerConfirm,
+        },
+        //students
+        {
+          name: "student-courses",
+          path: "/studentcourses",
+          component: StudentCourses,
+        },
+        {
+          name: "student-my-courses",
+          path: "/mycourses",
+          component: StudentMcourses,
+        },
+        { name: "student-chat", path: "/chat", component: StudentChat },
+        {
+          name: "student-calender",
+          path: "/calender",
+          component: StudentCalender,
+        },
+        {
+          name: "student-confirm",
+          path: "/confirm",
+          component: StudentConfirm,
+        },
       ],
     },
+
+    // end test sec
     {
       // Lecturer Dashboard Pages
       name: "lecturer-dashboard",

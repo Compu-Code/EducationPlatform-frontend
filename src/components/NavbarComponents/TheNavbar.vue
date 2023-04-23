@@ -1,9 +1,11 @@
 <template>
   <div
     id="navbar"
-    class="font-inter w-screen px-[77px] py-[15px] text-sm"
+    class="font-inter w-screen px-[77px] py-[15px] text-sm duration-300"
     :class="[
-      navbarStore.darkMode ? 'bg-dark-primary-color' : 'bg-light-primary-color',
+      navbarStore.darkMode
+        ? 'bg-dark-primary-color border-b border-dark-navbar-border-bottom'
+        : 'bg-light-primary-color border-light-navbar-border-bottom',
     ]"
   >
     <NavbarContainer />

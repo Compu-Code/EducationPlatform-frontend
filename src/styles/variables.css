@@ -2,11 +2,13 @@
   /* colors for light mode (BG & text) */
   --light-primary-color: #f0f4ff;
   --light-secondary-color: #c8ddff;
+  --light-navbar-border-bottom: #b2c4e4;
   --light-text-color: #01041b;
 
   /* colors for dark mode (BG & text) */
   --dark-primary-color: #01041b;
   --dark-secondary-color: #01062d;
+  --dark-navbar-border-bottom: #313b4b;
   --dark-text-color: #f0f4ff;
 
   /* colors for light mode hover menus */

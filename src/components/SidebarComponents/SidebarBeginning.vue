@@ -3,8 +3,13 @@
     <div class="inline-flex">
       <IconLogo class="cursor-pointer text-4xl float-left block mr-2" />
       <h1
-        class="text-light-text-color origin-left font-medium duration-300 text-lg pt-1"
-        :class="{ 'scale-0': !sidebarStore.isMenuOpen }"
+        class="origin-left font-medium duration-300 text-lg pt-1"
+        :class="[
+          { 'scale-0': !sidebarStore.isMenuOpen },
+          navbarStore.darkMode
+            ? 'text-dark-text-color'
+            : 'text-light-text-color',
+        ]"
       >
         Dashboard
       </h1>
@@ -27,6 +32,7 @@
 
 <script>
 import { useSidebarStore } from "../../stores/SidebarStore";
+import { useNavbarStore } from "../../stores/NavbarStore";
 
 import IconLogo from "../icons/IconLogo.vue";
 export default {
@@ -36,7 +42,24 @@ export default {
 
   setup() {
     const sidebarStore = useSidebarStore();
-    return { sidebarStore };
+    const navbarStore = useNavbarStore();
+    return { sidebarStore, navbarStore };
+  },
+  computed: {
+    changeRadioOutlineAndBgColor() {
+      if (this.navbarStore.darkMode) {
+        return "#f0f4ff";
+      } else {
+        return "#01041b";
+      }
+    },
+    changeRadioBorderColor() {
+      if (this.navbarStore.darkMode) {
+        return "#01041b";
+      } else {
+        return "#f0f4ff";
+      }
+    },
   },
 };
 </script>
@@ -50,8 +73,8 @@ export default {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  border: 2.5px solid #dae6f9;
-  outline: 2px solid #01041b;
+  border: 2.5px solid v-bind(changeRadioBorderColor);
+  outline: 2px solid v-bind(changeRadioOutlineAndBgColor);
   margin-right: 8px;
   vertical-align: middle;
   position: relative;
@@ -59,6 +82,6 @@ export default {
   cursor: pointer;
 }
 .checked {
-  background-color: #01041b;
+  background-color: v-bind(changeRadioOutlineAndBgColor);
 }
 </style>

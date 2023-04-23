@@ -1,32 +1,43 @@
 <template>
-  <ul v-show="list.isSubmenuActive">
-    <li
-      v-for="submenu in list.submenuItem"
-      :key="submenu.title"
-      class="hover:bg-light-secondary-color px-5 rounded-r-3xl cursor-pointer"
+  <router-link :to="{ name: submenu.name }">
+    <div
+      class="overflow-hidden text-ellipsis whitespace-nowrap pl-[3.2rem] gap-x-4 duration-150 items-center flex mt-2 p-2 rounded-r-3xl cursor-pointer"
+      :class="
+        navbarStore.darkMode
+          ? 'text-dark-text-color hover:bg-dark-menu-hover'
+          : 'text-light-text-color hover:bg-light-menu-hover'
+      "
     >
-      <!-- :class="{ hidden: !sidebarStore.isMenuOpen }"  inside span behind the class= test bas .... -->
-      <div class="text-base font-medium duration-300">
-        <router-link
-          :to="'' + submenu.link"
-          class="text-light-text-color items-start gap-x-4 ml-2 duration-150"
-          >{{ submenu.title }}</router-link
-        >
-      </div>
-    </li>
-  </ul>
+      {{ submenu.title }}
+    </div>
+  </router-link>
 </template>
 
 <script>
 import { RouterLink, RouterView } from "vue-router";
 import { useSidebarStore } from "../../stores/SidebarStore";
+import { useNavbarStore } from "../../stores/NavbarStore";
 export default {
-  props: ["list"],
+  props: ["submenu"],
   setup() {
     const sidebarStore = useSidebarStore();
-    return { sidebarStore };
+    const navbarStore = useNavbarStore();
+    return { sidebarStore, navbarStore };
+  },
+  computed: {
+    changeActiveColor() {
+      if (this.navbarStore.darkMode) {
+        return "#3858bb";
+      } else {
+        return "#1433ab";
+      }
+    },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+a.router-link-exact-active div {
+  background-color: v-bind("changeActiveColor");
+}
+</style>
