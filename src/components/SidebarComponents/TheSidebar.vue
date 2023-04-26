@@ -1,7 +1,7 @@
 <template>
   <div
     id="sidebar"
-    class="h-screen duration-300 overflow-x-hidden scrollbar z-10"
+    class="h-screen duration-300 z-10 fixed"
     :class="[
       {
         'sidebar-shadow-on-hover':
@@ -19,15 +19,27 @@
     <SidebarHeader />
 
     <!-- sidebar Lists (Menus)  -->
-    <ul>
+    <ul class="scrollbar menus-hight overflow-x-hidden">
       <li
-        v-for="Menu in sidebarStore.allMenus"
-        :key="Menu.title"
+        v-if="filteredMenus.length > 0"
+        v-for="Menu in filteredMenus"
+        :key="Menu.name"
         class="duration-300"
         :class="Menu.spacing ? 'mt-9' : 'mt-2'"
       >
         <SidebarMenu :Menu="Menu" />
       </li>
+      <p
+        v-if="filteredMenus.length < 1"
+        class="text-center py-1"
+        :class="[
+          navbarStore.darkMode
+            ? 'text-dark-text-color'
+            : 'text-light-text-color',
+        ]"
+      >
+        No Results Found.
+      </p>
     </ul>
   </div>
 </template>
@@ -43,6 +55,11 @@ export default {
     SidebarHeader,
     SidebarMenu,
   },
+  data() {
+    return {
+      search: "",
+    };
+  },
   setup() {
     const sidebarStore = useSidebarStore();
     const navbarStore = useNavbarStore();
@@ -57,7 +74,29 @@ export default {
         return "w-16";
       }
     },
+    scrollbarVisibility() {
+      if (this.sidebarStore.isMenuOpen) {
+        return "block";
+      } else {
+        return "none";
+      }
+    },
+    scrollbarColor() {
+      if (this.navbarStore.darkMode) {
+        return "#f0f4ff";
+      } else {
+        return "#01041b";
+      }
+    },
+    filteredMenus() {
+      return this.sidebarStore.allMenus.filter((Menu) =>
+        Menu.title
+          .toLowerCase()
+          .includes(this.sidebarStore.searchText.toLowerCase())
+      );
+    },
   },
+
   // created() {
   //   this.sidebarStore.TESTgetUserPages();
   // },
@@ -65,29 +104,33 @@ export default {
 </script>
 
 <style scoped>
+.menus-hight {
+  height: calc(100% - 6.063rem);
+}
 .scrollbar::-webkit-scrollbar {
   width: 12px;
+  display: v-bind(scrollbarVisibility);
 }
 
 .scrollbar::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px 10px #dae6f9;
+  box-shadow: inset 0 0 10px 10px transparent;
   border: solid 4px transparent;
   border-radius: 20px;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 10px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 10px 10px v-bind(scrollbarColor);
   border: solid 4px transparent;
   border-radius: 20px;
 }
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
-  box-shadow: inset 0 0 10px 10px rgba(0, 0, 0, 0.286);
+  box-shadow: inset 0 0 10px 10px v-bind(scrollbarColor);
   border-left: solid 3.4px transparent;
 }
 .sidebar-shadow-on-hover {
-  -moz-box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
-  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 0px 5px v-bind(scrollbarColor);
+  -webkit-box-shadow: 2px 0px 5px v-bind(scrollbarColor);
+  box-shadow: 2px 0px 5px v-bind(scrollbarColor);
 }
 </style>

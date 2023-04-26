@@ -10,7 +10,7 @@
           ? 'hover:bg-dark-menu-hover'
           : 'hover:bg-light-menu-hover',
       ]"
-      @click="sidebarStore.toggleSubmenu(Menu.title)"
+      @click="sidebarStore.closeAllSubmenus"
     >
       <!-- Menu Icon -->
       <span class="text-2xl block float-left ml-2 duration-300">
@@ -97,11 +97,20 @@
   </div>
 
   <!-- Submenu -->
-  <ul v-if="Menu.isSubmenuActive && Menu.submenu && sidebarStore.isMenuOpen">
-    <li v-for="submenu in Menu.submenuItem" :key="submenu.title">
-      <SidebarSubmenu :submenu="submenu" />
-    </li>
-  </ul>
+  <transition
+    name="submenu"
+    @enter="enter"
+    @after-enter="afterEnter"
+    @leave="leave"
+  >
+    <ul
+      v-show="Menu.isSubmenuActive && Menu.submenu && sidebarStore.isMenuOpen"
+    >
+      <li v-for="submenu in Menu.submenuItem" :key="submenu.name">
+        <SidebarSubmenu :submenu="submenu" />
+      </li>
+    </ul>
+  </transition>
 </template>
 
 <script>
@@ -171,11 +180,40 @@ export default {
       }
     },
   },
+  methods: {
+    // for submenu animation
+    enter(el) {
+      el.style.height = "auto";
+      const height = getComputedStyle(el).height;
+      el.style.height = 0;
+      getComputedStyle(el);
+      setTimeout(() => {
+        el.style.height = height;
+      });
+    },
+    afterEnter(el) {
+      el.style.height = "auto";
+    },
+    leave(el) {
+      el.style.height = getComputedStyle(el).height;
+      getComputedStyle(el);
+      setTimeout(() => {
+        el.style.height = 0;
+      });
+    },
+    // for submenu animation
+  },
 };
 </script>
 
 <style scoped>
 a.router-link-exact-active div {
   background-color: v-bind("changeActiveColor");
+}
+/* for submenu animation */
+.submenu-enter-active,
+.submenu-leave-active {
+  transition: height 0.3s ease-in-out;
+  overflow: hidden;
 }
 </style>

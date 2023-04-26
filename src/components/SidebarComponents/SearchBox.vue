@@ -28,7 +28,10 @@
             ? 'text-dark-text-color'
             : 'text-light-text-color',
         ]"
+        v-model="sidebarStore.searchText"
       />
+      <!-- v-model="searchText"
+      @keyup="filterMenus(searchText)" -->
     </div>
   </section>
 </template>
@@ -48,7 +51,9 @@ export default {
     return { sidebarStore, navbarStore };
   },
   data() {
-    return {};
+    return {
+      // filteredItems: [],
+    };
   },
   computed: {
     SearchPaddingInClose() {
@@ -64,5 +69,27 @@ export default {
       }
     },
   },
+  // watch: {
+  //   searchText() {
+  //     this.sidebarStore.filterMenus();
+  //   },
+  // },
+  // methods: {
+  //   filterMenus() {
+  //     this.sidebarStore.filteredMenus = this.sidebarStore.allMenus.filter(
+  //       (Menu) =>
+  //         Menu.title.toLowerCase().includes(this.searchText.toLowerCase())
+  //     );
+  //     console.log(this.sidebarStore.filteredMenus);
+  //   },
+  // },
 };
 </script>
+
+<style scoped>
+input::-webkit-search-cancel-button {
+  /* -webkit-appearance: none; */
+  content: URL();
+  cursor: pointer;
+}
+</style>

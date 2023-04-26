@@ -1,11 +1,13 @@
 <template>
-  <section class="pl-4 relative flex">
+  <section
+    class="pl-4 relative flex overflow-hidden text-ellipsis whitespace-nowrap"
+  >
     <div class="inline-flex">
       <IconLogo class="cursor-pointer text-4xl float-left block mr-2" />
       <h1
         class="origin-left font-medium duration-300 text-lg pt-1"
         :class="[
-          { 'scale-0': !sidebarStore.isMenuOpen },
+          { hidden: !sidebarStore.isMenuOpen },
           navbarStore.darkMode
             ? 'text-dark-text-color'
             : 'text-light-text-color',
