@@ -1,7 +1,7 @@
 <template>
   <div
     id="navbar"
-    class="font-inter w-screen px-[77px] py-[15px] text-sm duration-300"
+    class="font-inter w-screen px-[77px] py-[15px] text-sm duration-300 sticky"
     :class="[
       navbarStore.darkMode
         ? 'bg-dark-primary-color border-b border-dark-navbar-border-bottom'
@@ -36,5 +36,6 @@ export default {
   line-height: 110%;
   letter-spacing: 0.5px;
   border-bottom: 1px solid #b2c4e4;
+  inset-block-start: 0;
 }
 </style>

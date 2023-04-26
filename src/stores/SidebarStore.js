@@ -6,6 +6,7 @@ import { useUserStore } from "./UserStore";
 export const useSidebarStore = defineStore("sidebarStore", {
   state: () => ({
     UserStore: useUserStore(),
+    search: "",
     studentMenu: [
       { title: "Dashboard", link: "/Student/Dashboard", icon: "IconDashboard" },
       { title: "Courses", link: "/Student/Courses", icon: "IconCourses" },
@@ -162,7 +163,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
     allMenus: [
       {
         title: "Dashboard",
-        name: "dashboard",
+        name: "dashboard-home",
         icon: "IconDashboard",
       },
       { title: "Users", name: "admin-users", icon: "IconUsers" },
@@ -286,6 +287,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
         icon: "IconConfirm",
       },
     ],
+    filteredMenus: [],
     // testing
     // for testing
     testMenu: [],
@@ -295,6 +297,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
     isSidebarPinned: useLocalStorage("isSidebarPinned", false),
     isSubmenuOpen: false,
     isRadioChecked: useLocalStorage("isRadioChecked", false),
+    searchText: "",
   }),
   actions: {
     toggleOpen(mouseEvent) {
@@ -308,18 +311,31 @@ export const useSidebarStore = defineStore("sidebarStore", {
         }
       }
     },
-    setActive(title) {
-      const menu = this.allMenu.find((m) => m.title === title);
-      if (!menu.isActive) {
-        for (let i = 0; i < this.allMenu.length; i++) {
-          this.allMenu[i].isActive = false;
-        }
-        menu.isActive = true;
-      }
-    },
+    // setActive(title) {
+    //   const menu = this.allMenu.find((m) => m.title === title);
+    //   if (!menu.isActive) {
+    //     for (let i = 0; i < this.allMenu.length; i++) {
+    //       this.allMenu[i].isActive = false;
+    //     }
+    //     menu.isActive = true;
+    //   }
+    // },
     toggleSubmenu(title) {
       const Submenu = this.allMenus.find((m) => m.title === title);
-      Submenu.isSubmenuActive = !Submenu.isSubmenuActive;
+      if (Submenu.isSubmenuActive) {
+        Submenu.isSubmenuActive = false;
+      } else {
+        for (let i = 0; i < this.allMenus.length; i++) {
+          this.allMenus[i].isSubmenuActive = false;
+        }
+        Submenu.isSubmenuActive = true;
+      }
+      // Submenu.isSubmenuActive = !Submenu.isSubmenuActive;
+    },
+    closeAllSubmenus() {
+      for (let i = 0; i < this.allMenus.length; i++) {
+        this.allMenus[i].isSubmenuActive = false;
+      }
     },
     togglePinned() {
       this.isSidebarPinned = !this.isSidebarPinned;
@@ -337,5 +353,17 @@ export const useSidebarStore = defineStore("sidebarStore", {
       }
       console.log(this.testMenu);
     },
+    // setSearch(searchText) {
+    //   this.search = searchText;
+    // },
   },
+  // getters: {
+  //   getMenus() {
+  //     if (this.filteredMenus.length > 0) {
+  //       return this.filteredMenus;
+  //     } else {
+  //       return this.allMenus;
+  //     }
+  //   },
+  // },
 });
