@@ -88,8 +88,6 @@ export default {
 
 <style scoped>
 input::-webkit-search-cancel-button {
-  /* -webkit-appearance: none; */
-  content: URL();
-  cursor: pointer;
+  -webkit-appearance: none;
 }
 </style>
