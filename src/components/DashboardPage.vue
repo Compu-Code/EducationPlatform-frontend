@@ -3,22 +3,33 @@
     <div class="z-10 absolute">
       <TheSidebar />
     </div>
-    <div class="layout-page flex flex-col absolute z-0 right-0 duration-300">
-      <NavbarRightside class="bg-dark-primary-color" />
+    <div
+      class="layout-page flex flex-col absolute z-0 right-0 duration-300 px-8"
+      :class="[
+        NavbarStore.darkMode
+          ? 'bg-dark-primary-color'
+          : 'bg-light-primary-color',
+      ]"
+    >
+      <DashboardNavbar />
+      <!-- <NavbarRightside class="bg-dark-primary-color" /> -->
       <RouterView />
     </div>
   </div>
 </template>
 
 <script>
-import NavbarRightside from "./NavbarComponents/NavbarRightside.vue";
+import DashboardNavbar from "./DashboardComponents/Navbar/DashboardNavbar.vue";
+import TheSidebar from "./SidebarComponents/TheSidebar.vue";
 import { useSidebarStore } from "../stores/SidebarStore";
+import { useNavbarStore } from "../stores/NavbarStore";
 
 export default {
-  components: { NavbarRightside },
+  components: { TheSidebar, DashboardNavbar },
   setup() {
     const SidebarStore = useSidebarStore();
-    return { SidebarStore };
+    const NavbarStore = useNavbarStore();
+    return { SidebarStore, NavbarStore };
   },
   methods: {
     getSidebarWidth() {
