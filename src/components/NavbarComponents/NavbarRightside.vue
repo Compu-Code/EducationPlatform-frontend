@@ -10,120 +10,55 @@
           @click="navbarStore.toggleLanguageMenu"
         />
       </div>
-      <ul
-        v-if="navbarStore.isLanguageMenuOpen"
-        class="language-menu absolute top-[2.188rem] right-0 z-10"
-        :class="[
-          navbarStore.darkMode
-            ? 'bg-dark-primary-color text-dark-text-color'
-            : 'bg-light-primary-color text-light-text-color',
-        ]"
-      >
-        <div class="py-5 px-[0.625rem]">
-          <li>
-            <button
-              class="p-[0.625rem] w-full text-left mb-[0.625rem]"
-              :class="changeColorOfLanguageSelected"
-              @click="
-                navbarStore.toggleLanguageMenu();
-                navbarStore.toggleLanguage(makeLanguageSelectedTop.slice(0, 2));
-              "
-            >
-              {{ makeLanguageSelectedTop }}
-            </button>
-          </li>
-          <li>
-            <button
-              class="p-[0.625rem] w-full text-left"
-              @click="
-                navbarStore.toggleLanguageMenu();
-                navbarStore.toggleLanguage(
-                  makeLanguageUnselectedDown.slice(0, 2)
-                );
-              "
-            >
-              {{ makeLanguageUnselectedDown }}
-            </button>
-          </li>
-        </div>
-      </ul>
-    </div>
-    <div v-if="AuthStore.isAuthenticated" class="relative">
-      <div
-        @click="navbarStore.toggleProfileMenuOpen"
-        class="flex justify-center items-center"
-      >
-        <IconAvatar class="mr-2 cursor-pointer" />
-        <IconThickarrow class="cursor-pointer" />
-      </div>
-      <ul
-        v-if="navbarStore.isProfileMenuOpen"
-        class="account-menu absolute top-[2.188rem] right-0 z-10"
-        :class="[
-          navbarStore.darkMode
-            ? 'bg-dark-primary-color text-dark-text-color'
-            : 'bg-light-primary-color text-light-text-color',
-        ]"
-      >
-        <div class="py-4 px-[0.625rem]">
-          <div class="mb-3 flex w-full px-[0.938rem] items-end justify-start">
-            <IconAvatar class="w-10 h-10" />
-            <div class="ml-[0.5rem] px-[0.625rem]">
-              <p class="font-bold text-s">
-                {{ AuthStore.userFullName }}
-              </p>
-              <p class="font-normal text-xs mt-[0.125rem]">
-                {{ AuthStore.userRoles[0] }}
-              </p>
-            </div>
-          </div>
-          <div>
-            <li>
-              <RouterLink to="/dashboard">
-                <button
-                  class="py-[0.625rem] pl-4 w-full text-left mb-[0.625rem] flex items-center"
-                  @click="navbarStore.toggleProfileMenuOpen"
-                >
-                  <div class="pr-[0.625rem]">
-                    <IconDdropmenu />
-                  </div>
-                  Dashboard
-                </button>
-              </RouterLink>
-            </li>
-            <li>
-              <RouterLink to="/profile/settings">
-                <button
-                  class="py-[0.625rem] pl-4 w-full text-left mb-[0.625rem] flex items-center"
-                  @click="navbarStore.toggleProfileMenuOpen"
-                >
-                  <div class="pr-[0.625rem]">
-                    <IconSettings />
-                  </div>
 
-                  Profile Settings
-                </button>
-              </RouterLink>
+      <!-- language dropdown menu and transitions -->
+      <transition name="language-dropdown">
+        <ul
+          v-if="navbarStore.isLanguageMenuOpen"
+          class="language-menu absolute top-[2.188rem] right-0 z-10"
+          :class="[
+            navbarStore.darkMode
+              ? 'bg-dark-primary-color text-dark-text-color'
+              : 'bg-light-primary-color text-light-text-color',
+          ]"
+        >
+          <div class="py-5 px-[0.625rem]">
+            <li>
+              <button
+                class="p-[0.625rem] w-full text-left mb-[0.625rem]"
+                :class="changeColorOfLanguageSelected"
+                @click="
+                  navbarStore.toggleLanguageMenu();
+                  navbarStore.toggleLanguage(
+                    makeLanguageSelectedTop.slice(0, 2)
+                  );
+                "
+              >
+                {{ makeLanguageSelectedTop }}
+              </button>
             </li>
             <li>
               <button
-                class="py-[0.625rem] pl-4 w-full text-left flex items-center"
+                class="p-[0.625rem] w-full text-left"
                 @click="
-                  navbarStore.toggleProfileMenuOpen();
-                  userLogout();
+                  navbarStore.toggleLanguageMenu();
+                  navbarStore.toggleLanguage(
+                    makeLanguageUnselectedDown.slice(0, 2)
+                  );
                 "
               >
-                <div class="pr-[0.625rem]">
-                  <IconLogout />
-                </div>
-                Log Out
+                {{ makeLanguageUnselectedDown }}
               </button>
             </li>
           </div>
-        </div>
-      </ul>
+        </ul>
+      </transition>
     </div>
 
+    <!-- if user auth => will show avatar and dropmenu -->
+    <RightAuthenticated v-if="AuthStore.isAuthenticated" />
+
+    <!-- if user not auth => will show login and signup -->
     <div v-if="!AuthStore.isAuthenticated">
       <router-link to="/login" class="login mr-3">Log In</router-link>
       <router-link to="/signup" class="signup text-white font-inter"
@@ -136,24 +71,16 @@
 <script>
 import IconLanguage from "../icons/IconLanguage.vue";
 import IconMode from "../icons/IconMode.vue";
-import IconAvatar from "../icons/IconAvatar.vue";
-import IconThickarrow from "../icons/IconThickarrow.vue";
-import IconLogout from "../icons/IconLogout.vue";
-import IconSettings from "../icons/IconSettings.vue";
-import IconDdropmenu from "../icons/IconDdropmenu.vue";
 import { useNavbarStore } from "../../stores/NavbarStore";
 import { useAuthStore } from "../../stores/AuthStore";
 import { useUserStore } from "../../stores/UserStore";
+import RightAuthenticated from "./RightAuthenticated.vue";
 
 export default {
   components: {
     IconMode,
     IconLanguage,
-    IconAvatar,
-    IconThickarrow,
-    IconLogout,
-    IconSettings,
-    IconDdropmenu,
+    RightAuthenticated,
   },
   data() {
     return {};
@@ -208,22 +135,12 @@ export default {
         return "bg-light-menu-hover";
       }
     },
-    // getUserName() {
-    //   if (this.UserStore.userData && !this.UserStore.isUserDataLoading) {
-    //     return `${this.UserStore.userData.first_name} ${this.UserStore.userData.last_name}`;
-    //   } else {
-    //     return "loading ...";
-    //   }
-    // },
   },
   methods: {
     userLogout() {
       this.AuthStore.logout();
     },
   },
-  // mounted() {
-  //   this.UserStore.getUserData();
-  // },
 };
 </script>
 
@@ -249,8 +166,7 @@ export default {
   background-color: v-bind("changeHoverColor");
 }
 
-.language-menu,
-.account-menu {
+.language-menu {
   border-radius: 8px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
@@ -258,18 +174,28 @@ export default {
 .language-menu li {
   width: 7.75rem;
 }
-.account-menu li {
-  width: 13.313rem;
-}
 
-.language-menu button,
-.account-menu button {
+.language-menu button {
   transition: all 300ms;
 }
 
-.language-menu button:hover,
-.account-menu button:hover {
+.language-menu button:hover {
   background-color: v-bind(changeHoverMenuColor);
   border-radius: 2px;
 }
+
+/* create animation for language dropdown (down from up & go to up from down) */
+.language-dropdown-enter-from,
+.language-dropdown-leave-to {
+  transform: translateY(-175.8px);
+}
+.language-dropdown-enter-active,
+.language-dropdown-leave-active {
+  transition: transform 300ms ease;
+}
+.language-dropdown-enter-to,
+.language-dropdown-leave-from {
+  transform: translateY(0);
+}
+/* create animation for language dropdown (down from up & go to up from down) */
 </style>

@@ -38,4 +38,8 @@ export default {
 <style>
 @import "./styles/main.css";
 @import "./styles/variables.css/";
+
+* {
+  font-family: "Inter";
+}
 </style>

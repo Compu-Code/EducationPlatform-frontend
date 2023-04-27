@@ -30,8 +30,6 @@
         ]"
         v-model="sidebarStore.searchText"
       />
-      <!-- v-model="searchText"
-      @keyup="filterMenus(searchText)" -->
     </div>
   </section>
 </template>
@@ -50,11 +48,6 @@ export default {
     const navbarStore = useNavbarStore();
     return { sidebarStore, navbarStore };
   },
-  data() {
-    return {
-      // filteredItems: [],
-    };
-  },
   computed: {
     SearchPaddingInClose() {
       if (this.isMenuOpen) {
@@ -69,20 +62,6 @@ export default {
       }
     },
   },
-  // watch: {
-  //   searchText() {
-  //     this.sidebarStore.filterMenus();
-  //   },
-  // },
-  // methods: {
-  //   filterMenus() {
-  //     this.sidebarStore.filteredMenus = this.sidebarStore.allMenus.filter(
-  //       (Menu) =>
-  //         Menu.title.toLowerCase().includes(this.searchText.toLowerCase())
-  //     );
-  //     console.log(this.sidebarStore.filteredMenus);
-  //   },
-  // },
 };
 </script>
 

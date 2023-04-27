@@ -1,10 +1,10 @@
 <template>
   <!-- overlay -->
-  <div
+  <!-- <div
     id="overlay"
     :class="{ hidden: !NavbarStore.isLanguageMenuOpen }"
     @click="NavbarStore.toggleLanguageMenu"
-  ></div>
+  ></div> -->
   <TheNavbar />
   <RouterView />
 </template>

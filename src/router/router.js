@@ -41,7 +41,11 @@ import LecturersPage from "../views/UserAccess/LecturersPage.vue";
 import ContactPage from "../views/UserAccess/ContactPage.vue";
 import FAQsPage from "../views/UserAccess/FAQsPage.vue";
 import LoginPage from "../views/UserAccess/LoginPage.vue";
-import SignupPage from "../views/UserAccess/SignupPage.vue";
+
+// import signup steps from UserAccess
+import Signup1 from "../views/UserAccess/SiginupSteps/Signup1.vue";
+import Signup2 from "../views/UserAccess/SiginupSteps/Signup2.vue";
+import Signup3 from "../views/UserAccess/SiginupSteps/Signup3.vue";
 
 ////
 import WebsitePage from "../views/Website.vue";
@@ -79,7 +83,12 @@ const router = createRouter({
       // signup
       name: "signup",
       path: "/signup",
-      component: SignupPage,
+      redirect: "/signup/step1",
+      children: [
+        { name: "signup-step1", path: "step1", component: Signup1 },
+        { name: "signup-step2", path: "step2", component: Signup2 },
+        { name: "signup-step3", path: "step3", component: Signup3 },
+      ],
     },
     {
       // Admin Dashboard Pages

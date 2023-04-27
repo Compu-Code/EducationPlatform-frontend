@@ -96,10 +96,6 @@ export default {
       );
     },
   },
-
-  // created() {
-  //   this.sidebarStore.TESTgetUserPages();
-  // },
 };
 </script>
 

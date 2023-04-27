@@ -27,10 +27,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* .sidebarHeader {
-  -moz-box-shadow: 0px 6px 50px #dae6f9;
-  -webkit-box-shadow: 0px 6px 50px #dae6f9;
-  box-shadow: 0px 6px 50px #dae6f9;
-} */
-</style>
+<style scoped></style>
