@@ -1,29 +1,19 @@
 import { defineStore } from "pinia";
 import { RouterLink, RouterView, createWebHistory } from "vue-router";
 import { useLocalStorage } from "@vueuse/core";
+import { useUserStore } from "./UserStore";
 import axios from "axios";
 
 export const useAuthStore = defineStore("authStore", {
   state: () => ({
+    UserStore: useUserStore(),
     signupLoading: false,
     signupMessage: "",
     loginLoading: false,
     loginMessage: "",
 
-    // user data
     userToken: null,
-    userData: useLocalStorage("userData", ""),
-    userFname: "",
-    userLname: "",
-    userFullName: "",
-    userId: "",
-    userEmail: "",
-    userUniversity: "",
-    userMajor: "",
-    userPhone: "",
-    userPic: "",
-    userRoles: "",
-    userRolesPermissions: "",
+    userData: null,
   }),
   actions: {
     async signup(payload) {
@@ -55,18 +45,19 @@ export const useAuthStore = defineStore("authStore", {
         this.userData = response.data.data.user;
         this.userToken = response.data.data.user.token;
         //
-        // this.userFname = this.userData.first_name;
-        // this.userLname = this.userData.last_name;
-        // this.userFullName = this.userFname + " " + this.userLname;
-        // this.userId = this.userData.id;
-        // this.userEmail = this.userData.email;
-        // this.userUniversity = this.userData.university_name;
-        // this.userMajor = this.userData.major;
-        // this.userPhone = this.userData.phone;
-        // this.userPic = this.userData.profile_pic;
-        // this.userRoles = this.userData.roles;
-        // this.userRolesPermissions = this.userData.roles_permissions;
-        //
+        this.UserStore.userFname = this.userData.first_name;
+        this.UserStore.userLname = this.userData.last_name;
+        this.UserStore.userFullName = this.userFname + " " + this.userLname;
+        this.UserStore.userId = this.userData.id;
+        this.UserStore.userEmail = this.userData.email;
+        this.UserStore.userUniversity = this.userData.university_name;
+        this.UserStore.userMajor = this.userData.major;
+        this.UserStore.userPhone = this.userData.phone;
+        this.UserStore.userPic = this.userData.profile_pic;
+        this.UserStore.userRoles = this.userData.roles;
+        this.UserStore.userRolesPermissions = this.userData.roles_permissions;
+
+        // TODO: search for axios credentials IMPORTANT
         document.cookie = "userToken=" + "#" + this.userToken + "#";
 
         if (this.userToken) {
