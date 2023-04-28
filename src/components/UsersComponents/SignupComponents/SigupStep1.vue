@@ -12,7 +12,7 @@
     </div>
 
     <div
-      class="Container2 grid z-10 relative top-[50%] left-[4.688rem] grid-cols-6 grid-rows-6"
+      class="Container2 grid z-10 relative top-[50%] left-[4.688rem] grid-rows-6"
       :class="[
         navbarStore.darkMode ? 'text-dark-text-color' : 'text-light-text-color',
       ]"
@@ -30,14 +30,42 @@
       </div>
 
       <!-- student || lecturer -->
-      <div class="acc-type flex col-start-3 col-end-5 row-start-3 row-end-6">
-        <div class="w-64 border border-white">student</div>
-        <div class="w-64 border border-white">Lecturer</div>
+      <div
+        class="acc-type flex col-start-3 col-end-7 row-start-3 row-end-6 justify-self-center"
+      >
+        <div class="w-64 relative mr-[-30px]">
+          <img
+            src="../../../assets/images/Student.png"
+            alt="student-img"
+            class="absolute student-img"
+            @click="studentChoosed"
+          />
+          <span
+            class="text-dark-text-color student-span absolute"
+            @click="studentChoosed"
+          >
+            Student
+          </span>
+        </div>
+        <div class="w-64 relative">
+          <img
+            src="../../../assets/images/Lecturer.png"
+            alt="lecturer-img"
+            class="absolute lecturer-img"
+            @click="lecturerChoosed"
+          />
+          <span
+            class="text-dark-text-color lecturer-span absolute"
+            @click="lecturerChoosed"
+          >
+            Lecturer
+          </span>
+        </div>
       </div>
 
       <!-- don't have acc ? login -->
       <div
-        class="self-center justify-self-center col-start-3 col-end-5 row-start-6"
+        class="self-end justify-self-center col-start-4 col-end-6 row-start-6"
       >
         <p>
           Don’t have an account ?
@@ -62,12 +90,15 @@ import { useNavbarStore } from "../../../stores/NavbarStore";
 import VectorupSignup from "../../icons/VectorupSignup.vue";
 import VectordownSignup from "../../icons/VectordownSignup.vue";
 import StepsBar from "./StepsBar.vue";
+
 // import threeTest from "../../three test/threeTest.vue";
 
 export default {
   components: { VectorupSignup, VectordownSignup, StepsBar },
   data() {
-    return {};
+    return {
+      accType: "",
+    };
   },
   setup() {
     const navbarStore = useNavbarStore();
@@ -82,6 +113,16 @@ export default {
       }
     },
   },
+  methods: {
+    studentChoosed() {
+      this.accType = "Student";
+      this.$router.replace({ name: "signup-step2" });
+    },
+    lecturerChoosed() {
+      this.accType = "Lecturer";
+      this.$router.replace({ name: "signup-step2" });
+    },
+  },
 };
 </script>
 
@@ -94,9 +135,36 @@ export default {
   width: 100%;
   height: 500px;
   transform: translateY(-50%);
+  grid-template-columns: repeat(6, minmax(0, 185px));
 }
 
 .login:hover {
   color: v-bind(changeLoginColor);
+}
+
+.student-img {
+  left: 50%;
+  transform: translateX(-50%);
+  user-select: none;
+  -webkit-user-drag: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.lecturer-img {
+  left: 50%;
+  transform: translateX(-50%);
+  user-select: none;
+  -webkit-user-drag: none;
+  cursor: pointer;
+  z-index: 1;
+}
+.student-span,
+.lecturer-span {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  z-index: 2;
 }
 </style>
