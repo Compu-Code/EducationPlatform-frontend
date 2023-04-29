@@ -2,20 +2,20 @@
   <div class="steps-bar absolute self-center">
     <transition name="step-1-transition" @before-enter="onBeforeEnter">
       <div class="step-1">
-        <router-link :to="{ name: 'signup-step1' }">
+        <router-link :to="{ name: 'signup-step1' }" replace>
           <span>1</span>
         </router-link>
       </div>
     </transition>
 
     <div class="step-2">
-      <router-link :to="{ name: 'signup-step2' }">
+      <router-link :to="{ name: 'signup-step2' }" replace>
         <span>2</span>
       </router-link>
     </div>
 
     <div class="step-3">
-      <router-link :to="{ name: 'signup-step3' }">
+      <router-link :to="{ name: 'signup-step3' }" replace>
         <span>3</span>
       </router-link>
     </div>

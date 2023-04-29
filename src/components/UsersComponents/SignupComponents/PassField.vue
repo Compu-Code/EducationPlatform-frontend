@@ -1,13 +1,18 @@
 <template>
-  <input
-    name="pass"
-    :type="[passIsHide ? 'password' : 'text']"
-    class="w-full"
-    :placeholder="[placeHolder === 1 ? 'Password' : 'Confirm Password']"
-  />
-  <div class="pass-icon absolute right-7" @click="togglePassVisibility">
-    <IconShowpass v-if="!passIsHide" />
-    <IconHidepass v-else-if="passIsHide" />
+  <div class="relative">
+    <input
+      :type="[passIsHide ? 'password' : 'text']"
+      class="w-full password-field"
+      @blur="$emit('checkPassValidate', $event.target.value)"
+      @focus="$emit('showPassConstraint')"
+      @keyup="$emit('userPass', $event.target.value)"
+      :value="modelValue"
+      :placeholder="[placeHolder === 1 ? 'Password' : 'Confirm Password']"
+    />
+    <div class="pass-icon absolute right-7" @click="togglePassVisibility">
+      <IconShowpass v-if="!passIsHide" />
+      <IconHidepass v-else-if="passIsHide" />
+    </div>
   </div>
 </template>
 
@@ -15,21 +20,31 @@
 import { useNavbarStore } from "../../../stores/NavbarStore";
 import IconShowpass from "../../icons/IconShowpass.vue";
 import IconHidepass from "../../icons/IconHidepass.vue";
+import { useSignupStepsStore } from "../../../stores/SignupStepsStore";
 
 export default {
   components: {
     IconShowpass,
     IconHidepass,
   },
-  props: ["placeHolder"],
+  props: ["placeHolder", "modelValue"],
+  emits: [
+    "checkPassValidate",
+    "update:modelValue",
+    "showPassConstraint",
+    "userPass",
+  ],
   data() {
     return {
       passIsHide: true,
+      isPassValid: "",
+      userPass: "",
     };
   },
   setup() {
     const navbarStore = useNavbarStore();
-    return { navbarStore };
+    const signupStepsStore = useSignupStepsStore();
+    return { navbarStore, signupStepsStore };
   },
   methods: {
     togglePassVisibility() {
