@@ -9,6 +9,7 @@ export const useAuthStore = defineStore("authStore", {
     UserStore: useUserStore(),
     signupLoading: false,
     signupMessage: "",
+    signupSuccess: false,
     loginLoading: false,
     loginMessage: "",
 
@@ -20,7 +21,7 @@ export const useAuthStore = defineStore("authStore", {
       this.signupLoading = true;
       try {
         const response = await axios.post(
-          "https://6cf4-109-107-253-177.ngrok-free.app/api/auth/register",
+          "https://3b43-109-107-253-177.ngrok-free.app/api/auth/register",
           payload
         );
         this.signupLoading = false;
@@ -28,6 +29,7 @@ export const useAuthStore = defineStore("authStore", {
         console.log(response.data.message);
         console.log(response.data.success);
         this.signupMessage = response.data.message;
+        this.signupSuccess = response.data.success;
       } catch (error) {
         this.signupLoading = false;
         console.log(error);
@@ -37,7 +39,7 @@ export const useAuthStore = defineStore("authStore", {
       this.loginLoading = true;
       try {
         const response = await axios.post(
-          "https://6cf4-109-107-253-177.ngrok-free.app/api/auth/login",
+          "https://3b43-109-107-253-177.ngrok-free.app/api/auth/login",
           payload
         );
         this.loginLoading = false;
@@ -74,7 +76,7 @@ export const useAuthStore = defineStore("authStore", {
       try {
         console.log(this.userToken);
         const response = await axios.post(
-          "https://6cf4-109-107-253-177.ngrok-free.app/api/auth/logout",
+          "https://3b43-109-107-253-177.ngrok-free.app/api/auth/logout",
           null,
           {
             headers: {
