@@ -32,7 +32,13 @@
       <div
         class="user-data-form flex col-start-2 col-end-5 row-start-3 row-end-6 mt-7"
       >
-        <form @submit.prevent="checkAllFieldsAndStore">
+        <form
+          @submit.prevent="checkAllFieldsAndStore"
+          @blur="
+            checkUniversityValidity();
+            checkMajorValidity();
+          "
+        >
           <!-- university + major -->
           <input
             name="university"
@@ -83,13 +89,44 @@
               >
             </router-link>
             <!-- continue button -->
-            <normal-filled type="submit">Continue</normal-filled>
+            <normal-filled type="submit" :isDisabled="disabledBtn"
+              >Continue</normal-filled
+            >
           </div>
           <!-- TODO: make loading spinner in continue btn -->
           <p v-if="authStore.signupLoading">Loading ...</p>
         </form>
       </div>
     </div>
+    <popup-card
+      v-if="signupStatus === true"
+      :numOfActions="2"
+      firstActionLink="/login"
+      secondActionLink="/home"
+    >
+      <template v-slot:cardTitle>Success!</template>
+      <template v-slot:cardDetails>Your account has been created.</template>
+      <template v-slot:cardFirstAction>Go back to</template>
+      <template v-slot:cardFirstActionLink>Login</template>
+      <template v-slot:cardSecondAction></template>
+      <template v-slot:cardSecondActionLink>Home</template>
+    </popup-card>
+
+    <popup-card
+      v-if="signupStatus === false"
+      :numOfActions="2"
+      firstActionLink="/login"
+      secondActionLink="/home"
+    >
+      <template v-slot:cardTitle>Failed!</template>
+      <template v-slot:cardDetails
+        >The email you entered already exists.</template
+      >
+      <template v-slot:cardFirstAction>para</template>
+      <template v-slot:cardFirstActionLink>Login</template>
+      <template v-slot:cardSecondAction>para</template>
+      <template v-slot:cardSecondActionLink>Home</template>
+    </popup-card>
   </section>
 </template>
 
@@ -141,7 +178,7 @@ function changeBgFieldColor(arg1) {
 function changeParaColor(arg1) {
   if (!useNavbarStore().darkMode) {
     if (arg1) {
-      return "#4CC38AE5";
+      return "#01041b";
     } else if (arg1 === false) {
       return "#FF6369E5";
     } else if (arg1 === "") {
@@ -149,7 +186,7 @@ function changeParaColor(arg1) {
     }
   } else {
     if (arg1) {
-      return "#4CC38AE5";
+      return "#f0f4ff";
     } else if (arg1 === false) {
       return "#FF6369E5";
     } else if (arg1 === "") {
@@ -166,6 +203,7 @@ import VectorupSignup from "../../icons/VectorupSignup.vue";
 import VectordownSignup from "../../icons/VectordownSignup.vue";
 import NormalFilled from "../../UI/ButtonBases/NormalFilled.vue";
 import IconDeflated from "../../UI/ButtonBases/IconDeflated.vue";
+import PopupCard from "../../UI/PopupBases/PopupCard.vue";
 
 export default {
   components: {
@@ -174,6 +212,7 @@ export default {
     VectordownSignup,
     NormalFilled,
     IconDeflated,
+    PopupCard,
   },
   setup() {
     const navbarStore = useNavbarStore();
@@ -186,6 +225,7 @@ export default {
       isUniversityValid: "",
       isMajorValid: "",
       isUserAgreeTerms: "",
+      signupStatus: "",
     };
   },
   methods: {
@@ -274,13 +314,13 @@ export default {
           acc_type: this.signupStepsStore.userAccType,
         });
         if (this.authStore.signupSuccess) {
+          this.signupStatus = true;
           this.signupStepsStore.$reset();
-          this.$router.replace({ path: "/login" });
         } else {
-          console.log("signup failed");
+          this.signupStatus = false;
         }
       } else {
-        console.log("please check all fields");
+        // console.log("please check all fields");
       }
     },
   },
@@ -290,6 +330,17 @@ export default {
         return "rgba(240, 244, 255, 0.2)";
       } else {
         return "rgba(53, 92, 239, 0.1)";
+      }
+    },
+    disabledBtn() {
+      if (
+        this.signupStepsStore.userMajor !== "" &&
+        this.signupStepsStore.userUniversity !== "" &&
+        this.isUserAgreeTerms === true
+      ) {
+        return false;
+      } else {
+        return true;
       }
     },
   },

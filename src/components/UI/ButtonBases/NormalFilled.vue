@@ -1,6 +1,6 @@
 <!-- base button (normal filled / light + dark (mode)) -->
 <template>
-  <button class="normal-filled">
+  <button class="normal-filled" :disabled="isDisabled">
     <slot></slot>
   </button>
 </template>
@@ -12,6 +12,7 @@ export default {
     const navbarStore = useNavbarStore();
     return { navbarStore };
   },
+  props: ["isDisabled"],
   // change colors (bg, hover & clicked Dynamically based on mode[light/dark])
   computed: {
     changeColor() {
@@ -53,5 +54,11 @@ button:hover {
 }
 button:active {
   background: v-bind(changeClickedColor);
+}
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }
 </style>
