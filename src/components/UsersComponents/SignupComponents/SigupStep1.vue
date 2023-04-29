@@ -87,6 +87,7 @@
 
 <script>
 import { useNavbarStore } from "../../../stores/NavbarStore";
+import { useSignupStepsStore } from "../../../stores/SignupStepsStore.js";
 import VectorupSignup from "../../icons/VectorupSignup.vue";
 import VectordownSignup from "../../icons/VectordownSignup.vue";
 import StepsBar from "./StepsBar.vue";
@@ -96,13 +97,12 @@ import StepsBar from "./StepsBar.vue";
 export default {
   components: { VectorupSignup, VectordownSignup, StepsBar },
   data() {
-    return {
-      accType: "",
-    };
+    return {};
   },
   setup() {
     const navbarStore = useNavbarStore();
-    return { navbarStore };
+    const signupStepsStore = useSignupStepsStore();
+    return { navbarStore, signupStepsStore };
   },
   computed: {
     changeLoginColor() {
@@ -115,12 +115,12 @@ export default {
   },
   methods: {
     studentChoosed() {
-      this.accType = "Student";
-      this.$router.replace({ name: "signup-step2" });
+      this.signupStepsStore.userAccType = "1";
+      this.$router.replace({ path: "/signup/step2" });
     },
     lecturerChoosed() {
-      this.accType = "Lecturer";
-      this.$router.replace({ name: "signup-step2" });
+      this.signupStepsStore.userAccType = "2";
+      this.$router.replace({ path: "/signup/step2" });
     },
   },
 };
