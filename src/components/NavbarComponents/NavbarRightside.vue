@@ -29,10 +29,9 @@
                 class="p-[0.625rem] w-full text-left mb-[0.625rem]"
                 :class="changeColorOfLanguageSelected"
                 @click="
-                  navbarStore.toggleLanguageMenu();
                   navbarStore.toggleLanguage(
                     makeLanguageSelectedTop.slice(0, 2)
-                  );
+                  )
                 "
               >
                 {{ makeLanguageSelectedTop }}
@@ -42,10 +41,9 @@
               <button
                 class="p-[0.625rem] w-full text-left"
                 @click="
-                  navbarStore.toggleLanguageMenu();
                   navbarStore.toggleLanguage(
                     makeLanguageUnselectedDown.slice(0, 2)
-                  );
+                  )
                 "
               >
                 {{ makeLanguageUnselectedDown }}

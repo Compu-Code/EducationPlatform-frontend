@@ -1,18 +1,18 @@
 <template>
   <div>
-    <h1>users</h1>
+    <ErrorLogs />
   </div>
 </template>
 
 <script>
 import { defineAsyncComponent } from "vue";
 
-const UserPage = defineAsyncComponent(() =>
-  import("../../components/AdminsComponents/UsersPage.vue")
+const ErrorLogs = defineAsyncComponent(() =>
+  import("../../components/AdminsComponents/ErrorLogs.vue")
 );
 
 export default {
-  components: { UserPage },
+  components: { ErrorLogs },
 };
 </script>
 

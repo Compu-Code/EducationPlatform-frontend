@@ -209,8 +209,8 @@ export const useSidebarStore = defineStore("sidebarStore", {
         ],
       },
       {
-        title: "Errors Log",
-        name: "admin-errors-log",
+        title: "Error Logs",
+        name: "admin-error-logs",
         icon: "IconErrors",
       },
       {
@@ -242,7 +242,12 @@ export const useSidebarStore = defineStore("sidebarStore", {
         icon: "IconSponsors",
       },
       //lecturers
-      { title: "Students", name: "lecturer-students", icon: "IconStudents" },
+      {
+        title: "Students",
+        name: "lecturer-students",
+        icon: "IconStudents",
+        spacing: true,
+      },
       { title: "Courses", name: "lecturer-courses", icon: "IconCourses" },
       {
         title: "Chat",
@@ -265,7 +270,12 @@ export const useSidebarStore = defineStore("sidebarStore", {
         icon: "IconConfirm",
       },
       // students
-      { title: "Courses", name: "student-courses", icon: "IconCourses" },
+      {
+        title: "Courses",
+        name: "student-courses",
+        icon: "IconCourses",
+        spacing: true,
+      },
       {
         title: "Chat",
         name: "student-chat",

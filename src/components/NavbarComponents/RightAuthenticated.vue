@@ -1,6 +1,7 @@
 <template>
   <div class="relative">
     <div
+      ref="target"
       @click="navbarStore.toggleProfileMenuOpen"
       class="flex justify-center items-center"
     >
@@ -31,10 +32,9 @@
           </div>
           <div>
             <li>
-              <RouterLink :to="currentRouterPath">
+              <RouterLink :to="{ name: currentRouterPath }">
                 <button
                   class="py-[0.625rem] pl-4 w-full text-left mb-[0.625rem] flex items-center"
-                  @click="navbarStore.toggleProfileMenuOpen"
                 >
                   <div class="pr-[0.625rem]">
                     <IconDdropmenu />
@@ -47,7 +47,6 @@
               <RouterLink to="/profile/settings">
                 <button
                   class="py-[0.625rem] pl-4 w-full text-left mb-[0.625rem] flex items-center"
-                  @click="navbarStore.toggleProfileMenuOpen"
                 >
                   <div class="pr-[0.625rem]">
                     <IconSettings />
@@ -60,10 +59,7 @@
             <li>
               <button
                 class="py-[0.625rem] pl-4 w-full text-left flex items-center"
-                @click="
-                  navbarStore.toggleProfileMenuOpen();
-                  userLogout();
-                "
+                @click="userLogout"
               >
                 <div class="pr-[0.625rem]">
                   <IconLogout />
@@ -97,14 +93,11 @@ const IconDdropmenu = defineAsyncComponent(() =>
   import("../icons/IconDdropmenu.vue")
 );
 
-// import IconAvatar from "../icons/IconAvatar.vue";
-// import IconThickarrow from "../icons/IconThickarrow.vue";
-// import IconLogout from "../icons/IconLogout.vue";
-// import IconSettings from "../icons/IconSettings.vue";
-// import IconDdropmenu from "../icons/IconDdropmenu.vue";
+import { ref } from "vue";
 import { useNavbarStore } from "../../stores/NavbarStore";
 import { useAuthStore } from "../../stores/AuthStore";
 import { useUserStore } from "../../stores/UserStore";
+import { onClickOutside } from "@vueuse/core";
 
 export default {
   components: {
@@ -121,7 +114,11 @@ export default {
     const navbarStore = useNavbarStore();
     const AuthStore = useAuthStore();
     const UserStore = useUserStore();
-    return { navbarStore, AuthStore, UserStore };
+
+    const target = ref(null);
+    onClickOutside(target, (event) => (navbarStore.isProfileMenuOpen = false));
+
+    return { navbarStore, AuthStore, UserStore, target };
   },
   computed: {
     changeHoverMenuColor() {
@@ -132,17 +129,17 @@ export default {
       }
     },
     currentRouteName() {
-      if (this.$route.name === "home") {
+      if (this.$route.matched[0].name === "website") {
         return "Dashboard";
-      } else if (this.$route.name === "dashboard-home") {
+      } else if (this.$route.matched[0].name === "dashboard") {
         return "Home";
       }
     },
     currentRouterPath() {
-      if (this.$route.name === "home") {
-        return "/dashboard";
-      } else if (this.$route.name === "dashboard-home") {
-        return "/home";
+      if (this.$route.matched[0].name === "website") {
+        return "dashboard";
+      } else if (this.$route.matched[0].name === "dashboard") {
+        return "website";
       }
     },
   },

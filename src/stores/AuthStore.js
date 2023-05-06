@@ -11,7 +11,7 @@ import axios from "axios";
 export const useAuthStore = defineStore("authStore", {
   state: () => ({
     UserStore: useUserStore(),
-    baseURL: "https://1137-109-107-243-170.ngrok-free.app",
+    baseURL: "https://34bb-109-107-243-170.ngrok-free.app",
     signupLoading: false,
     signupMessage: "",
     signupSuccess: "",
@@ -29,10 +29,10 @@ export const useAuthStore = defineStore("authStore", {
       try {
         const response = await axios.post(
           this.baseURL + "/api/auth/register",
-          payload,
-          {
-            timeout: 3000,
-          }
+          payload
+          // {
+          //   timeout: 3000,
+          // }
         );
         this.signupLoading = false;
         console.log(response.data);
@@ -56,8 +56,8 @@ export const useAuthStore = defineStore("authStore", {
           payload,
           {
             // withCredentials: true,
-            credentials: "include",
-            timeout: 10000,
+            // credentials: "include",
+            // timeout: 10000,
             headers: {
               "Access-Control-Allow-Origin": "*",
               // Authorization: `Bearer ${this.userToken}`,
@@ -102,14 +102,14 @@ export const useAuthStore = defineStore("authStore", {
       // console.log(this.getCookie("JWT"));
       try {
         console.log(this.userToken);
-        const response = await instance.post(
+        const response = await axios.post(
           this.baseURL + "/api/auth/logout",
           null,
           {
-            withCredentials: true,
+            // withCredentials: true,
             headers: {
               "Access-Control-Allow-Origin": "*",
-              // Authorization: `Bearer ${this.userToken}`,
+              Authorization: `Bearer ${this.userToken}`,
               "content-type": "application/json",
             },
             timeout: 3000,

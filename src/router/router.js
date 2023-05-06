@@ -1,4 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { defineAsyncComponent } from "vue";
+
+// const ErrorsLog = defineAsyncComponent(() => import("../views/AdminsAccess/ErrorsLog.vue"));
 
 // import all files from AdminAccess folder + LAZY LOADING
 const Users = () => import("../views/AdminsAccess/UsersPage.vue");
@@ -12,7 +15,7 @@ const PendingOrders = () =>
   import("../views/AdminsAccess/Orders/PendingOrders.vue");
 const CompletedOrders = () =>
   import("../views/AdminsAccess/Orders/CompletedOrders.vue");
-const ErrorsLog = () => import("../views/AdminsAccess/ErrorsLog.vue");
+const ErrorLogs = () => import("../views/AdminsAccess/ErrorLogs.vue");
 const FormsResponses = () => import("../views/AdminsAccess/FormsResponses.vue");
 const RolesPage = () => import("../views/AdminsAccess/RolesPage.vue");
 const NewsPage = () => import("../views/AdminsAccess/NewsPage.vue");
@@ -191,7 +194,7 @@ const router = createRouter({
           path: "orders/completed",
           component: CompletedOrders,
         },
-        { name: "admin-errors-log", path: "errorlog", component: ErrorsLog },
+        { name: "admin-error-logs", path: "errorlogs", component: ErrorLogs },
         {
           name: "admin-forms-responses",
           path: "formsresponses",
