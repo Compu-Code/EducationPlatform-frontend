@@ -1,60 +1,75 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-// import all files from AdminAccess folder
-import AdminDashboard from "../views/AdminsAccess/AdminDashboard.vue";
-import Users from "../views/AdminsAccess/UsersPage.vue";
-import Courses from "../views/AdminsAccess/CoursesPage.vue";
-import PendingTransactions from "../views/AdminsAccess/Transactions/PendingTransactions.vue";
-import CompletedTransactions from "../views/AdminsAccess/Transactions/CompletedTransactions.vue";
-import PendingOrders from "../views/AdminsAccess/Orders/PendingOrders.vue";
-import CompletedOrders from "../views/AdminsAccess/Orders/CompletedOrders.vue";
-import ErrorsLog from "../views/AdminsAccess/ErrorsLog.vue";
-import FormsResponses from "../views/AdminsAccess/FormsResponses.vue";
-import RolesPage from "../views/AdminsAccess/RolesPage.vue";
-import NewsPage from "../views/AdminsAccess/NewsPage.vue";
-import RatingPage from "../views/AdminsAccess/RatingPage.vue";
-import SupportPage from "../views/AdminsAccess/SupportPage.vue";
-import ActivityLog from "../views/AdminsAccess/ActivityLog.vue";
-import SponsorsPage from "../views/AdminsAccess/SponsorsPage.vue";
+// import all files from AdminAccess folder + LAZY LOADING
+const Users = () => import("../views/AdminsAccess/UsersPage.vue");
+const Courses = () => import("../views/AdminsAccess/CoursesPage.vue");
+const PendingTransactions = () =>
+  import("../views/AdminsAccess/Transactions/PendingTransactions.vue");
+const CompletedTransactions = () =>
+  import("../views/AdminsAccess/Transactions/CompletedTransactions.vue");
+
+const PendingOrders = () =>
+  import("../views/AdminsAccess/Orders/PendingOrders.vue");
+const CompletedOrders = () =>
+  import("../views/AdminsAccess/Orders/CompletedOrders.vue");
+const ErrorsLog = () => import("../views/AdminsAccess/ErrorsLog.vue");
+const FormsResponses = () => import("../views/AdminsAccess/FormsResponses.vue");
+const RolesPage = () => import("../views/AdminsAccess/RolesPage.vue");
+const NewsPage = () => import("../views/AdminsAccess/NewsPage.vue");
+const RatingPage = () => import("../views/AdminsAccess/RatingPage.vue");
+const SupportPage = () => import("../views/AdminsAccess/SupportPage.vue");
+const ActivityLog = () => import("../views/AdminsAccess/ActivityLog.vue");
+const SponsorsPage = () => import("../views/AdminsAccess/SponsorsPage.vue");
 
 // import all files from LecturerAccess folder
-import LecturerDashboard from "../views/LecturersAccess/LecturerDashboard.vue";
-import LecturerCourses from "../views/LecturersAccess/LecturerCourses.vue";
-import LecturerStudents from "../views/LecturersAccess/LecturerStudents.vue";
-import LecturerChistory from "../views/LecturersAccess/LecturerChistory.vue";
-import LecturerChat from "../views/LecturersAccess/LecturerChat.vue";
-import LecturerCalender from "../views/LecturersAccess/LecturerCalender.vue";
-import LecturerConfirm from "../views/LecturersAccess/LecturerConfirm.vue";
+const LecturerCourses = () =>
+  import("../views/LecturersAccess/LecturerCourses.vue");
+const LecturerStudents = () =>
+  import("../views/LecturersAccess/LecturerStudents.vue");
+const LecturerChistory = () =>
+  import("../views/LecturersAccess/LecturerChistory.vue");
+const LecturerChat = () => import("../views/LecturersAccess/LecturerChat.vue");
+const LecturerCalender = () =>
+  import("../views/LecturersAccess/LecturerCalender.vue");
+const LecturerConfirm = () =>
+  import("../views/LecturersAccess/LecturerConfirm.vue");
 
 // import all files from StudentAccess folder
-import StudentDashboard from "../views/StudentsAccess/StudentDashboard.vue";
-import StudentCourses from "../views/StudentsAccess/StudentCourses.vue";
-import StudentMcourses from "../views/StudentsAccess/StudentMcourses.vue";
-import StudentChat from "../views/StudentsAccess/StudentChat.vue";
-import StudentCalender from "../views/StudentsAccess/StudentCalender.vue";
-import StudentConfirm from "../views/StudentsAccess/StudentConfirm.vue";
+const StudentCourses = () =>
+  import("../views/StudentsAccess/StudentCourses.vue");
+const StudentMcourses = () =>
+  import("../views/StudentsAccess/StudentMcourses.vue");
+const StudentChat = () => import("../views/StudentsAccess/StudentChat.vue");
+const StudentCalender = () =>
+  import("../views/StudentsAccess/StudentCalender.vue");
+const StudentConfirm = () =>
+  import("../views/StudentsAccess/StudentConfirm.vue");
 
 // import all files from UserAccess folder
-import HomePage from "../views/UserAccess/HomePage.vue";
-import AboutPage from "../views/UserAccess/AboutPage.vue";
-import LecturersPage from "../views/UserAccess/LecturersPage.vue";
-import ContactPage from "../views/UserAccess/ContactPage.vue";
-import FAQsPage from "../views/UserAccess/FAQsPage.vue";
-import LoginPage from "../views/UserAccess/LoginPage.vue";
+const HomePage = () => import("../views/UserAccess/HomePage.vue");
+const AboutPage = () => import("../views/UserAccess/AboutPage.vue");
+const LecturersPage = () => import("../views/UserAccess/LecturersPage.vue");
+const ContactPage = () => import("../views/UserAccess/ContactPage.vue");
+const FAQsPage = () => import("../views/UserAccess/FAQsPage.vue");
+const LoginPage = () => import("../views/UserAccess/LoginPage.vue");
 
 // import signup steps from UserAccess
-import Signup1 from "../views/UserAccess/SiginupSteps/Signup1.vue";
-import Signup2 from "../views/UserAccess/SiginupSteps/Signup2.vue";
-import Signup3 from "../views/UserAccess/SiginupSteps/Signup3.vue";
+const Signup1 = () => import("../views/UserAccess/SiginupSteps/Signup1.vue");
+const Signup2 = () => import("../views/UserAccess/SiginupSteps/Signup2.vue");
+const Signup3 = () => import("../views/UserAccess/SiginupSteps/Signup3.vue");
+
+// import rest pass page
+const ResetPassword = () => import("../views/UserAccess/ResetPassword.vue");
 
 ////
-import WebsitePage from "../views/Website.vue";
-import Dashboard from "../views/Dashboard.vue";
-import dashboardHome from "../components/DashboardComponents/DashboardHome/DashboardHome.vue";
+const WebsitePage = () => import("../views/Website.vue");
+const Dashboard = () => import("../views/Dashboard.vue");
+const dashboardHome = () =>
+  import("../components/DashboardComponents/DashboardHome/DashboardHome.vue");
 ////
 
 // import files from PageNotFound folder
-import PageNotFound from "../views/PageNotfound.vue";
+const PageNotFound = () => import("../views/PageNotfound.vue");
 
 const router = createRouter({
   history: createWebHistory(),
@@ -89,6 +104,11 @@ const router = createRouter({
         { name: "signup-step2", path: "step2", component: Signup2 },
         { name: "signup-step3", path: "step3", component: Signup3 },
       ],
+    },
+    {
+      name: "reset-password",
+      path: "/reset-password",
+      component: ResetPassword,
     },
     {
       // Admin Dashboard Pages
