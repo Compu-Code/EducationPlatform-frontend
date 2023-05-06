@@ -1,35 +1,30 @@
 <template>
-  <Teleport to="body">
-    <div id="overlay" class="z-10"></div>
-    <transition name="card">
-      <div class="popup-card absolute flex flex-col justify-center z-20">
-        <div class="card-title">
-          <slot name="cardTitle"></slot>
-        </div>
-        <div class="card-details">
-          <slot name="cardDetails"></slot>
-        </div>
-        <div class="card-actions">
-          <p class="first-action">
-            <slot name="cardFirstAction"></slot>
-            <span class="card-first-action-link">
-              <router-link :to="firstActionLink" replace
-                ><slot name="cardFirstActionLink"></slot
-              ></router-link>
-            </span>
-          </p>
-          <p v-if="numOfActions === '2'" class="second-action">
-            <slot name="cardSecondAction"></slot>
-            <span class="card-second-action-link">
-              <router-link :to="secondActionLink" replace
-                ><slot name="cardSecondActionLink"></slot
-              ></router-link>
-            </span>
-          </p>
-        </div>
-      </div>
-    </transition>
-  </Teleport>
+  <div class="popup-card absolute flex flex-col justify-center z-20">
+    <div class="card-title">
+      <slot name="cardTitle"></slot>
+    </div>
+    <div class="card-details">
+      <slot name="cardDetails"></slot>
+    </div>
+    <div class="card-actions">
+      <p class="first-action">
+        <slot name="cardFirstAction"></slot>
+        <span class="card-first-action-link">
+          <router-link :to="firstActionLink" replace
+            ><slot name="cardFirstActionLink"></slot
+          ></router-link>
+        </span>
+      </p>
+      <p v-if="numOfActions === 2" class="second-action">
+        <slot name="cardSecondAction"></slot>
+        <span class="card-second-action-link">
+          <router-link :to="secondActionLink" replace
+            ><slot name="cardSecondActionLink"></slot
+          ></router-link>
+        </span>
+      </p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -77,13 +72,6 @@ export default {
         return "#1433AB";
       }
     },
-    changeOverlayColor() {
-      if (this.navbarStore.darkMode) {
-        return "#01041B";
-      } else {
-        return "#F0F4FF";
-      }
-    },
   },
 };
 </script>
@@ -127,7 +115,7 @@ export default {
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 110%;
 }
 .first-action span a,
@@ -140,6 +128,13 @@ export default {
   padding-left: 4px;
   color: v-bind(changeLinkColor);
 }
+.card-actions {
+  flex-direction: column;
+  align-items: center;
+}
+.second-action {
+  margin-top: 5px;
+}
 .first-action span a:hover,
 .second-action span a:hover {
   color: v-bind(changeLinkHoverColor);
@@ -147,30 +142,5 @@ export default {
 .first-action span a:active,
 .second-action span a:active {
   color: v-bind(changeLinkClickedColor);
-}
-.card-enter-from,
-.card-leave-to {
-  transform: translateY(-100px);
-  transform: scale(0.8);
-}
-.card-enter-active,
-.card-leave-active {
-  transition: all 0.4s;
-}
-.card-enter-to,
-.card-leave-from {
-  transform: translateY(0);
-  transform: scale(1);
-}
-#overlay {
-  position: fixed;
-  background-color: v-bind(changeOverlayColor);
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 5;
 }
 </style>
