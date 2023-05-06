@@ -7,7 +7,7 @@
       @focus="$emit('showPassConstraint')"
       @keyup="$emit('userPass', $event.target.value)"
       :value="modelValue"
-      :placeholder="[placeHolder === 1 ? 'Password' : 'Confirm Password']"
+      :placeholder="changePlaceholder"
     />
     <div class="pass-icon absolute right-7" @click="togglePassVisibility">
       <IconShowpass v-if="!passIsHide" />
@@ -17,6 +17,44 @@
 </template>
 
 <script>
+function changeFieldColor(arg1) {
+  if (arg1) {
+    return "#4CC38AE5";
+  } else if (arg1 === false) {
+    return "#FF6369E5";
+  } else {
+    return "transparent";
+  }
+}
+function changeFieldHoverColor(arg1) {
+  if (arg1) {
+    return "#4CC38AE5";
+  } else if (arg1 === false) {
+    return "#FF6369E5";
+  }
+}
+function changeFieldClickedColor(arg1) {
+  if (arg1) {
+    return "#4CC38AE5";
+  } else if (arg1 === false) {
+    return "#FF6369E5";
+  }
+}
+// to change bg of fields in light mode
+function changeBgFieldColor(arg1) {
+  if (!useNavbarStore().darkMode) {
+    if (arg1 === true) {
+      return "rgba(41, 151, 100, 0.1)";
+    } else if (arg1 === false) {
+      return "rgba(220, 61, 67, 0.1)";
+    } else if (arg1 === "") {
+      return "rgba(53, 92, 239, 0.1)";
+    }
+  } else {
+    return "rgba(240, 244, 255, 0.2)";
+  }
+}
+
 import { useNavbarStore } from "../../../stores/NavbarStore";
 import IconShowpass from "../../icons/IconShowpass.vue";
 import IconHidepass from "../../icons/IconHidepass.vue";
@@ -27,7 +65,7 @@ export default {
     IconShowpass,
     IconHidepass,
   },
-  props: ["placeHolder", "modelValue"],
+  props: ["placeHolder", "modelValue", "isValid"],
   emits: [
     "checkPassValidate",
     "update:modelValue",
@@ -37,7 +75,6 @@ export default {
   data() {
     return {
       passIsHide: true,
-      isPassValid: "",
       userPass: "",
     };
   },
@@ -50,6 +87,18 @@ export default {
     togglePassVisibility() {
       this.passIsHide = !this.passIsHide;
     },
+    changePassFieldColor() {
+      return changeFieldColor(this.isValid);
+    },
+    changePassFieldHoverColor() {
+      return changeFieldHoverColor(this.isValid);
+    },
+    changePassFieldClickedColor() {
+      return changeFieldClickedColor(this.isValid);
+    },
+    changePassFieldBgColor() {
+      return changeBgFieldColor(this.isValid);
+    },
   },
   computed: {
     changeFieldsBGColor() {
@@ -59,16 +108,22 @@ export default {
         return "rgba(53, 92, 239, 0.1)";
       }
     },
+    changePlaceholder() {
+      if (this.placeHolder === 1) {
+        return "Password";
+      } else if (this.placeHolder === 2) {
+        return "Confirm Password";
+      } else if (this.placeHolder === 3) {
+        return "Enter your password";
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
 .user-data-form form input {
-  margin-bottom: 17px;
-  padding-left: 30px;
-  padding-top: 11.5px;
-  padding-bottom: 11.5px;
+  padding: 11.5px 30px;
   border: 2px solid transparent;
   border-radius: 8px;
   background: v-bind(changeFieldsBGColor);
@@ -76,21 +131,20 @@ export default {
   transition: all 0.1s;
   outline: none;
 }
-.user-data-form form input:hover {
-  border: 2px solid #8394b1;
-}
-.user-data-form form input:focus {
-  border: 2px solid #b2c4e4;
-}
+
 .pass-icon {
-  top: calc(50% - 8.5px);
+  top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  /* transition: opacity 0.1s;
-  opacity: 0; */
 }
-
-/* input[name="pass"]:focus ~ .pass-icon {
-  opacity: 1;
-} */
+.user-data-form form input {
+  border-color: v-bind(changePassFieldColor()) !important;
+  background-color: v-bind(changePassFieldBgColor()) !important;
+}
+.user-data-form form input:hover {
+  border-color: v-bind(changePassFieldHoverColor()) !important;
+}
+.user-data-form form input:focus {
+  border-color: v-bind(changePassFieldClickedColor()) !important;
+}
 </style>

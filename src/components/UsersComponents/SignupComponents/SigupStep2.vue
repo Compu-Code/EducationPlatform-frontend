@@ -1,154 +1,149 @@
 <template>
-  <KeepAlive>
-    <section
-      class="Container relative top-0 right-0 overflow-hidden"
+  <section
+    class="Container relative top-0 right-0 overflow-hidden"
+    :class="[
+      navbarStore.darkMode ? 'bg-dark-primary-color' : 'bg-light-primary-color',
+    ]"
+  >
+    <!-- Vectors -->
+    <div class="z-0">
+      <VectorupSignup class="absolute top-0 right-0" />
+      <VectordownSignup class="absolute bottom-0 left-0" />
+    </div>
+
+    <div
+      class="Container2 grid z-10 relative top-[50%] left-[4.688rem] grid-rows-6 gap-y-28"
       :class="[
-        navbarStore.darkMode
-          ? 'bg-dark-primary-color'
-          : 'bg-light-primary-color',
+        navbarStore.darkMode ? 'text-dark-text-color' : 'text-light-text-color',
       ]"
     >
-      <!-- Vectors -->
-      <div class="z-0">
-        <VectorupSignup class="absolute top-0 right-0" />
-        <VectordownSignup class="absolute bottom-0 left-0" />
+      <!-- stepsbar -->
+      <StepsBar />
+
+      <!-- tell us about you -->
+      <div class="text w-fit absolute left-[11.563rem]">
+        <p class="py-1">Step 2</p>
+        <p class="text-5xl leading-[3.813rem]">Tell Us About You</p>
       </div>
+
+      <!-- form to get user data -->
 
       <div
-        class="Container2 grid z-10 relative top-[50%] left-[4.688rem] grid-rows-6 gap-y-28"
-        :class="[
-          navbarStore.darkMode
-            ? 'text-dark-text-color'
-            : 'text-light-text-color',
-        ]"
+        class="user-data-form flex col-start-2 col-end-5 row-start-2 row-end-6"
       >
-        <!-- stepsbar -->
-        <StepsBar />
-
-        <!-- tell us about you -->
-        <div class="text w-fit absolute left-[11.563rem]">
-          <p class="py-1">Step 2</p>
-          <p class="text-5xl leading-[3.813rem]">Tell Us About You</p>
-        </div>
-
-        <!-- form to get user data -->
-
-        <div
-          class="user-data-form flex col-start-2 col-end-5 row-start-2 row-end-6"
-        >
-          <form @submit.prevent="checkAllFieldsAndStore">
-            <!-- first + last name -->
-            <div class="flex w-full">
-              <input
-                name="fName"
-                type="text"
-                class="w-1/2"
-                placeholder="First Name"
-                v-model="signupStepsStore.userFirstName"
-                @keyup="getUserFirstName($event.target.value)"
-                @blur="checkFirstNameValidity"
-              />
-              <input
-                name="lName"
-                type="text"
-                class="w-1/2"
-                placeholder="Last Name"
-                v-model="signupStepsStore.userLastName"
-                @keyup="getUserLastName($event.target.value)"
-                @blur="checkLastNameValidity"
-              />
-            </div>
-            <!-- email -->
+        <form @submit.prevent="checkAllFieldsAndStore">
+          <!-- first + last name -->
+          <div class="flex w-full">
             <input
-              name="email"
-              class="w-full"
-              placeholder="Your Email Address"
-              v-model="signupStepsStore.userEmail"
-              @keyup="getUserEmail($event.target.value)"
-              @blur="checkEmailValidate"
+              name="fName"
+              type="text"
+              class="w-1/2"
+              placeholder="First Name"
+              v-model="signupStepsStore.userFirstName"
+              @keyup="getUserFirstName($event.target.value)"
+              @blur="checkFirstNameValidity"
             />
+            <input
+              name="lName"
+              type="text"
+              class="w-1/2"
+              placeholder="Last Name"
+              v-model="signupStepsStore.userLastName"
+              @keyup="getUserLastName($event.target.value)"
+              @blur="checkLastNameValidity"
+            />
+          </div>
+          <!-- email -->
+          <input
+            name="email"
+            class="w-full"
+            placeholder="Your Email Address"
+            v-model="signupStepsStore.userEmail"
+            @keyup="getUserEmail($event.target.value)"
+            @blur="checkEmailValidate"
+          />
 
-            <!-- pass & constraint-->
+          <!-- pass & constraint-->
+          <div
+            class="relative mb-[17px]"
+            @focus="togglePassConstraint('show')"
+            @blur="togglePassConstraint('hide')"
+          >
+            <pass-field
+              :placeHolder="1"
+              @checkPassValidate="
+                [checkPassValidate($event), (showPassConstraint = false)]
+              "
+              @showPassConstraint="showPassConstraint = true"
+              @userPass="getUserPass"
+              v-model:model-value="signupStepsStore.userPassword"
+              :isValid="isPassValid"
+            ></pass-field>
+            <!-- pass constraint -->
             <div
-              class="relative"
-              @focus="togglePassConstraint('show')"
-              @blur="togglePassConstraint('hide')"
+              class="pass-constraint flex justify-between items-start mt-4 mb-4"
+              v-if="showPassConstraint"
             >
-              <pass-field
-                @checkPassValidate="
-                  checkPassValidate();
-                  showPassConstraint = false;
-                "
-                @showPassConstraint="showPassConstraint = true"
-                @userPass="getUserPass"
-                v-model:model-value="signupStepsStore.userPassword"
-                :placeHolder="1"
-              ></pass-field>
-              <!-- pass constraint -->
-              <div
-                class="pass-constraint flex justify-between items-start mb-4"
-                v-if="showPassConstraint"
-              >
-                <div>
-                  <span :class="{ active: lowerCaseCheck }">
-                    <IconCheckconstraints />
-                    <p>Lowercase Character</p>
-                  </span>
-                  <span :class="{ active: upperCaseCheck }">
-                    <IconCheckconstraints />
-                    <p>One Uppercase Character</p>
-                  </span>
-                  <span :class="{ active: oneDigitCheck }">
-                    <IconCheckconstraints />
-                    <p>One Number</p>
-                  </span>
-                </div>
-                <div>
-                  <span :class="{ active: oneSpecialCharCheck }">
-                    <IconCheckconstraints />
-                    <p>One Special Character</p>
-                  </span>
-                  <span :class="{ active: charMinimumCheck }">
-                    <IconCheckconstraints />
-                    <p>8 Character Minimum</p>
-                  </span>
-                </div>
+              <div>
+                <span :class="{ active: signupStepsStore.lowerCaseCheck }">
+                  <IconCheckconstraints />
+                  <p>Lowercase Character</p>
+                </span>
+                <span :class="{ active: signupStepsStore.upperCaseCheck }">
+                  <IconCheckconstraints />
+                  <p>One Uppercase Character</p>
+                </span>
+                <span :class="{ active: signupStepsStore.oneDigitCheck }">
+                  <IconCheckconstraints />
+                  <p>One Number</p>
+                </span>
+              </div>
+              <div>
+                <span :class="{ active: signupStepsStore.oneSpecialCharCheck }">
+                  <IconCheckconstraints />
+                  <p>One Special Character</p>
+                </span>
+                <span :class="{ active: signupStepsStore.charMinimumCheck }">
+                  <IconCheckconstraints />
+                  <p>8 Character Minimum</p>
+                </span>
               </div>
             </div>
+          </div>
 
-            <!-- confirm pass -->
-            <div class="relative">
-              <PassField
-                :placeHolder="2"
-                @checkPassValidate="checkConfirmPass"
-                @userPass="getUserConfirmPass"
-                v-model:model-value="signupStepsStore.userConfirmPass"
-              />
-            </div>
+          <!-- confirm pass -->
+          <div class="relative mb-[17px]">
+            <PassField
+              :placeHolder="2"
+              @checkPassValidate="checkConfirmPass($event)"
+              @userPass="getUserConfirmPass"
+              v-model:model-value="signupStepsStore.userConfirmPass"
+              :isValid="isConfirmMatch"
+            />
+          </div>
 
-            <div class="flex justify-between items-center mt-3">
-              <!-- back button -->
-              <router-link to="/signup/step1" replace>
-                <icon-deflated direction="up" bordered="false" class="back-btn"
-                  >Back</icon-deflated
-                >
-              </router-link>
-              <!-- continue button -->
-              <!-- TODO: make loading spinner in continue btn -->
-              <normal-filled type="submit">Continue</normal-filled>
-            </div>
-          </form>
-        </div>
-        <!-- img beside form -->
-        <div class="col-start-5 col-end-8 row-start-1 row-end-6 ml-16">
-          <img
-            src="../../../assets/images/InformationDetails.png"
-            alt="InformationDetailsImg"
-          />
-        </div>
+          <div class="flex justify-between items-center mt-3">
+            <!-- back button -->
+            <router-link to="/signup/step1" replace>
+              <icon-deflated direction="up" bordered="false" class="back-btn"
+                >Back</icon-deflated
+              >
+            </router-link>
+            <!-- continue button -->
+            <!-- TODO: make loading spinner in continue btn -->
+            <normal-filled type="submit">Continue</normal-filled>
+          </div>
+        </form>
       </div>
-    </section>
-  </KeepAlive>
+      <!-- img beside form -->
+      <div class="col-start-5 col-end-8 row-start-1 row-end-6 ml-16">
+        <img
+          src="../../../assets/images/InformationDetails.png"
+          alt="InformationDetailsImg"
+        />
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -213,10 +208,6 @@ export default {
   },
   data() {
     return {
-      userFirstName: "",
-      userLastName: "",
-      userEmail: "",
-      userPass: "",
       userConfirmPass: "",
       isEmailValid: "",
       isPassValid: "",
@@ -224,11 +215,6 @@ export default {
       isFirstNameValid: "",
       isLastNameValid: "",
       showPassConstraint: false,
-      lowerCaseCheck: false,
-      upperCaseCheck: false,
-      oneDigitCheck: false,
-      oneSpecialCharCheck: false,
-      charMinimumCheck: false,
     };
   },
   setup() {
@@ -243,6 +229,7 @@ export default {
         this.isFirstNameValid = true;
       } else {
         this.isFirstNameValid = false;
+        this.signupStepsStore.signupStep2 = false;
       }
     },
     checkLastNameValidity() {
@@ -250,6 +237,7 @@ export default {
         this.isLastNameValid = true;
       } else {
         this.isLastNameValid = false;
+        this.signupStepsStore.signupStep2 = false;
       }
     },
     //check email validity (regexp)
@@ -262,6 +250,7 @@ export default {
         this.isEmailValid = true;
       } else {
         this.isEmailValid = false;
+        this.signupStepsStore.signupStep2 = false;
       }
     },
     togglePassConstraint(e) {
@@ -272,8 +261,11 @@ export default {
       }
     },
     // check pass validate
-    checkPassValidate() {
+    checkPassValidate(userPass) {
       // to check whole pass and change passValid
+      if (userPass) {
+        this.signupStepsStore.userPassword = userPass;
+      }
       if (
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^])[A-Za-z\d@$!%*?#^&]{8,}$/.test(
           this.signupStepsStore.userPassword
@@ -282,10 +274,49 @@ export default {
         this.isPassValid = true;
       } else {
         this.isPassValid = false;
+        this.signupStepsStore.signupStep2 = false;
+      }
+      // check all parts of pass
+      if (/(?=.*[a-z])/.test(this.signupStepsStore.userPassword)) {
+        this.signupStepsStore.lowerCaseCheck = true;
+      } else {
+        this.signupStepsStore.lowerCaseCheck = false;
+      }
+      // upper case check
+      if (/(?=.*[A-Z])/.test(this.signupStepsStore.userPassword)) {
+        this.signupStepsStore.upperCaseCheck = true;
+      } else {
+        this.signupStepsStore.upperCaseCheck = false;
+      }
+      // one digit check
+      if (/(?=.*\d)/.test(this.signupStepsStore.userPassword)) {
+        this.signupStepsStore.oneDigitCheck = true;
+      } else {
+        this.signupStepsStore.oneDigitCheck = false;
+      }
+      // one special char check
+      if (/(?=.*[@$!%*?&#^])/.test(this.signupStepsStore.userPassword)) {
+        this.signupStepsStore.oneSpecialCharCheck = true;
+      } else {
+        this.signupStepsStore.oneSpecialCharCheck = false;
+      }
+      // 8 char minimum check
+      if (/[A-Za-z\d@$!%*#^?&]{8,}/.test(this.signupStepsStore.userPassword)) {
+        this.signupStepsStore.charMinimumCheck = true;
+      } else {
+        this.signupStepsStore.charMinimumCheck = false;
+      }
+      if (this.isConfirmMatch === true) {
+        this.checkConfirmPass();
+      } else if (this.isConfirmMatch === false) {
+        this.checkConfirmPass();
       }
     },
     // check confirm pass
-    checkConfirmPass() {
+    checkConfirmPass(userConfirmPass) {
+      if (userConfirmPass) {
+        this.signupStepsStore.userConfirmPass = userConfirmPass;
+      }
       if (
         this.signupStepsStore.userConfirmPass ===
           this.signupStepsStore.userPassword &&
@@ -328,45 +359,50 @@ export default {
       //check pass parts (pass constraint)
       // lower case check
       if (/(?=.*[a-z])/.test(this.signupStepsStore.userPassword)) {
-        this.lowerCaseCheck = true;
+        this.signupStepsStore.lowerCaseCheck = true;
       } else {
-        this.lowerCaseCheck = false;
+        this.signupStepsStore.lowerCaseCheck = false;
       }
       // upper case check
       if (/(?=.*[A-Z])/.test(this.signupStepsStore.userPassword)) {
-        this.upperCaseCheck = true;
+        this.signupStepsStore.upperCaseCheck = true;
       } else {
-        this.upperCaseCheck = false;
+        this.signupStepsStore.upperCaseCheck = false;
       }
       // one digit check
       if (/(?=.*\d)/.test(this.signupStepsStore.userPassword)) {
-        this.oneDigitCheck = true;
+        this.signupStepsStore.oneDigitCheck = true;
       } else {
-        this.oneDigitCheck = false;
+        this.signupStepsStore.oneDigitCheck = false;
       }
       // one special char check
       if (/(?=.*[@$!%*?&#^])/.test(this.signupStepsStore.userPassword)) {
-        this.oneSpecialCharCheck = true;
+        this.signupStepsStore.oneSpecialCharCheck = true;
       } else {
-        this.oneSpecialCharCheck = false;
+        this.signupStepsStore.oneSpecialCharCheck = false;
       }
       // 8 char minimum check
       if (/[A-Za-z\d@$!%*#^?&]{8,}/.test(this.signupStepsStore.userPassword)) {
-        this.charMinimumCheck = true;
+        this.signupStepsStore.charMinimumCheck = true;
       } else {
-        this.charMinimumCheck = false;
+        this.signupStepsStore.charMinimumCheck = false;
       }
       if (this.isPassValid === true) {
         this.checkPassValidate();
       } else if (this.isPassValid === false) {
         this.checkPassValidate();
       }
+      if (this.isConfirmMatch === true) {
+        this.checkConfirmPass();
+      } else if (this.isConfirmMatch === false) {
+        this.checkConfirmPass();
+      }
     },
     getUserConfirmPass(userConfirmPass) {
       this.signupStepsStore.userConfirmPass = userConfirmPass;
-      if (this.signupStepsStore.isConfirmMatch === true) {
+      if (this.isConfirmMatch === true) {
         this.checkConfirmPass();
-      } else if (this.signupStepsStore.isConfirmMatch === false) {
+      } else if (this.isConfirmMatch === false) {
         this.checkConfirmPass();
       }
     },
@@ -412,19 +448,6 @@ export default {
     changeEmailFieldBgColor() {
       return changeBgFieldColor(this.isEmailValid);
     },
-    // change border color of pass field and check if valid become green and if invalid become red otherwise stay like the other fields
-    changePassFieldColor() {
-      return changeFieldColor(this.isPassValid);
-    },
-    changePassFieldHoverColor() {
-      return changeFieldHoverColor(this.isPassValid);
-    },
-    changePassFieldClickedColor() {
-      return changeFieldClickedColor(this.isPassValid);
-    },
-    changePassFieldBgColor() {
-      return changeBgFieldColor(this.isPassValid);
-    },
     // change border color of confirm pass field and check if valid become green and if invalid become red otherwise stay like the other fields
     changeConfirmPassFieldColor() {
       return changeFieldColor(this.isConfirmMatch);
@@ -440,6 +463,7 @@ export default {
     },
     /*  TODO: store user data if all fields correct */
     checkAllFieldsAndStore() {
+      console.log(this.signupStepsStore);
       this.checkFirstNameValidity();
       this.checkLastNameValidity();
       this.checkEmailValidate();
@@ -452,6 +476,7 @@ export default {
         this.signupStepsStore.userFirstName !== "" &&
         this.signupStepsStore.userLastName !== ""
       ) {
+        this.signupStepsStore.signupStep2 = true;
         this.$router.replace({ path: "/signup/step3" });
       } else {
         console.log("please check all fields");
@@ -469,14 +494,15 @@ export default {
   },
   // when user refresh step 2 the store will be empty so user will return to step 1
   mounted() {
-    if (this.signupStepsStore.userAccType === "") {
+    if (!this.signupStepsStore.signupStep1) {
       this.$router.replace({ name: "signup-step1" });
     }
   },
 };
 </script>
 
-<style>
+<!-- TODO: fix scoped buges in signup -->
+<style scoped>
 .Container {
   width: 100vw;
   height: 100vh;
@@ -488,10 +514,8 @@ export default {
   grid-template-columns: repeat(6, minmax(0, 185px));
 }
 .user-data-form form input {
+  padding: 11.5px 30px;
   margin-bottom: 17px;
-  padding-left: 30px;
-  padding-top: 11.5px;
-  padding-bottom: 11.5px;
   border: 2px solid transparent;
   border-radius: 8px;
   background: v-bind(changeFieldsBGColor);
@@ -541,31 +565,6 @@ export default {
 .user-data-form form input[name="lName"]:focus {
   border-color: v-bind(changeLastNameFieldClickedColor());
 }
-
-/* password field border color */
-input[placeholder="Password"]:first-child {
-  border-color: v-bind(changePassFieldColor()) !important;
-  background-color: v-bind(changePassFieldBgColor()) !important;
-}
-input[placeholder="Password"]:first-child:hover {
-  border-color: v-bind(changePassFieldHoverColor()) !important;
-}
-input[placeholder="Password"]:first-child:focus {
-  border-color: v-bind(changePassFieldClickedColor()) !important;
-}
-
-/* confirm password field border color */
-input[placeholder="Confirm Password"]:first-child {
-  border-color: v-bind(changeConfirmPassFieldColor()) !important;
-  background-color: v-bind(changeConfirmPassFieldBgColor()) !important;
-}
-input[placeholder="Confirm Password"]:first-child:hover {
-  border-color: v-bind(changeConfirmPassFieldHoverColor()) !important;
-}
-input[placeholder="Confirm Password"]:first-child:focus {
-  border-color: v-bind(changeConfirmPassFieldClickedColor()) !important;
-}
-
 .pass-constraint {
   font-family: "Inter";
   font-style: normal;

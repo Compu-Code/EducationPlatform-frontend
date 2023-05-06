@@ -89,44 +89,62 @@
               >
             </router-link>
             <!-- continue button -->
-            <normal-filled type="submit" :isDisabled="disabledBtn"
-              >Continue</normal-filled
+            <normal-filled
+              type="submit"
+              :isDisabled="disabledBtn"
+              class="flex duration-300 items-center"
+            >
+              <div class="spinner mr-2" v-if="authStore.signupLoading"></div>
+              Continue</normal-filled
             >
           </div>
-          <!-- TODO: make loading spinner in continue btn -->
-          <p v-if="authStore.signupLoading">Loading ...</p>
         </form>
       </div>
     </div>
-    <popup-card
-      v-if="signupStatus === true"
-      :numOfActions="2"
-      firstActionLink="/login"
-      secondActionLink="/home"
-    >
-      <template v-slot:cardTitle>Success!</template>
-      <template v-slot:cardDetails>Your account has been created.</template>
-      <template v-slot:cardFirstAction>Go back to</template>
-      <template v-slot:cardFirstActionLink>Login</template>
-      <template v-slot:cardSecondAction></template>
-      <template v-slot:cardSecondActionLink>Home</template>
-    </popup-card>
-
-    <popup-card
-      v-if="signupStatus === false"
-      :numOfActions="2"
-      firstActionLink="/login"
-      secondActionLink="/home"
-    >
-      <template v-slot:cardTitle>Failed!</template>
-      <template v-slot:cardDetails
-        >The email you entered already exists.</template
+    <transition name="overlay">
+      <OverlayBase
+        v-if="authStore.signupSuccess === true"
+        @click="hideOverlayAndPopup"
+      />
+    </transition>
+    <transition name="card">
+      <popup-card
+        v-if="authStore.signupSuccess === true"
+        :numOfActions="1"
+        firstActionLink="/login"
       >
-      <template v-slot:cardFirstAction>para</template>
-      <template v-slot:cardFirstActionLink>Login</template>
-      <template v-slot:cardSecondAction>para</template>
-      <template v-slot:cardSecondActionLink>Home</template>
-    </popup-card>
+        <template v-slot:cardTitle>Success!</template>
+        <template v-slot:cardDetails>Your account has been created.</template>
+        <template v-slot:cardFirstAction>Go to</template>
+        <template v-slot:cardFirstActionLink>Login</template>
+      </popup-card>
+    </transition>
+
+    <transition name="overlay">
+      <OverlayBase
+        v-if="authStore.signupSuccess === false"
+        @click="hideOverlayAndPopup"
+      />
+    </transition>
+    <transition name="card">
+      <popup-card
+        v-if="authStore.signupSuccess === false"
+        :numOfActions="2"
+        firstActionLink="/signup"
+        secondActionLink="/home"
+      >
+        <template v-slot:cardTitle>Failed!</template>
+        <template v-slot:cardDetails>Sorry , there was a problem.</template>
+        <template v-slot:cardFirstAction>want to try again ?</template>
+        <template v-slot:cardFirstActionLink
+          ><span @click="actionClicked">Signup</span></template
+        >
+        <template v-slot:cardSecondAction>Go to</template>
+        <template v-slot:cardSecondActionLink
+          ><span @click="actionClicked">Home</span></template
+        >
+      </popup-card>
+    </transition>
   </section>
 </template>
 
@@ -204,6 +222,7 @@ import VectordownSignup from "../../icons/VectordownSignup.vue";
 import NormalFilled from "../../UI/ButtonBases/NormalFilled.vue";
 import IconDeflated from "../../UI/ButtonBases/IconDeflated.vue";
 import PopupCard from "../../UI/PopupBases/PopupCard.vue";
+import OverlayBase from "../../UI/OverlayBase.vue";
 
 export default {
   components: {
@@ -213,6 +232,7 @@ export default {
     NormalFilled,
     IconDeflated,
     PopupCard,
+    OverlayBase,
   },
   setup() {
     const navbarStore = useNavbarStore();
@@ -229,6 +249,12 @@ export default {
     };
   },
   methods: {
+    actionClicked() {
+      (this.authStore.signupSuccess = ""), this.signupStepsStore.$reset();
+    },
+    hideOverlayAndPopup() {
+      this.authStore.signupSuccess = "";
+    },
     getUserUniversity(userUniversity) {
       this.signupStepsStore.userUniversity = userUniversity.trim();
       if (this.isUniversityValid === true) {
@@ -313,6 +339,7 @@ export default {
           major: this.signupStepsStore.userMajor,
           acc_type: this.signupStepsStore.userAccType,
         });
+        this.signupStepsStore.signupStep3 = true;
         if (this.authStore.signupSuccess) {
           this.signupStatus = true;
           this.signupStepsStore.$reset();
@@ -346,9 +373,10 @@ export default {
   },
   // when user refresh step 3 the store will be empty so user will return to step 1
   mounted() {
-    if (this.signupStepsStore.userAccType === "") {
+    // TODO: fix the bug (when user only write his email can navigate to step3)
+    if (!this.signupStepsStore.signupStep1) {
       this.$router.replace({ name: "signup-step1" });
-    } else if (this.signupStepsStore.userEmail === "") {
+    } else if (!this.signupStepsStore.signupStep2) {
       this.$router.replace({ name: "signup-step2" });
     }
   },
@@ -414,5 +442,135 @@ input[type="checkbox"] {
   font-weight: 400;
   font-size: 13px;
   line-height: 110%;
+}
+
+.card-enter-from,
+.card-leave-to {
+  transform: translate(-50%, -49rem);
+}
+.card-enter-active,
+.card-leave-active {
+  transition: transform 800ms ease-in-out;
+}
+.card-enter-to,
+.card-leave-from {
+  transform: translate(-50%, -50%);
+}
+.overlay-enter-from,
+.overlay-leave-to {
+  opacity: 0;
+}
+.overlay-enter-active,
+.overlay-leave-active {
+  transition: all 800ms ease-in-out;
+}
+.overlay-enter-to,
+.overlay-leave-from {
+  opacity: 1;
+}
+.spinner {
+  width: 15px;
+  display: inline-flex;
+  height: 15px;
+  border-radius: 50%;
+  border: 3.8px solid #ffffff;
+  animation: spinner-bulqg1 0.8s infinite linear alternate,
+    spinner-oaa3wk 1.6s infinite linear;
+}
+
+@keyframes spinner-bulqg1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+  }
+
+  12.5% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%
+    );
+  }
+
+  25% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      100% 100%,
+      100% 100%
+    );
+  }
+
+  50% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+
+  62.5% {
+    clip-path: polygon(
+      50% 50%,
+      100% 0,
+      100% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+
+  75% {
+    clip-path: polygon(
+      50% 50%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+
+  100% {
+    clip-path: polygon(
+      50% 50%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+}
+
+@keyframes spinner-oaa3wk {
+  0% {
+    transform: scaleY(1) rotate(0deg);
+  }
+
+  49.99% {
+    transform: scaleY(1) rotate(135deg);
+  }
+
+  50% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+
+  100% {
+    transform: scaleY(-1) rotate(-135deg);
+  }
 }
 </style>

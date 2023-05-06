@@ -63,12 +63,12 @@
         </div>
       </div>
 
-      <!-- don't have acc ? login -->
+      <!-- Already have acc ? login -->
       <div
         class="self-end justify-self-center col-start-4 col-end-6 row-start-6"
       >
         <p>
-          Don’t have an account ?
+          Already have an account ?
           <router-link
             to="/login"
             :class="[
@@ -112,14 +112,23 @@ export default {
         return "#2246CD";
       }
     },
+    changeLoginClickedColor() {
+      if (this.navbarStore.darkMode) {
+        return "#3858bb";
+      } else {
+        return "#1433AB";
+      }
+    },
   },
   methods: {
     studentChoosed() {
       this.signupStepsStore.userAccType = "1";
+      this.signupStepsStore.signupStep1 = true;
       this.$router.replace({ path: "/signup/step2" });
     },
     lecturerChoosed() {
       this.signupStepsStore.userAccType = "2";
+      this.signupStepsStore.signupStep1 = true;
       this.$router.replace({ path: "/signup/step2" });
     },
   },
@@ -141,7 +150,9 @@ export default {
 .login:hover {
   color: v-bind(changeLoginColor);
 }
-
+.login:active {
+  color: v-bind(changeLoginClickedColor) !important;
+}
 .student-img {
   left: 50%;
   transform: translateX(-50%);
