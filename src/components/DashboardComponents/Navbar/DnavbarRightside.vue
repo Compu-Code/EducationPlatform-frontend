@@ -1,10 +1,13 @@
 <template>
-  <NavbarRightside />
+  <NavbarRightside :isHide="false" />
 </template>
 
 <script>
-import NavbarRightside from "../../NavbarComponents/NavbarRightside.vue";
+import { defineAsyncComponent } from "vue";
 
+const NavbarRightside = defineAsyncComponent(() =>
+  import("../../NavbarComponents/NavbarRightside.vue")
+);
 export default {
   components: {
     NavbarRightside,

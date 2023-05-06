@@ -6,8 +6,14 @@
 </template>
 
 <script>
-import DnavbarLeftside from "./DnavbarLeftside.vue";
-import DnavbarRightside from "./DnavbarRightside.vue";
+import { defineAsyncComponent } from "vue";
+
+const DnavbarLeftside = defineAsyncComponent(() =>
+  import("./DnavbarLeftside.vue")
+);
+const DnavbarRightside = defineAsyncComponent(() =>
+  import("./DnavbarRightside.vue")
+);
 
 export default {
   components: { DnavbarLeftside, DnavbarRightside },

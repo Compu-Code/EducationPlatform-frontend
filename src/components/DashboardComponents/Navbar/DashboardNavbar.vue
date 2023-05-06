@@ -13,7 +13,11 @@
   </div>
 </template>
 <script>
-import DnavbarContainer from "./DnavbarContainer.vue";
+import { defineAsyncComponent } from "vue";
+
+const DnavbarContainer = defineAsyncComponent(() =>
+  import("./DnavbarContainer.vue")
+);
 import { useNavbarStore } from "../../../stores/NavbarStore";
 import { useSidebarStore } from "../../../stores/SidebarStore";
 
@@ -40,9 +44,9 @@ export default {
     },
     changeColor() {
       if (this.navbarStore.darkMode) {
-        return "#01041b";
+        return "#01041b17";
       } else {
-        return "#f0f4ff";
+        return "white";
       }
     },
   },
@@ -75,7 +79,17 @@ export default {
   padding-left: 10px;
   padding-right: 10px;
   backdrop-filter: blur(6px);
-  background-color: rgb((v-bind(changeColor)), 0.9);
+  background-color: v-bind(changeColor());
   border-radius: 0 0 10px 10px;
+  /* TODO: edit the box shadow */
+  box-shadow: 0 3px 3px -2px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)),
+    0 3px 4px 0 var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)),
+    0 1px 8px 0 var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
+}
+@media screen and (max-width: 767px) {
+  .window-scrolled {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 </style>
