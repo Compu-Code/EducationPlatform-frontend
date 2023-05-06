@@ -4,25 +4,35 @@ import { useLocalStorage } from "@vueuse/core";
 import { useUserStore } from "./UserStore";
 import axios from "axios";
 
+// const instance = axios.create({
+//   withCredentials: true,
+// });
+
 export const useAuthStore = defineStore("authStore", {
   state: () => ({
     UserStore: useUserStore(),
+    baseURL: "https://1137-109-107-243-170.ngrok-free.app",
     signupLoading: false,
     signupMessage: "",
-    signupSuccess: false,
+    signupSuccess: "",
     loginLoading: false,
     loginMessage: "",
+    loginSuccess: "",
 
-    userToken: null,
+    userToken: "",
     userData: null,
   }),
   actions: {
     async signup(payload) {
+      // console.log(this.getCookie("JWT"));
       this.signupLoading = true;
       try {
         const response = await axios.post(
-          "https://3b43-109-107-253-177.ngrok-free.app/api/auth/register",
-          payload
+          this.baseURL + "/api/auth/register",
+          payload,
+          {
+            timeout: 3000,
+          }
         );
         this.signupLoading = false;
         console.log(response.data);
@@ -32,17 +42,32 @@ export const useAuthStore = defineStore("authStore", {
         this.signupSuccess = response.data.success;
       } catch (error) {
         this.signupLoading = false;
+        this.signupSuccess = false;
+        this.signupMessage = response.data.message;
         console.log(error);
       }
     },
     async login(payload) {
+      // console.log(this.getCookie("JWT"));
       this.loginLoading = true;
       try {
         const response = await axios.post(
-          "https://3b43-109-107-253-177.ngrok-free.app/api/auth/login",
-          payload
+          this.baseURL + "/api/auth/login",
+          payload,
+          {
+            // withCredentials: true,
+            credentials: "include",
+            timeout: 10000,
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              // Authorization: `Bearer ${this.userToken}`,
+              "content-type": "application/json",
+            },
+          }
         );
+        console.log(response.data);
         this.loginLoading = false;
+        this.loginSuccess = true;
 
         this.userData = response.data.data.user;
         this.userToken = response.data.data.user.token;
@@ -60,35 +85,39 @@ export const useAuthStore = defineStore("authStore", {
         this.UserStore.userRolesPermissions = this.userData.roles_permissions;
 
         // TODO: search for axios credentials IMPORTANT
-        document.cookie = "userToken=" + "#" + this.userToken + "#";
+        document.cookie = "JWT=" + this.userToken;
 
         if (this.userToken) {
           this.loginMessage = "Successfully login";
         } else {
         }
-        this.$router.push({ name: "dashboard", replace: true });
+        // this.$router.push({ name: "dashboard", replace: true });
       } catch (error) {
+        this.loginSuccess = false;
         this.loginLoading = false;
         console.log(error);
       }
     },
     async logout() {
+      // console.log(this.getCookie("JWT"));
       try {
         console.log(this.userToken);
-        const response = await axios.post(
-          "https://3b43-109-107-253-177.ngrok-free.app/api/auth/logout",
+        const response = await instance.post(
+          this.baseURL + "/api/auth/logout",
           null,
           {
+            withCredentials: true,
             headers: {
               "Access-Control-Allow-Origin": "*",
-              Authorization: `Bearer ${this.userToken}`,
+              // Authorization: `Bearer ${this.userToken}`,
               "content-type": "application/json",
             },
+            timeout: 3000,
           }
         );
         console.log(response.data);
         this.userToken = null;
-        document.cookie = "userToken=" + null;
+        document.cookie = "JWT=" + null;
         this.$router.push("/");
       } catch (error) {
         console.log(error);
@@ -98,6 +127,13 @@ export const useAuthStore = defineStore("authStore", {
   getters: {
     isAuthenticated() {
       return !!this.userToken;
+    },
+    getCookie(name) {
+      const value = "; ${document.cookie}";
+      const parts = value.split("; ${name}=");
+      if (parts.length === 2) {
+        return parts.pop().split(";").shift();
+      }
     },
   },
 });

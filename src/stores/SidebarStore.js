@@ -1,6 +1,6 @@
 import { useLocalStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
-import MainMenu from "../core/config/MainMenuConfig";
+const MainMenu = () => import("../core/config/MainMenuConfig");
 import { useUserStore } from "./UserStore";
 
 export const useSidebarStore = defineStore("sidebarStore", {
@@ -295,6 +295,8 @@ export const useSidebarStore = defineStore("sidebarStore", {
     // mainMenu: ad,
     isMenuOpen: useLocalStorage("isMenuOpen", false),
     isSidebarPinned: useLocalStorage("isSidebarPinned", false),
+    // for mobile
+    sidebarOpen: false,
     isSubmenuOpen: false,
     isRadioChecked: useLocalStorage("isRadioChecked", false),
     searchText: "",
@@ -304,12 +306,20 @@ export const useSidebarStore = defineStore("sidebarStore", {
       if (this.isSidebarPinned) {
         this.isMenuOpen = true;
       } else {
-        if (mouseEvent === "over") {
+        // TODO: fix sidebarOpen BUG
+        if (mouseEvent === "over" && !this.sidebarOpen) {
           this.isMenuOpen = true;
-        } else if (mouseEvent === "leave") {
+        } else if (mouseEvent === "leave" && !this.sidebarOpen) {
           this.isMenuOpen = false;
         }
       }
+    },
+    openSidebar() {
+      this.sidebarOpen = true;
+      this.isMenuOpen = true;
+    },
+    closeSidebar() {
+      this.sidebarOpen = false;
     },
     // setActive(title) {
     //   const menu = this.allMenu.find((m) => m.title === title);

@@ -27,7 +27,7 @@ export const useUserStore = defineStore("userStore", {
       try {
         this.isUserDataLoading = true;
         const response = await axios.post(
-          "https://b69b-109-107-253-177.ngrok-free.app/api/admin/user/info",
+          this.AuthStore.baseURL + "/api/admin/user/info",
           null,
           {
             headers: {
