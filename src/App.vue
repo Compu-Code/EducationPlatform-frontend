@@ -18,17 +18,28 @@ export default {
     const UserStore = useUserStore();
     return { AuthStore, UserStore };
   },
+  methods: {
+    getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) {
+        return parts.pop().split(";").shift();
+      }
+    },
+  },
   // to import token from cookies and put in AuthStore when app created
   created() {
-    const reg = new RegExp("\\b" + null + "\\b");
-    if (document.cookie.split("#")[1] && !reg.test(document.cookie)) {
-      let token = document.cookie.split("#")[1];
-      if (token.length > 1) {
-        this.AuthStore.userToken = token;
-      } else {
-        this.AuthStore.userToken = null;
-      }
-    }
+    console.log(this.getCookie("JWT"));
+    this.AuthStore.userToken = this.getCookie("JWT");
+    // const reg = new RegExp("\\b" + null + "\\b");
+    // if (document.cookie.split("#")[1] && !reg.test(document.cookie)) {
+    //   let token = document.cookie.split("#")[1];
+    //   if (token.length > 1) {
+    //     this.AuthStore.userToken = token;
+    //   } else {
+    //     this.AuthStore.userToken = null;
+    //   }
+    // }
   },
   mounted() {},
   // to get user data after reload
@@ -41,5 +52,17 @@ export default {
 
 * {
   font-family: "Inter";
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  /* background-color: red; */
+  /* width: 100%;
+  height: 100%; */
+  /* min-width: 100%; */
+  /* min-height: 100%; */
+  /* margin: 0; */
+  /* padding: 0; */
 }
 </style>

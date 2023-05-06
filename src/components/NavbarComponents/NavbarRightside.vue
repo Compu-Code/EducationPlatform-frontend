@@ -8,6 +8,7 @@
         <IconLanguage
           class="cursor-pointer"
           @click="navbarStore.toggleLanguageMenu"
+          ref="target"
         />
       </div>
 
@@ -59,7 +60,7 @@
     <RightAuthenticated v-if="AuthStore.isAuthenticated" />
 
     <!-- if user not auth => will show login and signup -->
-    <div v-if="!AuthStore.isAuthenticated">
+    <div v-if="!AuthStore.isAuthenticated && isHide">
       <router-link to="/login" class="login mr-3">Log In</router-link>
       <router-link to="/signup" class="signup text-white font-inter"
         >Sign Up</router-link
@@ -69,12 +70,20 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from "vue";
+
+const RightAuthenticated = defineAsyncComponent(() =>
+  import("./RightAuthenticated.vue")
+);
+
 import IconLanguage from "../icons/IconLanguage.vue";
 import IconMode from "../icons/IconMode.vue";
 import { useNavbarStore } from "../../stores/NavbarStore";
 import { useAuthStore } from "../../stores/AuthStore";
 import { useUserStore } from "../../stores/UserStore";
-import RightAuthenticated from "./RightAuthenticated.vue";
+// import RightAuthenticated from "./RightAuthenticated.vue";
+import { onClickOutside } from "@vueuse/core";
+import { ref } from "vue";
 
 export default {
   components: {
@@ -82,14 +91,19 @@ export default {
     IconLanguage,
     RightAuthenticated,
   },
+  props: ["isHide"],
   data() {
     return {};
   },
   setup() {
+    // on click outside close menu or anything you
+    const target = ref(null);
+    onClickOutside(target, (event) => (navbarStore.isLanguageMenuOpen = false));
+
     const navbarStore = useNavbarStore();
     const AuthStore = useAuthStore();
     const UserStore = useUserStore();
-    return { navbarStore, AuthStore, UserStore };
+    return { navbarStore, AuthStore, UserStore, target };
   },
   computed: {
     changeNormalColor() {

@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-between mx-auto container h-[40px]">
     <NavbarLeftside />
-    <NavbarRightside />
+    <NavbarRightside :isHide="true" />
   </div>
 </template>
 

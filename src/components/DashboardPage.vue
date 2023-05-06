@@ -4,7 +4,7 @@
       <TheSidebar />
     </div>
     <div
-      class="layout-page flex flex-col absolute z-0 right-0 duration-300 px-8"
+      class="layout-page flex flex-col absolute z-0 right-0 duration-300"
       :class="[
         NavbarStore.darkMode
           ? 'bg-dark-primary-color'
@@ -19,16 +19,27 @@
 </template>
 
 <script>
-import DashboardNavbar from "./DashboardComponents/Navbar/DashboardNavbar.vue";
-import TheSidebar from "./SidebarComponents/TheSidebar.vue";
+import { defineAsyncComponent } from "vue";
+
+const DashboardNavbar = defineAsyncComponent(() =>
+  import("./DashboardComponents/Navbar/DashboardNavbar.vue")
+);
+const TheSidebar = defineAsyncComponent(() =>
+  import("./SidebarComponents/TheSidebar.vue")
+);
+
+// import DashboardNavbar from "./DashboardComponents/Navbar/DashboardNavbar.vue";
+// import TheSidebar from "./SidebarComponents/TheSidebar.vue";
 import { useSidebarStore } from "../stores/SidebarStore";
 import { useNavbarStore } from "../stores/NavbarStore";
+// import { useAuthStore } from "../stores/AuthStore";
 
 export default {
   components: { TheSidebar, DashboardNavbar },
   setup() {
     const SidebarStore = useSidebarStore();
     const NavbarStore = useNavbarStore();
+    // const authStore = useAuthStore();
     return { SidebarStore, NavbarStore };
   },
   methods: {
@@ -46,5 +57,14 @@ export default {
 <style scoped>
 .layout-page {
   width: calc(100% - v-bind(getSidebarWidth()));
+  padding-left: 32px;
+  padding-right: 32px;
+}
+@media screen and (max-width: 767px) {
+  .layout-page {
+    width: 100%;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
 }
 </style>

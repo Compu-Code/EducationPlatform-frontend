@@ -31,7 +31,7 @@
           </div>
           <div>
             <li>
-              <RouterLink to="/dashboard">
+              <RouterLink :to="currentRouterPath">
                 <button
                   class="py-[0.625rem] pl-4 w-full text-left mb-[0.625rem] flex items-center"
                   @click="navbarStore.toggleProfileMenuOpen"
@@ -39,7 +39,7 @@
                   <div class="pr-[0.625rem]">
                     <IconDdropmenu />
                   </div>
-                  Dashboard
+                  {{ currentRouteName }}
                 </button>
               </RouterLink>
             </li>
@@ -79,11 +79,29 @@
 </template>
 
 <script>
-import IconAvatar from "../icons/IconAvatar.vue";
-import IconThickarrow from "../icons/IconThickarrow.vue";
-import IconLogout from "../icons/IconLogout.vue";
-import IconSettings from "../icons/IconSettings.vue";
-import IconDdropmenu from "../icons/IconDdropmenu.vue";
+import { defineAsyncComponent } from "vue";
+
+const IconAvatar = defineAsyncComponent(() =>
+  import("../icons/IconAvatar.vue")
+);
+const IconThickarrow = defineAsyncComponent(() =>
+  import("../icons/IconThickarrow.vue")
+);
+const IconLogout = defineAsyncComponent(() =>
+  import("../icons/IconLogout.vue")
+);
+const IconSettings = defineAsyncComponent(() =>
+  import("../icons/IconSettings.vue")
+);
+const IconDdropmenu = defineAsyncComponent(() =>
+  import("../icons/IconDdropmenu.vue")
+);
+
+// import IconAvatar from "../icons/IconAvatar.vue";
+// import IconThickarrow from "../icons/IconThickarrow.vue";
+// import IconLogout from "../icons/IconLogout.vue";
+// import IconSettings from "../icons/IconSettings.vue";
+// import IconDdropmenu from "../icons/IconDdropmenu.vue";
 import { useNavbarStore } from "../../stores/NavbarStore";
 import { useAuthStore } from "../../stores/AuthStore";
 import { useUserStore } from "../../stores/UserStore";
@@ -111,6 +129,20 @@ export default {
         return "rgba(240, 244, 255, 0.05)";
       } else {
         return "rgba(1, 4, 27, 0.05)";
+      }
+    },
+    currentRouteName() {
+      if (this.$route.name === "home") {
+        return "Dashboard";
+      } else if (this.$route.name === "dashboard-home") {
+        return "Home";
+      }
+    },
+    currentRouterPath() {
+      if (this.$route.name === "home") {
+        return "/dashboard";
+      } else if (this.$route.name === "dashboard-home") {
+        return "/home";
       }
     },
   },

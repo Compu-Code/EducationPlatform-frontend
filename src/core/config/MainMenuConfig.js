@@ -1,6 +1,6 @@
-import AdminsMenus from "./AdminsMenuConfig";
-import LecturersMenus from "./LecturersMenuConfig";
-import StudentsMenus from "./StudentsMenuConfig";
+const AdminsMenus = () => import("./AdminsMenuConfig");
+const LecturersMenus = () => import("./LecturersMenuConfig");
+const StudentsMenus = () => import("./StudentsMenuConfig");
 
 const Roles = {
   AdminRole: true,
