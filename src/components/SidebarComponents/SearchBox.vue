@@ -1,7 +1,7 @@
 <template>
   <section class="pl-5 pr-5">
     <div
-      class="flex items-center rounded-md mt-2 py-1 duration-300"
+      class="search-box flex items-center rounded-md mt-2 py-1 duration-300"
       :class="[
         { border: sidebarStore.isMenuOpen, SearchPaddingInClose },
         navbarStore.darkMode
@@ -35,9 +35,15 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from "vue";
+
+const IconSearch = defineAsyncComponent(() =>
+  import("../icons/IconSearch.vue")
+);
+
 import { useNavbarStore } from "../../stores/NavbarStore";
 import { useSidebarStore } from "../../stores/SidebarStore";
-import IconSearch from "../icons/IconSearch.vue";
+// import IconSearch from "../icons/IconSearch.vue";
 
 export default {
   components: {
@@ -61,6 +67,13 @@ export default {
         return "mr-2";
       }
     },
+    openSidebarOnMobile() {
+      if (this.sidebarStore.sidebarOpen) {
+        return "flex";
+      } else {
+        return "none";
+      }
+    },
   },
 };
 </script>
@@ -68,5 +81,10 @@ export default {
 <style scoped>
 input::-webkit-search-cancel-button {
   -webkit-appearance: none;
+}
+@media screen and (max-width: 767px) {
+  .search-box {
+    display: v-bind(openSidebarOnMobile);
+  }
 }
 </style>

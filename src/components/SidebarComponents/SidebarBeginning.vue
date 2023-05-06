@@ -17,7 +17,7 @@
       </h1>
     </div>
     <span
-      class="absolute right-3 top-1"
+      class="radio-btn-span absolute right-3 top-1"
       :class="{ hidden: !sidebarStore.isMenuOpen }"
     >
       <input
@@ -29,17 +29,30 @@
         @click="sidebarStore.togglePinned()"
       />
     </span>
+    <span
+      class="close-on-mobile hidden absolute right-3 top-1 cursor-pointer"
+      @click="sidebarStore.closeSidebar"
+    >
+      <IconCross class="icon-cross hidden" />
+    </span>
   </section>
 </template>
 
 <script>
+import { defineAsyncComponent } from "vue";
+
+const IconCross = defineAsyncComponent(() => import("../icons/IconCross.vue"));
+const IconLogo = defineAsyncComponent(() => import("../icons/IconLogo.vue"));
+
 import { useSidebarStore } from "../../stores/SidebarStore";
 import { useNavbarStore } from "../../stores/NavbarStore";
+// import IconCross from "../icons/IconCross.vue";
+// import IconLogo from "../icons/IconLogo.vue";
 
-import IconLogo from "../icons/IconLogo.vue";
 export default {
   components: {
     IconLogo,
+    IconCross,
   },
 
   setup() {
@@ -60,6 +73,13 @@ export default {
         return "#01041b";
       } else {
         return "#f0f4ff";
+      }
+    },
+    toggleIconCross() {
+      if (this.sidebarStore.sidebarOpen) {
+        return "inline-block";
+      } else {
+        return "none";
       }
     },
   },
@@ -85,5 +105,16 @@ export default {
 }
 .checked {
   background-color: v-bind(changeRadioOutlineAndBgColor);
+}
+@media screen and (max-width: 767px) {
+  .radio-btn-span {
+    display: none;
+  }
+  .close-on-mobile {
+    display: block;
+  }
+  .icon-cross {
+    display: v-bind(toggleIconCross);
+  }
 }
 </style>

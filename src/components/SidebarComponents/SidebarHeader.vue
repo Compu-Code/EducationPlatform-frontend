@@ -11,8 +11,15 @@
 </template>
 
 <script>
-import SidebarBeginning from "./SidebarBeginning.vue";
-import SearchBox from "./SearchBox.vue";
+import { defineAsyncComponent } from "vue";
+
+const SidebarBeginning = defineAsyncComponent(() =>
+  import("./SidebarBeginning.vue")
+);
+const SearchBox = defineAsyncComponent(() => import("./SearchBox.vue"));
+
+// import SidebarBeginning from "./SidebarBeginning.vue";
+// import SearchBox from "./SearchBox.vue";
 import { useNavbarStore } from "../../stores/NavbarStore";
 
 export default {

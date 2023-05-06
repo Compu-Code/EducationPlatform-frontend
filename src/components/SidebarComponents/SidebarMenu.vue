@@ -10,7 +10,10 @@
           ? 'hover:bg-dark-menu-hover'
           : 'hover:bg-light-menu-hover',
       ]"
-      @click="sidebarStore.closeAllSubmenus"
+      @click="
+        sidebarStore.closeAllSubmenus();
+        sidebarStore.closeSidebar();
+      "
     >
       <!-- Menu Icon -->
       <span class="text-2xl block float-left ml-2 duration-300">
@@ -107,36 +110,87 @@
       v-show="Menu.isSubmenuActive && Menu.submenu && sidebarStore.isMenuOpen"
     >
       <li v-for="submenu in Menu.submenuItem" :key="submenu.name">
-        <SidebarSubmenu :submenu="submenu" />
+        <SidebarSubmenu :submenu="submenu" @click="sidebarStore.closeSidebar" />
       </li>
     </ul>
   </transition>
 </template>
 
 <script>
+import { defineAsyncComponent } from "vue";
+
+const SidebarSubmenu = defineAsyncComponent(() =>
+  import("./SidebarSubmenu.vue")
+);
+const IconDashboard = defineAsyncComponent(() =>
+  import("../icons/IconDashboard.vue")
+);
+const IconArrow = defineAsyncComponent(() => import("../icons/IconArrow.vue"));
+const IconUsers = defineAsyncComponent(() => import("../icons/IconUsers.vue"));
+const IconCourses = defineAsyncComponent(() =>
+  import("../icons/IconCourses.vue")
+);
+const IconTransactions = defineAsyncComponent(() =>
+  import("../icons/IconTransactions.vue")
+);
+const IconOrders = defineAsyncComponent(() =>
+  import("../icons/IconOrders.vue")
+);
+const IconErrors = defineAsyncComponent(() =>
+  import("../icons/IconErrors.vue")
+);
+const IconForms = defineAsyncComponent(() => import("../icons/IconForms.vue"));
+const IconRoles = defineAsyncComponent(() => import("../icons/IconRoles.vue"));
+const IconRating = defineAsyncComponent(() =>
+  import("../icons/IconRating.vue")
+);
+const IconNews = defineAsyncComponent(() => import("../icons/IconNews.vue"));
+const IconChat = defineAsyncComponent(() => import("../icons/IconChat.vue"));
+const IconActivity = defineAsyncComponent(() =>
+  import("../icons/IconActivity.vue")
+);
+const IconSponsors = defineAsyncComponent(() =>
+  import("../icons/IconSponsors.vue")
+);
+const IconMycourses = defineAsyncComponent(() =>
+  import("../icons/IconMycourses.vue")
+);
+const IconCalender = defineAsyncComponent(() =>
+  import("../icons/IconCalender.vue")
+);
+const IconConfirm = defineAsyncComponent(() =>
+  import("../icons/IconConfirm.vue")
+);
+const IconHistory = defineAsyncComponent(() =>
+  import("../icons/IconHistory.vue")
+);
+const IconStudents = defineAsyncComponent(() =>
+  import("../icons/IconStudents.vue")
+);
+
 import { useSidebarStore } from "../../stores/SidebarStore";
 import { useNavbarStore } from "../../stores/NavbarStore";
-import SidebarSubmenu from "./SidebarSubmenu.vue";
+// import SidebarSubmenu from "./SidebarSubmenu.vue";
 // ICONS FOR MENUS
-import IconArrow from "../icons/IconArrow.vue";
-import IconDashboard from "../icons/IconDashboard.vue";
-import IconUsers from "../icons/IconUsers.vue";
-import IconCourses from "../icons/IconCourses.vue";
-import IconTransactions from "../icons/IconTransactions.vue";
-import IconOrders from "../icons/IconOrders.vue";
-import IconErrors from "../icons/IconErrors.vue";
-import IconForms from "../icons/IconForms.vue";
-import IconRoles from "../icons/IconRoles.vue";
-import IconRating from "../icons/IconRating.vue";
-import IconNews from "../icons/IconNews.vue";
-import IconChat from "../icons/IconChat.vue";
-import IconActivity from "../icons/IconActivity.vue";
-import IconSponsors from "../icons/IconSponsors.vue";
-import IconMycourses from "../icons/IconMycourses.vue";
-import IconCalender from "../icons/IconCalender.vue";
-import IconConfirm from "../icons/IconConfirm.vue";
-import IconHistory from "../icons/IconHistory.vue";
-import IconStudents from "../icons/IconStudents.vue";
+// import IconArrow from "../icons/IconArrow.vue";
+// import IconDashboard from "../icons/IconDashboard.vue";
+// import IconUsers from "../icons/IconUsers.vue";
+// import IconCourses from "../icons/IconCourses.vue";
+// import IconTransactions from "../icons/IconTransactions.vue";
+// import IconOrders from "../icons/IconOrders.vue";
+// import IconErrors from "../icons/IconErrors.vue";
+// import IconForms from "../icons/IconForms.vue";
+// import IconRoles from "../icons/IconRoles.vue";
+// import IconRating from "../icons/IconRating.vue";
+// import IconNews from "../icons/IconNews.vue";
+// import IconChat from "../icons/IconChat.vue";
+// import IconActivity from "../icons/IconActivity.vue";
+// import IconSponsors from "../icons/IconSponsors.vue";
+// import IconMycourses from "../icons/IconMycourses.vue";
+// import IconCalender from "../icons/IconCalender.vue";
+// import IconConfirm from "../icons/IconConfirm.vue";
+// import IconHistory from "../icons/IconHistory.vue";
+// import IconStudents from "../icons/IconStudents.vue";
 // END OF ICONS
 
 export default {
@@ -172,7 +226,21 @@ export default {
     return { sidebarStore, navbarStore };
   },
   computed: {
-    changeActiveColor() {
+    changeNormalColor() {
+      if (this.navbarStore.darkMode) {
+        return "#6188ff";
+      } else {
+        return "#355cef";
+      }
+    },
+    changeHoverColor() {
+      if (this.navbarStore.darkMode) {
+        return "#4b6fdd";
+      } else {
+        return "#2246cd";
+      }
+    },
+    changeClickedColor() {
       if (this.navbarStore.darkMode) {
         return "#3858bb";
       } else {
@@ -208,7 +276,14 @@ export default {
 
 <style scoped>
 a.router-link-exact-active div {
-  background-color: v-bind("changeActiveColor");
+  background-color: v-bind(changeNormalColor);
+  transition: 0.1s all ease;
+}
+a.router-link-exact-active div:hover {
+  background-color: v-bind(changeHoverColor);
+}
+a.router-link-exact-active div:active {
+  background-color: v-bind(changeClickedColor);
 }
 /* for submenu animation */
 .submenu-enter-active,

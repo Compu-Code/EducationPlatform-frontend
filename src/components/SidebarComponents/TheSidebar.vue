@@ -45,10 +45,15 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from "vue";
+
+const SidebarHeader = defineAsyncComponent(() => import("./SidebarHeader.vue"));
+const SidebarMenu = defineAsyncComponent(() => import("./SidebarMenu.vue"));
+
 import { useNavbarStore } from "../../stores/NavbarStore";
 import { useSidebarStore } from "../../stores/SidebarStore";
-import SidebarHeader from "./SidebarHeader.vue";
-import SidebarMenu from "./SidebarMenu.vue";
+// import SidebarHeader from "./SidebarHeader.vue";
+// import SidebarMenu from "./SidebarMenu.vue";
 
 export default {
   components: {
@@ -95,6 +100,13 @@ export default {
           .includes(this.sidebarStore.searchText.toLowerCase())
       );
     },
+    openSidebarOnMobile() {
+      if (this.sidebarStore.sidebarOpen) {
+        return "256px";
+      } else {
+        return "0px";
+      }
+    },
   },
 };
 </script>
@@ -128,5 +140,10 @@ export default {
   -moz-box-shadow: 2px 0px 5px v-bind(scrollbarColor);
   -webkit-box-shadow: 2px 0px 5px v-bind(scrollbarColor);
   box-shadow: 2px 0px 5px v-bind(scrollbarColor);
+}
+@media screen and (max-width: 767px) {
+  #sidebar {
+    width: v-bind(openSidebarOnMobile);
+  }
 }
 </style>
