@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @import "~vuetify/src/stylus/main"; */
+
 @font-face {
   font-family: "Inter";
   src: url("../fonts/inter/Roboto-Regular.ttf") format("truetype");

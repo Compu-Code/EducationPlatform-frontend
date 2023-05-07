@@ -70,6 +70,7 @@ export default {
     const navbarStore = useNavbarStore();
     return { sidebarStore, navbarStore };
   },
+  /*TODO: detect window screen width to fix sidebar bug when make website for mobile then return to laptop */
   methods: {},
   computed: {
     OpenMenuWidth() {
