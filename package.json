@@ -12,12 +12,12 @@
     "@splinetool/runtime": "^0.9.310",
     "@vueuse/core": "^10.1.2",
     "axios": "^1.3.5",
+    "bootstrap-vue": "^2.23.1",
     "pinia": "^2.0.34",
     "three": "^0.134.0",
     "troisjs": "^0.3.4",
     "vue": "^3.2.47",
-    "vue-router": "^4.1.6",
-    "vuetify": "^3.2.2"
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",

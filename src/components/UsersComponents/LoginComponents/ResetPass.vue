@@ -158,9 +158,9 @@ import { useNavbarStore } from "../../../stores/NavbarStore";
 import { useAuthStore } from "../../../stores/AuthStore";
 import VectordownLogin from "../../../components/icons/VectordownLogin.vue";
 import VectorupLogin from "../../../components/icons/VectorupLogin.vue";
-import NormalFilled from "../../../components/UI/ButtonBases/NormalFilled.vue";
+import NormalFilled from "../../../components/UI/BasesButton/NormalFilled.vue";
 import OverlayBase from "../../../components/UI/OverlayBase.vue";
-import PopupCard from "../../../components/UI/PopupBases/PopupCard.vue";
+import PopupCard from "../../../components/UI/BasesPopup/PopupCard.vue";
 
 export default {
   components: {

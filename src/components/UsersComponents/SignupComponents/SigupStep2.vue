@@ -192,8 +192,8 @@ import StepsBar from "./StepsBar.vue";
 import VectorupSignup from "../../icons/VectorupSignup.vue";
 import VectordownSignup from "../../icons/VectordownSignup.vue";
 import PassField from "./PassField.vue";
-import NormalFilled from "../../UI/ButtonBases/NormalFilled.vue";
-import IconDeflated from "../../UI/ButtonBases/IconDeflated.vue";
+import NormalFilled from "../../UI/BasesButton/NormalFilled.vue";
+import IconDeflated from "../../UI/BasesButton/IconDeflated.vue";
 import IconCheckconstraints from "../../icons/IconCheckconstraints.vue";
 
 export default {

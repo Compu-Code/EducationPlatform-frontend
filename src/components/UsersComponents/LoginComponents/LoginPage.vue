@@ -188,9 +188,9 @@ import { useAuthStore } from "../../../stores/AuthStore";
 import VectorupLogin from "../../icons/VectorupLogin.vue";
 import VectordownLogin from "../../icons/VectordownLogin.vue";
 import PassField from "../SignupComponents/PassField.vue";
-import NormalFilled from "../../UI/ButtonBases/NormalFilled.vue";
+import NormalFilled from "../../UI/BasesButton/NormalFilled.vue";
 import OverlayBase from "../../UI/OverlayBase.vue";
-import PopupCard from "../../UI/PopupBases/PopupCard.vue";
+import PopupCard from "../../UI/BasesPopup/PopupCard.vue";
 
 export default {
   components: {

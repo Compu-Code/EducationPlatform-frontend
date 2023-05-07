@@ -219,9 +219,9 @@ import { useSignupStepsStore } from "../../../stores/SignupStepsStore";
 import StepsBar from "./StepsBar.vue";
 import VectorupSignup from "../../icons/VectorupSignup.vue";
 import VectordownSignup from "../../icons/VectordownSignup.vue";
-import NormalFilled from "../../UI/ButtonBases/NormalFilled.vue";
-import IconDeflated from "../../UI/ButtonBases/IconDeflated.vue";
-import PopupCard from "../../UI/PopupBases/PopupCard.vue";
+import NormalFilled from "../../UI/BasesButton/NormalFilled.vue";
+import IconDeflated from "../../UI/BasesButton/IconDeflated.vue";
+import PopupCard from "../../UI/BasesPopup/PopupCard.vue";
 import OverlayBase from "../../UI/OverlayBase.vue";
 
 export default {
