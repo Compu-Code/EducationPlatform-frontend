@@ -1,9 +1,22 @@
 <template>
-  <main class="error-logs h-fit mt-6 w-full">
-    <div class="filter w-full h-20 bg-white mb-5">
+  <main
+    class="error-logs h-screen mt-6 w-full duration-300"
+    :class="[
+      navbarStore.darkMode ? ' text-dark-text-color' : 'text-light-text-color',
+    ]"
+  >
+    <div
+      class="filter w-full h-20 mb-5"
+      :class="[navbarStore.darkMode ? ' bg-[#272937]' : 'bg-white']"
+    >
       <div>Filter</div>
     </div>
-    <ErrorlogsTable class="table max-w-full" :errors="errorsData" />
+    <div
+      class="w-full"
+      :class="[navbarStore.darkMode ? ' bg-[#272937]' : 'bg-white']"
+    >
+      <ErrorlogsTable class="" :errors="errorsData" />
+    </div>
   </main>
 </template>
 
@@ -70,7 +83,6 @@ export default {
 <style scoped>
 .filter,
 .table {
-  /* TODO: edit the box shadow */
   box-shadow: 0 3px 3px -2px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)),
     0 3px 4px 0 var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)),
     0 1px 8px 0 var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
