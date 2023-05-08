@@ -56,14 +56,14 @@ export default {
   },
   computed: {
     SearchPaddingInClose() {
-      if (this.isMenuOpen) {
+      if (this.sidebarStore.isMenuOpen) {
         return "px-2.5";
       } else {
         return "px-4";
       }
     },
     SearchIconMarginInClose() {
-      if (this.isMenuOpen) {
+      if (this.sidebarStore.isMenuOpen) {
         return "mr-2";
       }
     },
