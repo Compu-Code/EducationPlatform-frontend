@@ -11,7 +11,7 @@ import axios from "axios";
 export const useAuthStore = defineStore("authStore", {
   state: () => ({
     UserStore: useUserStore(),
-    baseURL: "https://34bb-109-107-243-170.ngrok-free.app",
+    baseURL: "https://7b07-109-107-243-170.ngrok-free.app",
     signupLoading: false,
     signupMessage: "",
     signupSuccess: "",
@@ -117,7 +117,7 @@ export const useAuthStore = defineStore("authStore", {
         );
         console.log(response.data);
         this.userToken = null;
-        document.cookie = "JWT=" + null;
+        document.cookie = "JWT=" + "";
         this.$router.push("/");
       } catch (error) {
         console.log(error);
@@ -129,8 +129,8 @@ export const useAuthStore = defineStore("authStore", {
       return !!this.userToken;
     },
     getCookie(name) {
-      const value = "; ${document.cookie}";
-      const parts = value.split("; ${name}=");
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
       if (parts.length === 2) {
         return parts.pop().split(";").shift();
       }
