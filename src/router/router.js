@@ -16,6 +16,7 @@ const PendingOrders = () =>
 const CompletedOrders = () =>
   import("../views/AdminsAccess/Orders/CompletedOrders.vue");
 const ErrorLogs = () => import("../views/AdminsAccess/ErrorLogs.vue");
+const ErrorDetails = () => import("../views/AdminsAccess/ErrorDetails.vue");
 const FormsResponses = () => import("../views/AdminsAccess/FormsResponses.vue");
 const RolesPage = () => import("../views/AdminsAccess/RolesPage.vue");
 const NewsPage = () => import("../views/AdminsAccess/NewsPage.vue");
@@ -194,7 +195,17 @@ const router = createRouter({
           path: "orders/completed",
           component: CompletedOrders,
         },
-        { name: "admin-error-logs", path: "errorlogs", component: ErrorLogs },
+        {
+          name: "admin-error-logs",
+          path: "errorlogs",
+          component: ErrorLogs,
+        },
+        {
+          name: "errorDetails",
+          path: "errorlogs/:errorID/details",
+          component: ErrorDetails,
+          props: true,
+        },
         {
           name: "admin-forms-responses",
           path: "formsresponses",

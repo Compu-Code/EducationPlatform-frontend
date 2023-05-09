@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="error-log-layout">
     <ErrorLogs />
   </div>
 </template>
@@ -16,4 +16,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.error-log-layout {
+  height: calc(100% - 70px);
+}
+</style>
