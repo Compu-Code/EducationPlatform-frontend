@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { RouterLink, RouterView, createWebHistory } from "vue-router";
 import { useLocalStorage } from "@vueuse/core";
 import { useUserStore } from "./UserStore";
 import axios from "axios";
@@ -11,7 +10,7 @@ import axios from "axios";
 export const useAuthStore = defineStore("authStore", {
   state: () => ({
     UserStore: useUserStore(),
-    baseURL: "https://7b07-109-107-243-170.ngrok-free.app",
+    baseURL: "https://e739-109-107-243-170.ngrok-free.app",
     signupLoading: false,
     signupMessage: "",
     signupSuccess: "",
@@ -60,7 +59,7 @@ export const useAuthStore = defineStore("authStore", {
             // timeout: 10000,
             headers: {
               "Access-Control-Allow-Origin": "*",
-              // Authorization: `Bearer ${this.userToken}`,
+              Authorization: `Bearer ${this.userToken}`,
               "content-type": "application/json",
             },
           }
@@ -112,13 +111,12 @@ export const useAuthStore = defineStore("authStore", {
               Authorization: `Bearer ${this.userToken}`,
               "content-type": "application/json",
             },
-            timeout: 3000,
           }
         );
         console.log(response.data);
         this.userToken = null;
         document.cookie = "JWT=" + "";
-        this.$router.push("/");
+        this.$router.replace("/");
       } catch (error) {
         console.log(error);
       }

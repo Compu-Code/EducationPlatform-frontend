@@ -26,17 +26,20 @@ export const useUserStore = defineStore("userStore", {
     async getUserData() {
       try {
         this.isUserDataLoading = true;
-        const response = await axios.post(
+        const response = await axios.get(
           this.AuthStore.baseURL + "/api/admin/user/info",
-          null,
           {
             headers: {
-              "Access-Control-Allow-Origin": "*",
               Authorization: `Bearer ${this.AuthStore.userToken}`,
+              "Access-Control-Allow-Origin": "*",
               "content-type": "application/json",
+              // "Access-Control-Allow-Headers":
+              //   "Origin, X-Requested-With, Content-Type, Accept",
+              // "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE, OPTIONS",
             },
           }
         );
+        console.log(response);
         this.userData = response.data.data.user;
         console.log(this.userData);
         this.userFname = this.userData.first_name;
