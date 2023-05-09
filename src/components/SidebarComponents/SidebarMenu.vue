@@ -275,6 +275,10 @@ export default {
 </script>
 
 <style scoped>
+a.router-link-active-active div {
+  background-color: v-bind(changeNormalColor);
+  transition: 0.1s all ease;
+}
 a.router-link-exact-active div {
   background-color: v-bind(changeNormalColor);
   transition: 0.1s all ease;

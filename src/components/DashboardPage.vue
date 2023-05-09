@@ -4,7 +4,7 @@
       <TheSidebar />
     </div>
     <div
-      class="layout-page flex flex-col absolute z-0 right-0 duration-300"
+      class="layout-page h-screen flex flex-col absolute z-0 right-0 duration-300"
       :class="[
         NavbarStore.darkMode
           ? 'bg-dark-primary-color'
