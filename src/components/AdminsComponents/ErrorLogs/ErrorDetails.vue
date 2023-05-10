@@ -2,16 +2,20 @@
   <div>
     <div class="error-id">Error ID: {{ errorID }}</div>
     <div class="error-message">
-      Error Message: {{ errorlogsStore.errorDetails.error_message }}
+      Error Message:gg
+      <!-- {{ errorlogsStore.errorDetails.error_message }} -->
     </div>
     <div class="error-description">
-      Error Description: {{ errorlogsStore.errorDetails.error_description }}
+      Error Description:
+      <!-- {{ errorlogsStore.errorDetails.error_description }} -->
     </div>
     <div class="error-created-at">
-      Error Created At: {{ errorlogsStore.errorDetails.created_at }}
+      Error Created At:
+      <!-- {{ errorlogsStore.errorDetails.created_at }} -->
     </div>
     <div class="error-updated-at">
-      Error Updated At: {{ errorlogsStore.errorDetails.updated_at }}
+      Error Updated At:
+      <!-- {{ errorlogsStore.errorDetails.updated_at }} -->
     </div>
     <div class="btns flex justify-between">
       <router-link :to="{ name: 'admin-error-logs' }">
@@ -51,9 +55,9 @@ export default {
     const navbarStore = useNavbarStore();
     return { errorlogsStore, navbarStore };
   },
-  mounted() {
-    this.errorlogsStore.showErrorData();
-  },
+  // mounted() {
+  //   this.errorlogsStore.showErrorData();
+  // },
 };
 </script>
 

@@ -1,18 +1,18 @@
 <template>
   <main
-    class="error-logs h-full mt-6 w-full duration-300"
+    class="error-logs mt-6 w-full duration-300 mb-10"
     :class="[
       navbarStore.darkMode ? ' text-dark-text-color' : 'text-light-text-color',
     ]"
   >
-    <div
+    <!-- <div
       class="filter w-full h-20 mb-5"
       :class="[navbarStore.darkMode ? ' bg-[#272937]' : 'bg-white']"
     >
       <div>Filter</div>
-    </div>
+    </div> -->
     <div
-      class="table-sh w-full"
+      class="table-sh"
       :class="[navbarStore.darkMode ? ' bg-[#272937]' : 'bg-white']"
     >
       <ErrorlogsTable class="" :errors="errorlogsStore.errorLogsData" />
@@ -58,6 +58,6 @@ export default {
   border-radius: 5px;
 }
 .table-sh {
-  height: calc(100% - 103px);
+  /* height: calc(100% - 103px); */
 }
 </style>
