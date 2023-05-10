@@ -106,7 +106,7 @@ export default {
 .checked {
   background-color: v-bind(changeRadioOutlineAndBgColor);
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1280px) {
   .radio-btn-span {
     display: none;
   }

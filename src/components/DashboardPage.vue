@@ -4,15 +4,14 @@
       <TheSidebar />
     </div>
     <div
-      class="layout-page h-screen flex flex-col absolute z-0 right-0 duration-300"
+      class="layout-page flex flex-col absolute z-0 right-0 duration-300"
       :class="[
         NavbarStore.darkMode
           ? 'bg-dark-primary-color'
           : 'bg-light-primary-color',
       ]"
     >
-      <DashboardNavbar />
-      <!-- <NavbarRightside class="bg-dark-primary-color" /> -->
+      <DashboardNavbar class="z-10" />
       <RouterView />
     </div>
   </div>
@@ -60,7 +59,7 @@ export default {
   padding-left: 32px;
   padding-right: 32px;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1280px) {
   .layout-page {
     width: 100%;
     padding-left: 25px;

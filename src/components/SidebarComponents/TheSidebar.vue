@@ -108,6 +108,13 @@ export default {
         return "0px";
       }
     },
+    changeSidebarShadowColor() {
+      if (this.navbarStore.darkMode) {
+        return "rgb(65 64 64 / 0.38)";
+      } else {
+        return "rgba(0, 0, 0, 0.2)";
+      }
+    },
   },
 };
 </script>
@@ -138,11 +145,12 @@ export default {
   border-left: solid 3.4px transparent;
 }
 .sidebar-shadow-on-hover {
-  -moz-box-shadow: 2px 0px 5px v-bind(scrollbarColor);
-  -webkit-box-shadow: 2px 0px 5px v-bind(scrollbarColor);
-  box-shadow: 2px 0px 5px v-bind(scrollbarColor);
+  box-shadow: 3px 0 10px v-bind(changeSidebarShadowColor);
+  -moz-box-shadow: 3px 0 10px v-bind(changeSidebarShadowColor);
+  -webkit-box-shadow: 3px 0 10px v-bind(changeSidebarShadowColor);
+  /*box-shadow: 2px 0px 5px v-bind(scrollbarColor); */
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1280px) {
   #sidebar {
     width: v-bind(openSidebarOnMobile);
   }

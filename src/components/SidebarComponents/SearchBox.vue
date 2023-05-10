@@ -82,7 +82,7 @@ export default {
 input::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1280px) {
   .search-box {
     display: v-bind(openSidebarOnMobile);
   }
