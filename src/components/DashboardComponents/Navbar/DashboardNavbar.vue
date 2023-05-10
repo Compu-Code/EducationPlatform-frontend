@@ -44,9 +44,9 @@ export default {
     },
     changeColor() {
       if (this.navbarStore.darkMode) {
-        return "#01041b17";
+        return "rgba(39,41,55,0.9)";
       } else {
-        return "white";
+        return "rgba(255, 255, 255,0.9)";
       }
     },
   },
@@ -86,7 +86,7 @@ export default {
     0 3px 4px 0 var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)),
     0 1px 8px 0 var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1280px) {
   .window-scrolled {
     padding-left: 20px;
     padding-right: 20px;

@@ -96,12 +96,12 @@ a:hover {
   margin: 3px 0;
   border-radius: 5px;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1280px) {
   .left-side-text {
     display: none;
   }
 }
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 1280px) {
   .side-menu {
     display: none;
   }

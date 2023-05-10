@@ -13,6 +13,7 @@
       </div>
 
       <!-- language dropdown menu and transitions -->
+
       <transition name="language-dropdown">
         <ul
           v-if="navbarStore.isLanguageMenuOpen"
