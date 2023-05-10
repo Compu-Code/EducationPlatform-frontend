@@ -55,8 +55,8 @@ export default {
   width: fit-content;
 }
 .circle {
-  width: 4.1px;
-  height: 4.1px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background-color: gray;
   margin: 1px;
