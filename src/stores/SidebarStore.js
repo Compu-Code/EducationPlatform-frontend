@@ -199,12 +199,10 @@ export const useSidebarStore = defineStore("sidebarStore", {
           {
             title: "Pending",
             name: "admin-pending-orders",
-            icon: "IconDashboard",
           },
           {
             title: "Completed",
             name: "admin-completed-orders",
-            icon: "IconDashboard",
           },
         ],
       },
@@ -222,6 +220,18 @@ export const useSidebarStore = defineStore("sidebarStore", {
         title: "Forms",
         name: "admin-forms-responses",
         icon: "IconForms",
+        submenu: true,
+        isSubmenuActive: false,
+        submenuItem: [
+          {
+            title: "Contact us",
+            name: "admin-contact-forms",
+          },
+          {
+            title: "Volunteer",
+            name: "admin-volunteer-forms",
+          },
+        ],
       },
 
       { title: "Rating", name: "admin-rating", icon: "IconRating" },
@@ -232,8 +242,8 @@ export const useSidebarStore = defineStore("sidebarStore", {
       },
       { title: "Chat", name: "admin-support", icon: "IconChat" },
       {
-        title: "Activity Log",
-        name: "admin-activity-log",
+        title: "Activity Logs",
+        name: "admin-activity-logs",
         icon: "IconActivity",
       },
       {
@@ -242,60 +252,60 @@ export const useSidebarStore = defineStore("sidebarStore", {
         icon: "IconSponsors",
       },
       //lecturers
-      {
-        title: "Students",
-        name: "lecturer-students",
-        icon: "IconStudents",
-        spacing: true,
-      },
-      { title: "Courses", name: "lecturer-courses", icon: "IconCourses" },
-      {
-        title: "Chat",
-        name: "lecturer-chat",
-        icon: "IconChat",
-      },
-      {
-        title: "Calender",
-        name: "lecturer-calender",
-        icon: "IconCalender",
-      },
-      {
-        title: "Courses History",
-        name: "lecturer-courses-history",
-        icon: "IconHistory",
-      },
-      {
-        title: "Confirm Give Lecture",
-        name: "lecturer-confirm",
-        icon: "IconConfirm",
-      },
-      // students
-      {
-        title: "Courses",
-        name: "student-courses",
-        icon: "IconCourses",
-        spacing: true,
-      },
-      {
-        title: "Chat",
-        name: "student-chat",
-        icon: "IconChat",
-      },
-      {
-        title: "Calender",
-        name: "student-calender",
-        icon: "IconCalender",
-      },
-      {
-        title: "My Courses",
-        name: "student-my-courses",
-        icon: "IconMycourses",
-      },
-      {
-        title: "Confirm Take Lecture",
-        name: "student-confirm",
-        icon: "IconConfirm",
-      },
+      // {
+      //   title: "Students",
+      //   name: "lecturer-students",
+      //   icon: "IconStudents",
+      //   spacing: true,
+      // },
+      // { title: "Courses", name: "lecturer-courses", icon: "IconCourses" },
+      // {
+      //   title: "Chat",
+      //   name: "lecturer-chat",
+      //   icon: "IconChat",
+      // },
+      // {
+      //   title: "Calender",
+      //   name: "lecturer-calender",
+      //   icon: "IconCalender",
+      // },
+      // {
+      //   title: "Courses History",
+      //   name: "lecturer-courses-history",
+      //   icon: "IconHistory",
+      // },
+      // {
+      //   title: "Confirm Give Lecture",
+      //   name: "lecturer-confirm",
+      //   icon: "IconConfirm",
+      // },
+      // // students
+      // {
+      //   title: "Courses",
+      //   name: "student-courses",
+      //   icon: "IconCourses",
+      //   spacing: true,
+      // },
+      // {
+      //   title: "Chat",
+      //   name: "student-chat",
+      //   icon: "IconChat",
+      // },
+      // {
+      //   title: "Calender",
+      //   name: "student-calender",
+      //   icon: "IconCalender",
+      // },
+      // {
+      //   title: "My Courses",
+      //   name: "student-my-courses",
+      //   icon: "IconMycourses",
+      // },
+      // {
+      //   title: "Confirm Take Lecture",
+      //   name: "student-confirm",
+      //   icon: "IconConfirm",
+      // },
     ],
     filteredMenus: [],
     // testing
