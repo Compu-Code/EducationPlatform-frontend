@@ -83,6 +83,7 @@ import { useUserStore } from "../../stores/UserStore";
 // import RightAuthenticated from "./RightAuthenticated.vue";
 import { onClickOutside } from "@vueuse/core";
 import { ref } from "vue";
+// import { storeToRefs } from "pinia";
 
 export default {
   components: {
@@ -100,6 +101,7 @@ export default {
     onClickOutside(target, (event) => (navbarStore.isLanguageMenuOpen = false));
 
     const navbarStore = useNavbarStore();
+    // const { darkMode } = storeToRefs(navbarStore);
     const AuthStore = useAuthStore();
     const UserStore = useUserStore();
     return { navbarStore, AuthStore, UserStore, target };
@@ -154,6 +156,27 @@ export default {
       this.AuthStore.logout();
     },
   },
+  // watch: {
+  //   darkMode(newValue, oldValue) {
+  //     document.body.classList.add("h-screen", "duration-300");
+  //     if (newValue) {
+  //       document.body.classList.remove("bg-light-primary-color");
+  //       document.body.classList.add("bg-dark-primary-color");
+  //     } else if (newValue === false) {
+  //       document.body.classList.remove("bg-dark-primary-color");
+  //       document.body.classList.add("bg-light-primary-color");
+  //     }
+  //   },
+  // },
+  // mounted() {
+  //   if (this.darkMode) {
+  //     document.body.classList.remove("bg-light-primary-color");
+  //     document.body.classList.add("bg-dark-primary-color");
+  //   } else {
+  //     document.body.classList.remove("bg-dark-primary-color");
+  //     document.body.classList.add("bg-light-primary-color");
+  //   }
+  // },
 };
 </script>
 

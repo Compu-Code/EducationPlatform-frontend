@@ -148,9 +148,9 @@ export default {
       this.AuthStore.logout();
     },
   },
-  mounted() {
-    this.UserStore.getUserData();
-  },
+  // mounted() {
+  //   this.UserStore.getUserData();
+  // },
 };
 </script>
 
