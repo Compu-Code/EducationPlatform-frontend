@@ -23,14 +23,18 @@
     </div>
   </div>
   <hr />
-  <div class="table-container overflow-x-auto overflow-y-hidden">
+  <div class="table-container overflow-x-auto">
     <table class="min-w-[800px] w-full relative">
       <thead class="border-b sticky top-0 bg-white z-[1]">
         <tr>
-          <th class="px-4 text-sm font-semibold tracking-wide text-left">
+          <!-- <th class="px-4 text-sm font-semibold tracking-wide text-left">
             <input type="checkbox" name="" id="" />
+          </th> -->
+          <th
+            class="frozen-column px-4 text-sm font-semibold tracking-wide text-left"
+          >
+            ID
           </th>
-          <th class="px-4 text-sm font-semibold tracking-wide text-left">ID</th>
           <th class="px-4 text-sm font-semibold tracking-wide text-left">
             Message
           </th>
@@ -52,11 +56,11 @@
       <tbody class="">
         <tr
           class="border-b"
-          v-for="error in errors.slice().reverse()"
+          v-for="error in errorlogsStore.errorLogsData.slice().reverse()"
           :key="error.id"
         >
-          <td class="px-4 text-sm"><input type="checkbox" name="" id="" /></td>
-          <td class="px-4 text-sm">{{ error.id }}</td>
+          <!-- <td class="px-4 text-sm"><input type="checkbox" name="" id="" /></td> -->
+          <td class="frozen-column px-4 text-sm">{{ error.id }}</td>
           <td class="td-message px-4 text-sm">
             {{ error.error_message }}
           </td>
@@ -66,23 +70,28 @@
           <td class="td-created-at px-4 text-sm">{{ error.created_at }}</td>
           <td class="td-updated-at px-4 text-sm">{{ error.updated_at }}</td>
           <td class="px-4 text-sm w-full relative">
-            <div class="flex justify-center z-[0]">
-              <!-- <normal-deflated
-                class="view-btn mr-2"
-                @click="errorlogsStore.showErrorData(error.id)"
-                >View</normal-deflated
-              >
-              <normal-deflated
-                class="delete-btn"
-                @click="errorlogsStore.deleteError(error.id)"
-              >
-                Delete</normal-deflated
-              > -->
-              <KebabMenu @click="openMenu" />
+            <div>
+              <KebabMenu
+                @menuOpen="errorlogsStore.openMenu(error.id)"
+                class="kebab-menu z-[0] relative"
+              />
             </div>
-            <!-- <Teleport to="table" v-if="isMenuOpen"> -->
-            <!-- <ActionsMenu v-if="isMenuOpen" class="absolute right-0 top-0" /> -->
-            <!-- </Teleport> -->
+            <PopupMenu
+              @viewClicked="
+                {
+                  errorlogsStore.showErrorData(error.id);
+                  errorlogsStore.toggleMenu(error.id);
+                }
+              "
+              @deleteClicked="
+                errorlogsStore.deleteError(error.id);
+                errorlogsStore.toggleMenu(error.id);
+              "
+              v-if="error.isMenuActive"
+              :action1="true"
+              :action3="true"
+              class="popup-menu absolute top-[83%] right-[35%] z-[1]"
+            />
           </td>
         </tr>
       </tbody>
@@ -94,53 +103,80 @@
 import { defineAsyncComponent } from "vue";
 import { useErrorlogsStore } from "../../../stores/ErrorlogsStore";
 import { useNavbarStore } from "../../../stores/NavbarStore";
+import { onClickOutside } from "@vueuse/core";
+import { ref } from "vue";
 
 const IconSearch = defineAsyncComponent(() =>
   import("../../icons/IconSearch.vue")
 );
 
 const NormalFilled = defineAsyncComponent(() =>
-  import("../BasesButton/NormalFilled.vue")
+  import("../../UI/BasesButton/NormalFilled.vue")
 );
 const NormalDeflated = defineAsyncComponent(() =>
-  import("../BasesButton/NormalDeflated.vue")
+  import("../../UI/BasesButton/NormalDeflated.vue")
 );
 const KebabMenu = defineAsyncComponent(() =>
-  import("../BasesButton/KebabMenu.vue")
+  import("../../UI/BasesButton/KebabMenu.vue")
 );
-const ActionsMenu = defineAsyncComponent(() =>
-  import("../../AdminsComponents/ErrorLogs/ActionsMenu.vue")
+const PopupMenu = defineAsyncComponent(() =>
+  import("../../UI/BasesPopup/PopupMenu.vue")
 );
 export default {
   components: {
     NormalFilled,
     KebabMenu,
-    ActionsMenu,
+    PopupMenu,
     NormalDeflated,
     IconSearch,
   },
-  props: ["errors"],
   data() {
     return {
-      isMenuOpen: false,
+      // isMenuOpen: false,
+      menuId: null,
     };
   },
   setup() {
     const errorlogsStore = useErrorlogsStore();
     const navbarStore = useNavbarStore();
-    return { errorlogsStore, navbarStore };
+
+    const target = ref(null);
+    onClickOutside(target, (event) => errorlogsStore.closeMenus());
+
+    return { errorlogsStore, navbarStore, target };
   },
   methods: {
-    openMenu() {
-      this.isMenuOpen = !this.isMenuOpen;
+    // openMenu(ID) {
+    //   const error = this.errors.find((error) => error.id === ID);
+    //   this.menuId = error.id;
+    //   this.isMenuOpen = !this.isMenuOpen;
+    // },
+  },
+  computed: {
+    changeTableColor() {
+      if (this.navbarStore.darkMode) {
+        return "#272937";
+      } else {
+        return "#ffffff";
+      }
     },
   },
+  // isMenuOpened(ID){
+
+  // }
 };
 </script>
 
 <style scoped>
-.table-container {
-  /* height: calc(100% - 56px); */
+.frozen-column {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: v-bind(changeTableColor);
+}
+table,
+thead {
+  background-color: v-bind(changeTableColor);
 }
 .view-btn,
 .delete-btn {
@@ -157,6 +193,12 @@ td,
 th {
   height: 48px;
 }
+tr {
+  transition: all 0.1s ease-in-out;
+}
+/* table tr:not(thead tr):hover {
+  background-color: rgb(213, 213, 213);
+} */
 .td-message {
   /* min-width: 200px; */
   max-width: 300px;
@@ -172,7 +214,7 @@ th {
   white-space: nowrap;
 }
 thead {
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); */
 }
 
 td:last-child {

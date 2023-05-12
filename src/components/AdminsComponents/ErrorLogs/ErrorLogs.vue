@@ -15,18 +15,18 @@
       class="table-sh"
       :class="[navbarStore.darkMode ? ' bg-[#272937]' : 'bg-white']"
     >
-      <ErrorlogsTable class="" :errors="errorlogsStore.errorLogsData" />
+      <ErrorlogsTable />
     </div>
   </main>
 </template>
 
 <script>
 import { defineAsyncComponent } from "vue";
-import { useNavbarStore } from "../../stores/NavbarStore.js";
-import { useSidebarStore } from "../../stores/SidebarStore";
-import { useErrorlogsStore } from "../../stores/ErrorlogsStore";
+import { useNavbarStore } from "../../../stores/NavbarStore.js";
+import { useSidebarStore } from "../../../stores/SidebarStore";
+import { useErrorlogsStore } from "../../../stores/ErrorlogsStore";
 const ErrorlogsTable = defineAsyncComponent(() =>
-  import("../UI/BasesTables/ErrorlogsTable.vue")
+  import("./ErrorlogsTable.vue")
 );
 
 export default {

@@ -1,5 +1,5 @@
 <template>
-  <div class="error-log-layout">
+  <div class="error-logs-layout">
     <ErrorLogs />
   </div>
 </template>
@@ -8,7 +8,7 @@
 import { defineAsyncComponent } from "vue";
 
 const ErrorLogs = defineAsyncComponent(() =>
-  import("../../components/AdminsComponents/ErrorLogs.vue")
+  import("../../components/AdminsComponents/ErrorLogs/ErrorLogs.vue")
 );
 
 export default {
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style scoped>
-.error-log-layout {
+.error-logs-layout {
   height: calc(100% - 70px);
 }
 </style>
