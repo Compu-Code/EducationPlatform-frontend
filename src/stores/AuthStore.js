@@ -10,7 +10,7 @@ import axios from "axios";
 export const useAuthStore = defineStore("authStore", {
   state: () => ({
     UserStore: useUserStore(),
-    baseURL: "https://e739-109-107-243-170.ngrok-free.app",
+    baseURL: "https://5288-109-107-243-170.ngrok-free.app",
     signupLoading: false,
     signupMessage: "",
     signupSuccess: "",
@@ -62,6 +62,7 @@ export const useAuthStore = defineStore("authStore", {
               Authorization: `Bearer ${this.userToken}`,
               "content-type": "application/json",
             },
+            timeout: 2000,
           }
         );
         console.log(response.data);
@@ -84,6 +85,7 @@ export const useAuthStore = defineStore("authStore", {
         this.UserStore.userRolesPermissions = this.userData.roles_permissions;
 
         // TODO: search for axios credentials IMPORTANT
+        console.log("cookie created for token");
         document.cookie = "JWT=" + this.userToken;
 
         if (this.userToken) {
@@ -107,7 +109,7 @@ export const useAuthStore = defineStore("authStore", {
           {
             // withCredentials: true,
             headers: {
-              "Access-Control-Allow-Origin": "*",
+              // "Access-Control-Allow-Origin": "*",
               Authorization: `Bearer ${this.userToken}`,
               "content-type": "application/json",
             },
