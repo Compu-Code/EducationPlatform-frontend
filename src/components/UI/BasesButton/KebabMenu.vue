@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-kebab-menu">
+  <div class="wrapper-kebab-menu" @click="$emit('menuOpen')">
     <div class="kebab-menu">
       <div class="circle"></div>
       <div class="circle"></div>
@@ -15,7 +15,6 @@ export default {
     const navbarStore = useNavbarStore();
     return { navbarStore };
   },
-  props: [""],
   // change colors (bg, hover & clicked Dynamically based on mode[light/dark])
   computed: {
     changeHoverColor() {
@@ -38,7 +37,7 @@ export default {
 
 <style scoped>
 .wrapper-kebab-menu {
-  width: 31px;
+  width: 31px !important;
   height: 31px;
   cursor: pointer;
   display: flex;
