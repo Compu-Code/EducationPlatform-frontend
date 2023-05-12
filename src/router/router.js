@@ -17,12 +17,21 @@ const CompletedOrders = () =>
   import("../views/AdminsAccess/Orders/CompletedOrders.vue");
 const ErrorLogs = () => import("../views/AdminsAccess/ErrorLogs.vue");
 const ErrorDetails = () => import("../views/AdminsAccess/ErrorDetails.vue");
-const FormsResponses = () => import("../views/AdminsAccess/FormsResponses.vue");
+const ContactusPage = () =>
+  import("../views/AdminsAccess/Forms/ContactusPage.vue");
+const ContactUsDetails = () =>
+  import("../views/AdminsAccess/Forms/ContactusDetails.vue");
+const VolunteerPage = () =>
+  import("../views/AdminsAccess/Forms/VolunteerPage.vue");
+const VolunteerDetails = () =>
+  import("../views/AdminsAccess/Forms/VolunteerDetails.vue");
 const RolesPage = () => import("../views/AdminsAccess/RolesPage.vue");
 const NewsPage = () => import("../views/AdminsAccess/NewsPage.vue");
 const RatingPage = () => import("../views/AdminsAccess/RatingPage.vue");
 const SupportPage = () => import("../views/AdminsAccess/SupportPage.vue");
-const ActivityLog = () => import("../views/AdminsAccess/ActivityLog.vue");
+const ActivityLogs = () => import("../views/AdminsAccess/ActivityLogs.vue");
+const ActivityDetails = () =>
+  import("../views/AdminsAccess/ActivityDetails.vue");
 const SponsorsPage = () => import("../views/AdminsAccess/SponsorsPage.vue");
 
 // import all files from LecturerAccess folder
@@ -207,9 +216,26 @@ const router = createRouter({
           props: true,
         },
         {
-          name: "admin-forms-responses",
-          path: "formsresponses",
-          component: FormsResponses,
+          name: "admin-contact-forms",
+          path: "forms/contact-us",
+          component: ContactusPage,
+        },
+        {
+          name: "contactUsDetails",
+          path: "contact-us/:contactUsID/details",
+          component: ContactUsDetails,
+          props: true,
+        },
+        {
+          name: "admin-volunteer-forms",
+          path: "forms/volunteer-with-us",
+          component: VolunteerPage,
+        },
+        {
+          name: "volunteerDetails",
+          path: "volunteer-with-us/:volunteerID/details",
+          component: VolunteerDetails,
+          props: true,
         },
         { name: "admin-roles", path: "roles", component: RolesPage },
         {
@@ -220,9 +246,15 @@ const router = createRouter({
         { name: "admin-rating", path: "rating", component: RatingPage },
         { name: "admin-support", path: "support", component: SupportPage },
         {
-          name: "admin-activity-log",
-          path: "activitylog",
-          component: ActivityLog,
+          name: "admin-activity-logs",
+          path: "activitylogs",
+          component: ActivityLogs,
+        },
+        {
+          name: "activityDetails",
+          path: "activitylogs/:activityID/details",
+          component: ActivityDetails,
+          props: true,
         },
         { name: "admin-sponsors", path: "sponsors", component: SponsorsPage },
         // lecturers
