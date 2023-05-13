@@ -24,6 +24,7 @@ import { useAuthStore } from "../src/stores/AuthStore";
 import { useUserStore } from "./stores/UserStore";
 import { useNavbarStore } from "./stores/NavbarStore";
 import { storeToRefs } from "pinia";
+import VueCookies from "vue-cookies";
 import TheSidebar from "./components/SidebarComponents/TheSidebar.vue";
 import TheNavbar from "./components/NavbarComponents/TheNavbar.vue";
 
@@ -50,8 +51,14 @@ export default {
   },
   // to import token from cookies and put in AuthStore when app created
   created() {
-    console.log(getCookie("JWT"));
-    this.AuthStore.userToken = getCookie("JWT");
+    // this.$cookies.set("token", "GH1.1.1689020474.1484362313", "30MIN");
+    // console.log("from cooikes pack :" + this.$cookies);
+    // console.log(getCookie("userJWT"));
+    // document.cookie.length;
+    // document.cookie.replace(getCookie("JWT"), null);
+    // console.log(getCookie("JWT"));
+    // document.cookie.length;
+    // this.AuthStore.userToken = getCookie("userJWT");
     // const reg = new RegExp("\\b" + null + "\\b");
     // if (document.cookie.split("#")[1] && !reg.test(document.cookie)) {
     //   let token = document.cookie.split("#")[1];
@@ -86,7 +93,7 @@ export default {
     }
   },
   unmounted() {
-    this.AuthStore.logout();
+    // this.AuthStore.logout();
   },
 };
 </script>

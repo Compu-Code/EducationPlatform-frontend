@@ -110,7 +110,7 @@
         :numOfActions="1"
         firstActionLink="/dashboard"
       >
-        <template v-slot:cardTitle>Successfully Login!</template>
+        <template v-slot:cardTitle>Successful Login!</template>
         <template v-slot:cardDetails
           >You will be redirect to your Dashboard.</template
         >

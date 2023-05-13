@@ -13,7 +13,7 @@
             : 'text-light-text-color',
         ]"
       >
-        Dashboard
+        UniHub
       </h1>
     </div>
     <span
