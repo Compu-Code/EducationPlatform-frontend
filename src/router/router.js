@@ -27,12 +27,15 @@ const VolunteerDetails = () =>
   import("../views/AdminsAccess/Forms/VolunteerDetails.vue");
 const RolesPage = () => import("../views/AdminsAccess/RolesPage.vue");
 const NewsPage = () => import("../views/AdminsAccess/NewsPage.vue");
+const NewsDetails = () => import("../views/AdminsAccess/NewsDetails.vue");
 const RatingPage = () => import("../views/AdminsAccess/RatingPage.vue");
+const RatesDetails = () => import("../views/AdminsAccess/RatesDetails.vue");
 const SupportPage = () => import("../views/AdminsAccess/SupportPage.vue");
 const ActivityLogs = () => import("../views/AdminsAccess/ActivityLogs.vue");
 const ActivityDetails = () =>
   import("../views/AdminsAccess/ActivityDetails.vue");
 const SponsorsPage = () => import("../views/AdminsAccess/SponsorsPage.vue");
+const SponsorDetails = () => import("../views/AdminsAccess/SponsorDetails.vue");
 
 // import all files from LecturerAccess folder
 const LecturerCourses = () =>
@@ -222,7 +225,7 @@ const router = createRouter({
         },
         {
           name: "contactUsDetails",
-          path: "contact-us/:contactUsID/details",
+          path: "forms/contact-us/:contactUsID/details",
           component: ContactUsDetails,
           props: true,
         },
@@ -233,17 +236,29 @@ const router = createRouter({
         },
         {
           name: "volunteerDetails",
-          path: "volunteer-with-us/:volunteerID/details",
+          path: "forms/volunteer-with-us/:volunteerID/details",
           component: VolunteerDetails,
           props: true,
         },
         { name: "admin-roles", path: "roles", component: RolesPage },
         {
           name: "admin-news-events",
-          path: "news&events",
+          path: "news-events",
           component: NewsPage,
         },
+        {
+          name: "newsDetails",
+          path: "news-events/:newsID/details",
+          component: NewsDetails,
+          props: true,
+        },
         { name: "admin-rating", path: "rating", component: RatingPage },
+        {
+          name: "ratesDetails",
+          path: "rating/:rateID/details",
+          component: RatesDetails,
+          props: true,
+        },
         { name: "admin-support", path: "support", component: SupportPage },
         {
           name: "admin-activity-logs",
@@ -257,6 +272,12 @@ const router = createRouter({
           props: true,
         },
         { name: "admin-sponsors", path: "sponsors", component: SponsorsPage },
+        {
+          name: "sponsorDetails",
+          path: "sponsors/:sponsorID/details",
+          component: SponsorDetails,
+          props: true,
+        },
         // lecturers
         {
           name: "lecturer-students",
