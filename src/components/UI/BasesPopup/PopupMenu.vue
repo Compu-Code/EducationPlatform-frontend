@@ -37,7 +37,21 @@
         <span class="mr-3"> <IconPencil /> </span>
         <span> Edit </span>
       </li>
-      <!-- third list contain delete option -->
+      <!-- third list contain assign role option -->
+      <li
+        @click="$emit('assignClicked')"
+        class="menu-assign"
+        :class="[
+          navbarStore.darkMode
+            ? 'hover:bg-dark-menu-hover'
+            : 'hover:bg-light-menu-hover',
+        ]"
+        v-if="actions === 'all' || action3 === true"
+      >
+        <span class="mr-3"> IC </span>
+        <span> Assign Role </span>
+      </li>
+      <!-- fourth list contain delete option -->
       <li
         @click="$emit('deleteClicked')"
         class="menu-delete"
@@ -46,7 +60,7 @@
             ? 'hover:bg-dark-menu-hover'
             : 'hover:bg-light-menu-hover',
         ]"
-        v-if="actions === 'all' || action3 === true"
+        v-if="actions === 'all' || action4 === true"
       >
         <span class="mr-3"> <IconTrash /> </span>
         <span> Delete </span>
@@ -74,7 +88,7 @@ export default {
     IconTrash,
   },
   // [HOW TO USE] if you want to get all actions use [ACTIONS] otherwise use [ACTION] with number of action you want to get
-  props: ["actions", "action1", "action2", "action3"],
+  props: ["actions", "action1", "action2", "action3", "action4"],
   data() {
     return {};
   },
@@ -108,7 +122,7 @@ export default {
 }
 .menu li {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding: 4px 16px;
   height: 3rem;
