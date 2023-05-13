@@ -40,14 +40,9 @@ export default {
   data() {
     return {};
   },
-
-  // mounted() {
-  //   this.activitylogsStore.getActivityLogsData();
-  //   document.body.classList.add("h-screen");
-  // },
-  // unmounted() {
-  //   document.body.classList.remove("h-screen");
-  // },
+  mounted() {
+    this.volunteerStore.getVolunteerData();
+  },
 };
 </script>
 

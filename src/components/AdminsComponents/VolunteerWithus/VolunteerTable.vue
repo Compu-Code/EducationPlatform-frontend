@@ -99,7 +99,7 @@
               "
               v-if="volunteer.isMenuActive"
               :action1="true"
-              :action3="true"
+              :action4="true"
               class="popup-menu absolute top-[83%] right-[35%] z-[1]"
             />
           </td>
