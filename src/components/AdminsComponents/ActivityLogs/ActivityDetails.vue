@@ -1,27 +1,75 @@
 <template>
-  <div>
-    <div class="error-id">activity ID: {{ activityID }}</div>
-    <div class="error-message">
-      test
-      <!-- {{ errorlogsStore.errorDetails.error_message }} -->
+  <div class="relative top-3 w-full">
+    <!-- <div class="activity-container"> -->
+    <div
+      class="activity-header flex flex-col p-3 justify-between mt-10 flex-wrap w-1/2"
+      :class="
+        navbarStore.darkMode
+          ? 'bg-[#272937] text-dark-text-color'
+          : 'bg-white text-light-text-color'
+      "
+    >
+      <div class="mb-5">
+        <span class="font-bold">Activity ID :</span>
+        {{ activityID }}
+      </div>
+      <div class="mb-5">
+        <span class="font-bold">Activity created at :</span>
+        <!-- TODO: activityDetails instead of activityLogsData -->
+        {{ activitylogsStore.activityLogsData[0].created_at }}
+      </div>
+      <div class="">
+        <span class="font-bold">Activity updated at :</span>
+        <!-- TODO: activityDetails instead of errorLogsData -->
+        {{ activitylogsStore.activityLogsData[0].updated_at }}
+      </div>
     </div>
-    <div class="error-description">
-      test
-      <!-- {{ errorlogsStore.errorDetails.error_description }} -->
+    <div
+      class="activity-body mt-8 p-4 w-1/2"
+      :class="
+        navbarStore.darkMode
+          ? 'bg-[#272937] text-dark-text-color'
+          : 'bg-white text-light-text-color'
+      "
+    >
+      <div class="mb-5">
+        <span class="font-bold">User ID :</span>
+
+        <!-- TODO: activityDetails instead of activityLogsData -->
+        {{ activitylogsStore.activityLogsData[0].user_id }}
+      </div>
+      <div class="mb-5">
+        <span class="font-bold"> User Name :</span>
+        <!-- TODO: activityDetails instead of activityLogsData -->
+        {{ activitylogsStore.activityLogsData[0].name }}
+      </div>
+      <div class="mb-5">
+        <span class="font-bold"> Subject :</span>
+        <!-- TODO: activityDetails instead of activityLogsData -->
+        {{ activitylogsStore.activityLogsData[0].subject }}
+      </div>
+      <div class="mb-5">
+        <span class="font-bold"> URL :</span>
+        <!-- TODO: activityDetails instead of activityLogsData -->
+        {{ activitylogsStore.activityLogsData[0].url }}
+      </div>
+      <div class="mb-5">
+        <span class="font-bold"> Method :</span>
+        <!-- TODO: activityDetails instead of activityLogsData -->
+        {{ activitylogsStore.activityLogsData[0].method }}
+      </div>
+      <div class="">
+        <span class="font-bold"> IP Address :</span>
+        <!-- TODO: activityDetails instead of activityLogsData -->
+        {{ activitylogsStore.activityLogsData[0].ip }}
+      </div>
     </div>
-    <div class="error-created-at">
-      test
-      <!-- {{ errorlogsStore.errorDetails.created_at }} -->
-    </div>
-    <div class="error-updated-at">
-      test
-      <!-- {{ errorlogsStore.errorDetails.updated_at }} -->
-    </div>
-    <div class="btns flex justify-between">
+    <div class="btns flex justify-between mt-24 mb-5">
       <router-link :to="{ name: 'admin-activity-logs' }">
-        <icon-deflated :direction="left" :border="true">Back</icon-deflated>
+        <icon-deflated :direction="'left'" :border="true">Back</icon-deflated>
       </router-link>
     </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -58,4 +106,20 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.activity-header,
+.activity-body {
+  width: 100%;
+  /* min-width: 100%; */
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.activity-container {
+  /* width: fit-content; */
+  /* margin-right: 0; */
+  /* width: 100%; */
+  /* position: absolute;
+  left: 50%;
+  transform: translateX(-50%); */
+}
+</style>
