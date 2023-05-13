@@ -1,4 +1,8 @@
 import { createApp, markRaw } from "vue";
+
+//vue cookies
+import VueCookies from "vue-cookies";
+
 // pinia
 import { createPinia } from "pinia";
 
@@ -13,11 +17,11 @@ import axios from "axios";
 import { TroisJSVuePlugin } from "troisjs";
 
 // Start PrimeVue
-import PrimeVue from "primevue/config";
+// import PrimeVue from "primevue/config";
 //theme
-import "primevue/resources/themes/lara-light-indigo/theme.css";
+// import "primevue/resources/themes/lara-light-indigo/theme.css";
 //core
-import "primevue/resources/primevue.min.css";
+// import "primevue/resources/primevue.min.css";
 
 // PrimeVue import components
 // import Password from "primevue/password";
@@ -43,7 +47,7 @@ app.component("TheSidebar", TheSidebar).component("TheNavbar", TheNavbar);
 // app.component("ColumnGroup", ColumnGroup);
 // app.component("Row", Row);
 
-app.use(router, axios, TroisJSVuePlugin, PrimeVue);
+app.use(router, axios, TroisJSVuePlugin, VueCookies);
 app.use(
   createPinia().use(({ store }) => {
     store.$router = markRaw(router);

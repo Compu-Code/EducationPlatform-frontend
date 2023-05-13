@@ -7,10 +7,27 @@ import axios from "axios";
 //   withCredentials: true,
 // });
 
+//function to get cookie
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 export const useAuthStore = defineStore("authStore", {
   state: () => ({
     UserStore: useUserStore(),
-    baseURL: "https://5288-109-107-243-170.ngrok-free.app",
+    baseURL: "https://81a0-109-107-243-170.ngrok-free.app",
     signupLoading: false,
     signupMessage: "",
     signupSuccess: "",
@@ -18,7 +35,7 @@ export const useAuthStore = defineStore("authStore", {
     loginMessage: "",
     loginSuccess: "",
 
-    userToken: "",
+    userToken: useLocalStorage("userJWT", null),
     userData: null,
   }),
   actions: {
@@ -57,11 +74,11 @@ export const useAuthStore = defineStore("authStore", {
             // withCredentials: true,
             // credentials: "include",
             // timeout: 10000,
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              Authorization: `Bearer ${this.userToken}`,
-              "content-type": "application/json",
-            },
+            // headers: {
+            //   "Access-Control-Allow-Origin": "*",
+            //   Authorization: `Bearer ${this.userToken}`,
+            //   "content-type": "application/json",
+            // },
             timeout: 2000,
           }
         );
@@ -86,7 +103,8 @@ export const useAuthStore = defineStore("authStore", {
 
         // TODO: search for axios credentials IMPORTANT
         console.log("cookie created for token");
-        document.cookie = "JWT=" + this.userToken;
+        console.log("tiken : " + this.userToken);
+        // document.cookie = "userJWT=" + this.userToken;
 
         if (this.userToken) {
           this.loginMessage = "Successfully login";
@@ -117,7 +135,10 @@ export const useAuthStore = defineStore("authStore", {
         );
         console.log(response.data);
         this.userToken = null;
-        document.cookie = "JWT=" + "";
+        // console.log(document.cookie);
+        // document.cookie = null;
+        // console.log(document.cookie);
+        console.log(this.userToken);
         this.$router.replace("/");
       } catch (error) {
         console.log(error);
