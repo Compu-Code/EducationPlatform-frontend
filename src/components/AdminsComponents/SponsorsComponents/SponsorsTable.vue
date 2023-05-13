@@ -22,7 +22,7 @@
       />
     </div>
     <normal-filled
-      class="create-Sponsor-btn"
+      class="create-Sponsor-btn ml-2"
       @click="createSponsorsClicked = true"
       >Create Sponsor</normal-filled
     >
