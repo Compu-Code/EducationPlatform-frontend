@@ -22,7 +22,7 @@
         class="title text w-full mb-8 absolute col-start-2 col-end-4 row-start-1 row-end-2"
       >
         <p class="text-5xl leading-[3.813rem]">Welcome Back to</p>
-        <p class="py-1 text-3xl">website name</p>
+        <p class="py-1 text-3xl">UniHub</p>
       </div>
 
       <!-- user data email & pass -->

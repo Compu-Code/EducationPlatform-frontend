@@ -7,48 +7,7 @@
         : 'bg-light-primary-color text-light-text-color',
     ]"
   >
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
-    <div>home</div>
+    <div>dashboard home</div>
   </section>
 </template>
 

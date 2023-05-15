@@ -93,8 +93,8 @@ export default {
 </script>
 
 <style scoped>
-.error-header,
-.error-body {
+.rate-header,
+.rate-body {
   border-radius: 8px;
   box-shadow: 0px 0px 8px 0 rgba(0, 0, 0, 0.2);
 }
