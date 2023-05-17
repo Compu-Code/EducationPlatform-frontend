@@ -108,13 +108,4 @@ export default {
   padding: 0;
   margin: 0;
 }
-body {
-  /* background-color: red; */
-  /* width: 100%;
-  height: 100%; */
-  /* min-width: 100%; */
-  /* min-height: 100%; */
-  /* margin: 0; */
-  /* padding: 0; */
-}
 </style>

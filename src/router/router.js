@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { defineAsyncComponent } from "vue";
 
-// const ErrorsLog = defineAsyncComponent(() => import("../views/AdminsAccess/ErrorsLog.vue"));
-
 // import all files from AdminAccess folder + LAZY LOADING
 const Users = () => import("../views/AdminsAccess/UsersPage.vue");
 const Courses = () => import("../views/AdminsAccess/CoursesPage.vue");
@@ -126,58 +124,6 @@ const router = createRouter({
       path: "/reset-password",
       component: ResetPassword,
     },
-    {
-      // Admin Dashboard Pages
-      // name: "admin-dashboard",
-      // path: "/dashboard/admin",
-      // component: Dashboard,
-      // children: [
-      //   { name: "admin-users", path: "/users", component: Users },
-      //   { name: "admin-courses", path: "/courses", component: Courses },
-      //   {
-      //     name: "admin-pending-transactions",
-      //     path: "/transactions/pending",
-      //     component: PendingTransactions,
-      //   },
-      //   {
-      //     name: "admin-completed-transactions",
-      //     path: "/transactions/completed",
-      //     component: CompletedTransactions,
-      //   },
-      //   {
-      //     name: "admin-pending-orders",
-      //     path: "/orders/pending",
-      //     component: PendingOrders,
-      //   },
-      //   {
-      //     name: "admin-completed-orders",
-      //     path: "/orders/completed",
-      //     component: CompletedOrders,
-      //   },
-      //   { name: "admin-errors-log", path: "/errorlog", component: ErrorsLog },
-      //   {
-      //     name: "admin-forms-responses",
-      //     path: "/formsresponses",
-      //     component: FormsResponses,
-      //   },
-      //   { name: "admin-roles", path: "/roles", component: RolesPage },
-      //   {
-      //     name: "admin-news-events",
-      //     path: "/news&events",
-      //     component: NewsPage,
-      //   },
-      //   { name: "admin-rating", path: "/rating", component: RatingPage },
-      //   { name: "admin-support", path: "/support", component: SupportPage },
-      //   {
-      //     name: "admin-activity-log",
-      //     path: "/activitylog",
-      //     component: ActivityLog,
-      //   },
-      //   { name: "admin-sponsors", path: "/sponsors", component: SponsorsPage },
-      // ],
-    },
-
-    // for test
     {
       name: "dashboard",
       path: "/dashboard",
@@ -329,66 +275,6 @@ const router = createRouter({
         },
       ],
     },
-
-    // end test sec
-    // {
-    //   // Lecturer Dashboard Pages
-    //   name: "lecturer-dashboard",
-    //   path: "/dashboard/lecturer",
-    //   component: LecturerDashboard,
-    //   children: [
-    //     {
-    //       name: "lecturer-courses",
-    //       path: "/courses",
-    //       component: LecturerCourses,
-    //     },
-    //     {
-    //       name: "lecturer-courses-history",
-    //       path: "/courseshistory",
-    //       component: LecturerChistory,
-    //     },
-    //     { name: "lecturer-chat", path: "/chat", component: LecturerChat },
-    //     {
-    //       name: "lecturer-calender",
-    //       path: "/calender",
-    //       component: LecturerCalender,
-    //     },
-    //     {
-    //       name: "lecturer-confirm",
-    //       path: "/confirm",
-    //       component: LecturerConfirm,
-    //     },
-    //   ],
-    // },
-    // {
-    //   // Student Dashboard Pages
-    //   name: "student-dashboard",
-    //   path: "/dashboard/student",
-    //   component: StudentDashboard,
-    //   children: [
-    //     {
-    //       name: "student-courses",
-    //       path: "/courses",
-    //       component: StudentCourses,
-    //     },
-    //     {
-    //       name: "student-my-courses",
-    //       path: "/mycourses",
-    //       component: StudentMcourses,
-    //     },
-    //     { name: "student-chat", path: "/chat", component: StudentChat },
-    //     {
-    //       name: "student-calender",
-    //       path: "/calender",
-    //       component: StudentCalender,
-    //     },
-    //     {
-    //       name: "student-confirm",
-    //       path: "/confirm",
-    //       component: StudentConfirm,
-    //     },
-    //   ],
-    // },
     {
       // page not found (must be the latest one of routes)
       name: "PageNotFound",
