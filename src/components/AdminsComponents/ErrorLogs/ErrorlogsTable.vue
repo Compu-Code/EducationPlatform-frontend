@@ -56,7 +56,7 @@
       <tbody class="">
         <tr
           class="border-b"
-          v-for="error in errorlogsStore.errorLogsData.slice().reverse()"
+          v-for="error in errorlogsStore.errorLogsData"
           :key="error.id"
         >
           <!-- <td class="px-4 text-sm"><input type="checkbox" name="" id="" /></td> -->

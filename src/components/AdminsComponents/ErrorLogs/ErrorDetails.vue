@@ -10,17 +10,17 @@
     >
       <div class="error-id mb-5">
         <span class="font-bold">Error ID :</span>
-        {{ errorID }}
+        {{ errorlogsStore.errorDetails.id }}
       </div>
       <div class="error-created-at mb-5">
         <span class="font-bold">Error created at :</span>
         <!-- TODO: errorLogsDetails instead of errorLogsData -->
-        {{ errorlogsStore.errorLogsData[0].created_at }}
+        {{ errorlogsStore.errorDetails.created_at }}
       </div>
       <div class="error-updated-at">
         <span class="font-bold">Error updated at :</span>
         <!-- TODO: errorLogsDetails instead of errorLogsData -->
-        {{ errorlogsStore.errorLogsData[0].updated_at }}
+        {{ errorlogsStore.errorDetails.updated_at }}
       </div>
     </div>
     <div
@@ -35,12 +35,12 @@
         <span class="font-bold">Error message :</span>
 
         <!-- TODO: errorLogsDetails instead of errorLogsData -->
-        {{ errorlogsStore.errorLogsData[0].error_message }}
+        {{ errorlogsStore.errorDetails.error_message }}
       </div>
       <div class="error-description">
         <span class="font-bold"> Error description :</span>
         <!-- TODO: errorLogsDetails instead of errorLogsData -->
-        {{ errorlogsStore.errorLogsData[0].error_description }}
+        {{ errorlogsStore.errorDetails.error_description }}
       </div>
     </div>
     <div class="btns flex justify-between mt-32 mb-5">
@@ -48,7 +48,7 @@
         <icon-deflated :direction="'left'" :border="true">Back</icon-deflated>
       </router-link>
       <normal-deflated
-        @click="errorlogsStore.deleteError(errorID)"
+        @click="errorlogsStore.deleteError(Number(errorID))"
         class="delete-btn"
         >Delete</normal-deflated
       >
@@ -83,9 +83,10 @@ export default {
     const navbarStore = useNavbarStore();
     return { errorlogsStore, navbarStore };
   },
-  // mounted() {
-  //   this.errorlogsStore.showErrorData();
-  // },
+  beforeMount() {
+    console.log(Number(this.errorID));
+    this.errorlogsStore.showErrorData(Number(this.errorID));
+  },
 };
 </script>
 
