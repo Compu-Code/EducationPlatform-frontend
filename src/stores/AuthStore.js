@@ -27,7 +27,7 @@ function getCookie(cname) {
 export const useAuthStore = defineStore("authStore", {
   state: () => ({
     UserStore: useUserStore(),
-    baseURL: "https://81a0-109-107-243-170.ngrok-free.app",
+    baseURL: "http://192.168.1.10/education_platform/public",
     signupLoading: false,
     signupMessage: "",
     signupSuccess: "",
@@ -74,11 +74,11 @@ export const useAuthStore = defineStore("authStore", {
             // withCredentials: true,
             // credentials: "include",
             // timeout: 10000,
-            // headers: {
-            //   "Access-Control-Allow-Origin": "*",
-            //   Authorization: `Bearer ${this.userToken}`,
-            //   "content-type": "application/json",
-            // },
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              Authorization: `Bearer ${this.userToken}`,
+              "content-type": "application/json",
+            },
             timeout: 2000,
           }
         );

@@ -30,12 +30,9 @@ export const useUserStore = defineStore("userStore", {
           this.AuthStore.baseURL + "/api/admin/user/info",
           {
             headers: {
-              Authorization: `Bearer ${this.AuthStore.userToken}`,
               "Access-Control-Allow-Origin": "*",
+              Authorization: `Bearer ${this.AuthStore.userToken}`,
               "content-type": "application/json",
-              // "Access-Control-Allow-Headers":
-              //   "Origin, X-Requested-With, Content-Type, Accept",
-              // "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE, OPTIONS",
             },
           }
         );

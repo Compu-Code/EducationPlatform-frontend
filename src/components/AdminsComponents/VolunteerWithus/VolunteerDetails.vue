@@ -15,12 +15,12 @@
       <div class="mb-5">
         <span class="font-bold">Volunteer created at :</span>
         <!-- TODO: volunteerDetails instead of volunteerData -->
-        {{ volunteerStore.volunteerData[0].created_at }}
+        {{ volunteerStore.volunteerDetails.created_at }}
       </div>
       <div class="">
         <span class="font-bold">Volunteer updated at :</span>
         <!-- TODO: volunteerDetails instead of volunteerData -->
-        {{ volunteerStore.volunteerData[0].updated_at }}
+        {{ volunteerStore.volunteerDetails.updated_at }}
       </div>
     </div>
     <div
@@ -35,22 +35,22 @@
         <span class="font-bold">First Name :</span>
 
         <!-- TODO: volunteerDetails instead of volunteerData -->
-        {{ volunteerStore.volunteerData[0].first_name }}
+        {{ volunteerStore.volunteerDetails.first_name }}
       </div>
       <div class="mb-5">
         <span class="font-bold">Last Name :</span>
         <!-- TODO: volunteerDetails instead of volunteerData -->
-        {{ volunteerStore.volunteerData[0].last_name }}
+        {{ volunteerStore.volunteerDetails.last_name }}
       </div>
       <div class="mb-5">
         <span class="font-bold">Email :</span>
         <!-- TODO: volunteerDetails instead of volunteerData -->
-        {{ volunteerStore.volunteerData[0].email }}
+        {{ volunteerStore.volunteerDetails.email }}
       </div>
       <div class="">
         <span class="font-bold">Description :</span>
         <!-- TODO: volunteerDetails instead of volunteerData -->
-        {{ volunteerStore.volunteerData[0].description }}
+        {{ volunteerStore.volunteerDetails.description }}
       </div>
     </div>
     <div class="btns flex justify-between mt-10 mb-5">
@@ -58,7 +58,7 @@
         <icon-deflated :direction="'left'" :border="true">Back</icon-deflated>
       </router-link>
       <normal-deflated
-        @click="volunteerStore.deleteVolunteer(volunteerID)"
+        @click="volunteerStore.deleteVolunteer(Number(volunteerID))"
         class="delete-btn"
         >Delete</normal-deflated
       >
@@ -93,9 +93,9 @@ export default {
     const navbarStore = useNavbarStore();
     return { volunteerStore, navbarStore };
   },
-  // mounted() {
-  //   this.volunteerStore.showVolunteerData();
-  // },
+  beforeMount() {
+    this.volunteerStore.showVolunteerData(Number(this.volunteerID));
+  },
 };
 </script>
 

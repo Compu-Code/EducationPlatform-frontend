@@ -65,7 +65,7 @@
       <tbody class="">
         <tr
           class="border-b"
-          v-for="contactUs in contactUsStore.contactUsData.slice().reverse()"
+          v-for="contactUs in contactUsStore.contactUsData"
           :key="contactUs.id"
         >
           <!-- <td class="px-4 text-sm"><input type="checkbox" name="" id="" /></td> -->

@@ -59,7 +59,7 @@
       <tbody class="">
         <tr
           class="border-b"
-          v-for="rate in ratesStore.ratesData.slice().reverse()"
+          v-for="rate in ratesStore.ratesData"
           :key="rate.id"
         >
           <!-- <td class="px-4 text-sm"><input type="checkbox" name="" id="" /></td> -->

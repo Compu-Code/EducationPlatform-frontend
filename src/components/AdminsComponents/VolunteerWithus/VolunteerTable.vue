@@ -62,7 +62,7 @@
       <tbody class="">
         <tr
           class="border-b"
-          v-for="volunteer in volunteerStore.volunteerData.slice().reverse()"
+          v-for="volunteer in volunteerStore.volunteerData"
           :key="volunteer.id"
         >
           <!-- <td class="px-4 text-sm"><input type="checkbox" name="" id="" /></td> -->

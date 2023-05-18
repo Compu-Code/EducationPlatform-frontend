@@ -15,12 +15,12 @@
       <div class="mb-5">
         <span class="font-bold">Rate created at :</span>
         <!-- TODO: rateDetails instead of ratesStore -->
-        {{ ratesStore.ratesData[0].created_at }}
+        {{ ratesStore.rateDetails.created_at }}
       </div>
       <div class="">
         <span class="font-bold">Rate updated at :</span>
         <!-- TODO: rateDetails instead of ratesStore -->
-        {{ ratesStore.ratesData[0].updated_at }}
+        {{ ratesStore.rateDetails.updated_at }}
       </div>
     </div>
     <div
@@ -35,24 +35,26 @@
         <span class="font-bold">User Name :</span>
 
         <!-- TODO: rateDetails instead of ratesStore -->
-        {{ ratesStore.ratesData[0].user_name }}
+        {{ ratesStore.rateDetails.user_name }}
       </div>
       <div class="mb-5">
         <span class="font-bold"> Rate :</span>
         <!-- TODO: rateDetails instead of ratesStore -->
-        {{ ratesStore.ratesData[0].rate }}
+        {{ ratesStore.rateDetails.rate }}
       </div>
       <div class="">
         <span class="font-bold"> Message :</span>
         <!-- TODO: rateDetails instead of ratesStore -->
-        {{ ratesStore.ratesData[0].message }}
+        {{ ratesStore.rateDetails.message }}
       </div>
     </div>
     <div class="btns flex justify-between mt-24 mb-5">
       <router-link :to="{ name: 'admin-rating' }">
         <icon-deflated :direction="'left'" :border="true">Back</icon-deflated>
       </router-link>
-      <normal-deflated @click="ratesStore.deleteRate(rateID)" class="delete-btn"
+      <normal-deflated
+        @click="ratesStore.deleteRate(Number(rateID))"
+        class="delete-btn"
         >Delete</normal-deflated
       >
     </div>
@@ -86,8 +88,8 @@ export default {
     const navbarStore = useNavbarStore();
     return { ratesStore, navbarStore };
   },
-  mounted() {
-    this.ratesStore.showRateData(this.rateID);
+  beforeMount() {
+    this.ratesStore.showRateData(Number(this.rateID));
   },
 };
 </script>

@@ -15,12 +15,12 @@
       <div class="mb-5">
         <span class="font-bold">Contact-us created at :</span>
         <!-- TODO: contactUsDetails instead of contactUsData -->
-        {{ contactusStore.contactUsData[0].created_at }}
+        {{ contactusStore.contactUsDetails.created_at }}
       </div>
       <div class="">
         <span class="font-bold">Contact-us updated at :</span>
         <!-- TODO: contactUsDetails instead of contactUsData -->
-        {{ contactusStore.contactUsData[0].updated_at }}
+        {{ contactusStore.contactUsDetails.updated_at }}
       </div>
     </div>
     <div
@@ -35,27 +35,27 @@
         <span class="font-bold">First Name :</span>
 
         <!-- TODO: contactUsDetails instead of contactUsData -->
-        {{ contactusStore.contactUsData[0].first_name }}
+        {{ contactusStore.contactUsDetails.first_name }}
       </div>
       <div class="mb-5">
         <span class="font-bold">Last Name :</span>
         <!-- TODO: contactUsDetails instead of contactUsData -->
-        {{ contactusStore.contactUsData[0].last_name }}
+        {{ contactusStore.contactUsDetails.last_name }}
       </div>
       <div class="mb-5">
         <span class="font-bold">Email :</span>
         <!-- TODO: contactUsDetails instead of contactUsData -->
-        {{ contactusStore.contactUsData[0].email }}
+        {{ contactusStore.contactUsDetails.email }}
       </div>
       <div class="mb-5">
         <span class="font-bold">Subjact :</span>
         <!-- TODO: contactUsDetails instead of contactUsData -->
-        {{ contactusStore.contactUsData[0].subjact }}
+        {{ contactusStore.contactUsDetails.subjact }}
       </div>
       <div class="">
         <span class="font-bold">Description :</span>
         <!-- TODO: contactUsDetails instead of contactUsData -->
-        {{ contactusStore.contactUsData[0].description }}
+        {{ contactusStore.contactUsDetails.description }}
       </div>
     </div>
     <div class="btns flex justify-between mt-10 mb-5">
@@ -63,7 +63,7 @@
         <icon-deflated :direction="'left'" :border="true">Back</icon-deflated>
       </router-link>
       <normal-deflated
-        @click="contactusStore.deleteContactUs(contactUsID)"
+        @click="contactusStore.deleteContactUs(Number(contactUsID))"
         class="delete-btn"
         >Delete</normal-deflated
       >
@@ -98,9 +98,9 @@ export default {
     const navbarStore = useNavbarStore();
     return { contactusStore, navbarStore };
   },
-  // mounted() {
-  //   this.contactusStore.showContactUsData();
-  // },
+  mounted() {
+    this.contactusStore.showContactUsData(Number(this.contactUsID));
+  },
 };
 </script>
 

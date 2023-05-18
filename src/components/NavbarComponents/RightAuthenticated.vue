@@ -20,7 +20,7 @@
       >
         <div class="py-4 px-[0.625rem]">
           <div class="mb-3 flex w-full px-[0.938rem] items-end justify-start">
-            <IconAvatar class="w-10 h-10" />
+            <IconAvatar class="icon-avatar" />
             <div class="ml-[0.5rem] px-[0.625rem]">
               <p class="font-bold text-s">
                 {{ UserStore.userFullName }}
@@ -148,13 +148,17 @@ export default {
       this.AuthStore.logout();
     },
   },
-  // mounted() {
-  //   this.UserStore.getUserData();
-  // },
+  mounted() {
+    this.UserStore.getUserData();
+  },
 };
 </script>
 
 <style scoped>
+.icon-avatar {
+  width: 3rem !important;
+  height: 3rem !important;
+}
 .account-menu {
   border-radius: 8px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
