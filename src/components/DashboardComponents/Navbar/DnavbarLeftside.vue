@@ -3,30 +3,12 @@
     class="flex flex-row items-center"
     :class="{ 'text-dark-text-color': navbarStore.darkMode }"
   >
-    <div class="left-side-text">left side</div>
+    <div class="left-side-text">UniHub</div>
     <div class="side-menu" @click="sidebarStore.openSidebar">
       <div></div>
       <div></div>
       <div></div>
     </div>
-
-    <!-- <div class="font-bold text-2xl">Logo</div>
-    <div
-      class="divider mx-3 border"
-      :class="[
-        navbarStore.darkMode
-          ? 'border-dark-text-color'
-          : 'border-light-text-color',
-      ]"
-    ></div>
-    <ul class="flex flex-nowrap">
-      <li
-        v-for="Menu in navbarStore.navbarMenus"
-        class="inline-flex navMenu pr-8"
-      >
-        <RouterLink :to="'' + Menu.link">{{ Menu.title }}</RouterLink>
-      </li>
-    </ul> -->
   </section>
 </template>
 
