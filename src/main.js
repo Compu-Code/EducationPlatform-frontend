@@ -14,7 +14,7 @@ import router from "./router/router";
 import axios from "axios";
 
 // trios
-import { TroisJSVuePlugin } from "troisjs";
+// import { TroisJSVuePlugin } from "troisjs";
 
 // navbar navbar sidebar
 import "./styles/main.css";
@@ -24,7 +24,7 @@ import TheNavbar from "./components/NavbarComponents/TheNavbar.vue";
 const app = createApp(App);
 app.component("TheSidebar", TheSidebar).component("TheNavbar", TheNavbar);
 
-app.use(router, axios, TroisJSVuePlugin, VueCookies);
+app.use(router, axios, VueCookies);
 app.use(
   createPinia().use(({ store }) => {
     store.$router = markRaw(router);
