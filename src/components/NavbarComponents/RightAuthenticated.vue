@@ -20,13 +20,15 @@
       >
         <div class="py-4 px-[0.625rem]">
           <div class="mb-3 flex w-full px-[0.938rem] items-end justify-start">
-            <IconAvatar class="icon-avatar" />
+            <IconAvatar class="icon-avatar shrink-0 w-11 h-11" />
             <div class="ml-[0.5rem] px-[0.625rem]">
               <p class="font-bold text-s">
                 {{ UserStore.userFullName }}
               </p>
               <p class="font-normal text-xs mt-[0.125rem]">
-                {{ UserStore.userRoles[0] }}
+                <div v-for="role in UserStore.userRoles">
+                  {{ role }}
+                </div>
               </p>
             </div>
           </div>
@@ -156,8 +158,8 @@ export default {
 
 <style scoped>
 .icon-avatar {
-  width: 3rem !important;
-  height: 3rem !important;
+  /* width: 3rem !important;
+  height: 3rem !important; */
 }
 .account-menu {
   border-radius: 8px;
