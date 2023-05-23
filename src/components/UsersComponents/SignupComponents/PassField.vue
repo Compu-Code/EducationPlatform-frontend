@@ -115,6 +115,8 @@ export default {
         return "Confirm Password";
       } else if (this.placeHolder === 3) {
         return "Enter your password";
+      } else if (this.placeHolder === 4) {
+        return "Enter Password";
       }
     },
   },

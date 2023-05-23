@@ -1,7 +1,7 @@
 <template>
   <div
     id="sidebar"
-    class="h-screen duration-300 z-10 fixed"
+    class="h-screen z-10 fixed"
     :class="[
       {
         'sidebar-shadow-on-hover':
@@ -120,6 +120,9 @@ export default {
 </script>
 
 <style scoped>
+#sidebar {
+  transition: width 0.5s, background-color 300ms, color 300ms;
+}
 .menus-hight {
   height: calc(100% - 6.063rem);
 }

@@ -42,7 +42,6 @@
             @blur="checkEmailValidate"
             v-model="userEmail"
           />
-          <!-- v-model="signupStepsStore.userEmail" -->
 
           <!-- pass -->
           <div class="relative">
@@ -67,7 +66,6 @@
               </router-link>
             </div>
           </div>
-          <!-- v-model:model-value="signupStepsStore.userConfirmPass" class="flex duration-300 items-center"-->
           <normal-filled
             class="w-full login-btn mt-[3.125rem] flex items-center justify-center"
           >
@@ -102,11 +100,14 @@
     </div>
 
     <transition name="overlay">
-      <OverlayBase v-if="authStore.loginSuccess" @click="hideOverlayAndPopup" />
+      <OverlayBase
+        v-if="authStore.loginSuccess && !$route.redirectedFrom"
+        @click="hideOverlayAndPopup"
+      />
     </transition>
     <transition name="card">
       <popup-card
-        v-if="authStore.loginSuccess"
+        v-if="authStore.loginSuccess && !$route.redirectedFrom"
         :numOfActions="1"
         firstActionLink="/dashboard"
       >
@@ -299,6 +300,9 @@ export default {
           email: this.userEmail,
           password: this.userPass,
         });
+        if (this.authStore.loginSuccess && this.$route.redirectedFrom) {
+          this.$router.replace(this.$route.redirectedFrom.fullPath);
+        }
       }
     },
   },
@@ -331,6 +335,11 @@ export default {
         return "#1433AB";
       }
     },
+  },
+  mounted() {
+    if (this.$route.redirectedFrom) {
+      console.log(this.$route.redirectedFrom.path.startsWith("/dashboard"));
+    }
   },
 };
 </script>

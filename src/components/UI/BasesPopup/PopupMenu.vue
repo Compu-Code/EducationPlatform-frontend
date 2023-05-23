@@ -48,7 +48,7 @@
         ]"
         v-if="actions === 'all' || action3 === true"
       >
-        <span class="mr-3"> IC </span>
+        <span class="mr-3"> <IconAdd /> </span>
         <span> Assign Role </span>
       </li>
       <!-- fourth list contain delete option -->
@@ -74,9 +74,11 @@ import { defineAsyncComponent } from "vue";
 import { useNavbarStore } from "../../../stores/NavbarStore";
 
 const IconEye = defineAsyncComponent(() => import("../../icons/IconEye.vue"));
+
 const IconPencil = defineAsyncComponent(() =>
   import("../../icons/IconPencil.vue")
 );
+const IconAdd = defineAsyncComponent(() => import("../../icons/IconAdd.vue"));
 const IconTrash = defineAsyncComponent(() =>
   import("../../icons/IconTrash.vue")
 );
@@ -86,6 +88,7 @@ export default {
     IconEye,
     IconPencil,
     IconTrash,
+    IconAdd,
   },
   // [HOW TO USE] if you want to get all actions use [ACTIONS] otherwise use [ACTION] with number of action you want to get
   props: ["actions", "action1", "action2", "action3", "action4"],
@@ -110,7 +113,7 @@ export default {
 
 <style scoped>
 .menu-container {
-  width: 7.063rem;
+  width: fit-content;
   box-shadow: -3px 0px 2px rgba(0, 0, 0, 0.2), -1px 3px 2px rgba(0, 0, 0, 0.2),
     1px -1px 2px rgba(0, 0, 0, 0.2), 3px 3px 2px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
