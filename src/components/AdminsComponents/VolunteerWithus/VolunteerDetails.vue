@@ -93,7 +93,7 @@ export default {
     const navbarStore = useNavbarStore();
     return { volunteerStore, navbarStore };
   },
-  beforeMount() {
+  mounted() {
     this.volunteerStore.showVolunteerData(Number(this.volunteerID));
   },
 };

@@ -6,7 +6,7 @@ export const useVolunteerStore = defineStore("volunteerStore", {
   state: () => ({
     AuthStore: useAuthStore(),
     volunteerData: [],
-    volunteerDetails: null,
+    volunteerDetails: [],
   }),
   actions: {
     async deleteVolunteer(id) {
