@@ -27,7 +27,7 @@ function getCookie(cname) {
 export const useAuthStore = defineStore("authStore", {
   state: () => ({
     UserStore: useUserStore(),
-    baseURL: "http://192.168.1.10/education_platform/public",
+    baseURL: "http://192.168.0.123/education_platform/public",
     signupLoading: false,
     signupMessage: "",
     signupSuccess: "",

@@ -212,13 +212,23 @@ export const useSidebarStore = defineStore("sidebarStore", {
         icon: "IconErrors",
       },
       {
-        title: "Roles",
-        name: "admin-roles",
+        title: "Access Management",
         icon: "IconRoles",
+        submenu: true,
+        isSubmenuActive: false,
+        submenuItem: [
+          {
+            title: "Roles",
+            name: "admin-roles",
+          },
+          {
+            title: "Permissions",
+            name: "admin-permissions",
+          },
+        ],
       },
       {
         title: "Forms",
-        name: "admin-forms-responses",
         icon: "IconForms",
         submenu: true,
         isSubmenuActive: false,
@@ -252,60 +262,60 @@ export const useSidebarStore = defineStore("sidebarStore", {
         icon: "IconSponsors",
       },
       //lecturers
-      {
-        title: "Students",
-        name: "lecturer-students",
-        icon: "IconStudents",
-        spacing: true,
-      },
-      { title: "Courses", name: "lecturer-courses", icon: "IconCourses" },
-      {
-        title: "Chat",
-        name: "lecturer-chat",
-        icon: "IconChat",
-      },
-      {
-        title: "Calender",
-        name: "lecturer-calender",
-        icon: "IconCalender",
-      },
-      {
-        title: "Courses History",
-        name: "lecturer-courses-history",
-        icon: "IconHistory",
-      },
-      {
-        title: "Confirm Give Lecture",
-        name: "lecturer-confirm",
-        icon: "IconConfirm",
-      },
-      // // students
-      {
-        title: "Courses",
-        name: "student-courses",
-        icon: "IconCourses",
-        spacing: true,
-      },
-      {
-        title: "Chat",
-        name: "student-chat",
-        icon: "IconChat",
-      },
-      {
-        title: "Calender",
-        name: "student-calender",
-        icon: "IconCalender",
-      },
-      {
-        title: "My Courses",
-        name: "student-my-courses",
-        icon: "IconMycourses",
-      },
-      {
-        title: "Confirm Take Lecture",
-        name: "student-confirm",
-        icon: "IconConfirm",
-      },
+      // {
+      //   title: "Students",
+      //   name: "lecturer-students",
+      //   icon: "IconStudents",
+      //   spacing: true,
+      // },
+      // { title: "Courses", name: "lecturer-courses", icon: "IconCourses" },
+      // {
+      //   title: "Chat",
+      //   name: "lecturer-chat",
+      //   icon: "IconChat",
+      // },
+      // {
+      //   title: "Calender",
+      //   name: "lecturer-calender",
+      //   icon: "IconCalender",
+      // },
+      // {
+      //   title: "Courses History",
+      //   name: "lecturer-courses-history",
+      //   icon: "IconHistory",
+      // },
+      // {
+      //   title: "Confirm Give Lecture",
+      //   name: "lecturer-confirm",
+      //   icon: "IconConfirm",
+      // },
+      // students
+      // {
+      //   title: "Courses",
+      //   name: "student-courses",
+      //   icon: "IconCourses",
+      //   spacing: true,
+      // },
+      // {
+      //   title: "Chat",
+      //   name: "student-chat",
+      //   icon: "IconChat",
+      // },
+      // {
+      //   title: "Calender",
+      //   name: "student-calender",
+      //   icon: "IconCalender",
+      // },
+      // {
+      //   title: "My Courses",
+      //   name: "student-my-courses",
+      //   icon: "IconMycourses",
+      // },
+      // {
+      //   title: "Confirm Take Lecture",
+      //   name: "student-confirm",
+      //   icon: "IconConfirm",
+      // },
     ],
     filteredMenus: [],
     // testing
@@ -350,6 +360,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
     //     menu.isActive = true;
     //   }
     // },
+
     toggleSubmenu(title) {
       const Submenu = this.allMenus.find((m) => m.title === title);
       if (Submenu.isSubmenuActive) {
