@@ -67,7 +67,7 @@ export default {
     NormalDeflated,
   },
   emits: ["close"],
-  props: ["editUserRoles", "primaryBtn", "permissionId"],
+  props: ["editUserRoles", "primaryBtn", "userId"],
   data() {
     return {
       permissionRoles: null,
@@ -85,9 +85,12 @@ export default {
     async assignRole() {
       console.log(this.selectedRoles);
       if (this.selectedRoles.length > 0) {
-        await this.usersStore.assignRoleUser({
-          roles: this.selectedRoles,
-        });
+        await this.usersStore.assignRoleUser(
+          {
+            roles: this.selectedRoles,
+          },
+          this.userId
+        );
         if (this.usersStore.updatedSuccessfully) {
           this.$emit("close");
         }
