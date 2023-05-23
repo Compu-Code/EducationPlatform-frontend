@@ -6,7 +6,11 @@
     @click="NavbarStore.toggleLanguageMenu"
   ></div> -->
   <TheNavbar />
-  <RouterView />
+  <RouterView
+    :class="
+      NavbarStore.darkMode ? 'text-dark-text-color' : 'text-light-text-color'
+    "
+  />
 </template>
 
 <script>
