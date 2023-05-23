@@ -6,7 +6,7 @@ export const useErrorlogsStore = defineStore("errorlogsStore", {
   state: () => ({
     AuthStore: useAuthStore(),
     errorLogsData: [],
-    errorDetails: null,
+    errorDetails: [],
   }),
   actions: {
     async deleteError(id) {

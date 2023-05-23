@@ -83,7 +83,7 @@ export default {
     const navbarStore = useNavbarStore();
     return { errorlogsStore, navbarStore };
   },
-  beforeMount() {
+  mounted() {
     console.log(Number(this.errorID));
     this.errorlogsStore.showErrorData(Number(this.errorID));
   },

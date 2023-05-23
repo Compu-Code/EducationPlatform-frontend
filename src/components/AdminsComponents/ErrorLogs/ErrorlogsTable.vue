@@ -177,6 +177,7 @@ export default {
 table,
 thead {
   background-color: v-bind(changeTableColor);
+  white-space: nowrap;
 }
 .view-btn,
 .delete-btn {
