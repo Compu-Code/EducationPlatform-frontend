@@ -103,11 +103,14 @@ export const useUsersStore = defineStore("usersStore", {
       }
     },
     async assignRoleUser(payload, id) {
-      const user = this.usersData.find((user) => user.id === id);
+      console.log(id);
+      const user = this.usersData.find((user) => user.user.id === id);
+      console.log(user);
       try {
         this.editLoading = true;
         const response = await axios.put(
-          this.AuthStore.baseURL + `/api/admin/users/assign-roles/${user.id}`,
+          this.AuthStore.baseURL +
+            `/api/admin/users/assign-roles/${user.user.id}`,
           payload,
           {
             headers: {
@@ -123,8 +126,8 @@ export const useUsersStore = defineStore("usersStore", {
         if (response.data) {
           this.updatedSuccessfully = true;
         }
-        this.sponsorDetails = response.data.data;
-        this.getUsersData();
+        this.userDetails = response.data.data;
+        this.showUserData(user.user.id);
       } catch (error) {
         console.log(error);
       }

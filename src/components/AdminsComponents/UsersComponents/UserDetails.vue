@@ -112,7 +112,7 @@
           :class="{ hidden: !isEditPopupOpened }"
           @click="
             {
-              (isEditPopupOpened = false), (sponsorsStore.editLoading = false);
+              (isEditPopupOpened = false), (usersStore.editLoading = false);
             }
           "
         ></div>
@@ -124,7 +124,7 @@
           v-if="isEditPopupOpened"
           @close="
             {
-              (isEditPopupOpened = false), (sponsorsStore.editLoading = false);
+              (isEditPopupOpened = false), (usersStore.editLoading = false);
             }
           "
           :edit-user-roles="userRolesForEditPopup"
