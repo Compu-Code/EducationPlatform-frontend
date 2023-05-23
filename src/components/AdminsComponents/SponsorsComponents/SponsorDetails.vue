@@ -16,12 +16,12 @@
       <div class="mb-5">
         <span class="font-bold">Sponsor created at :</span>
         <!-- TODO: sponsorDetails instead of sponsorsData -->
-        {{ sponsorsStore.sponsorsData[0].created_at }}
+        {{ sponsorsStore.sponsorDetails.created_at }}
       </div>
       <div class="">
         <span class="font-bold">Sponsor updated at :</span>
         <!-- TODO: sponsorDetails instead of sponsorsData -->
-        {{ sponsorsStore.sponsorsData[0].updated_at }}
+        {{ sponsorsStore.sponsorDetails.updated_at }}
       </div>
     </div>
     <div
@@ -43,12 +43,12 @@
         <span class="font-bold">Sponsor Name :</span>
 
         <!-- TODO: sponsorDetails instead of sponsorsData -->
-        {{ sponsorsStore.sponsorsData[0].sponsor_name }}
+        {{ sponsorsStore.sponsorDetails.sponsor_name }}
       </div>
       <div class="">
         <span class="font-bold">Sponsor Description :</span>
         <!-- TODO: sponsorDetails instead of sponsorsData -->
-        {{ sponsorsStore.sponsorsData[0].sponsor_description }}
+        {{ sponsorsStore.sponsorDetails.sponsor_description }}
       </div>
     </div>
     <div class="btns flex justify-between mt-24 mb-5">
@@ -60,14 +60,14 @@
           @click="
             {
               //TODO: newsDetails instead of sponsorsData
-              openEditPopup(sponsorsStore.sponsorsData[0]);
+              openEditPopup(sponsorsStore.sponsorDetails);
             }
           "
           class="edit-btn mr-4"
           >Edit</normal-deflated
         >
         <normal-deflated
-          @click="sponsorsStore.deleteNews(sponsorID)"
+          @click="sponsorsStore.deleteSponsor(Number(sponsorID))"
           class="delete-btn"
           >Delete</normal-deflated
         >
@@ -156,7 +156,7 @@ export default {
     },
   },
   mounted() {
-    this.sponsorsStore.showSponsorData();
+    this.sponsorsStore.showSponsorData(Number(this.sponsorID));
   },
 };
 </script>

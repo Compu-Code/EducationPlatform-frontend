@@ -91,7 +91,7 @@
       <tbody class="">
         <tr
           class="border-b"
-          v-for="sponsor in sponsorsStore.sponsorsData.slice().reverse()"
+          v-for="sponsor in sponsorsStore.sponsorsData"
           :key="sponsor.id"
         >
           <!-- <td class="px-4 text-sm"><input type="checkbox" name="" id="" /></td> -->
@@ -296,6 +296,7 @@ export default {
 table,
 thead {
   background-color: v-bind(changeTableColor);
+  white-space: nowrap;
 }
 .view-btn,
 .delete-btn {

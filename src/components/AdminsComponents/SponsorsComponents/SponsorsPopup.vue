@@ -131,15 +131,16 @@ export default {
         this.sponsorName &&
         this.sponsorDescription &&
         this.selectedFile &&
-        this.selectedFile.type === "image/png"
+        this.selectedFile.type.startsWith("image/")
       ) {
+        console.log(this.selectedFile);
         await this.sponsorsStore.createSponsor({
           // TODO: ask backend how he want to receive img
           sponsor_logo: this.selectedFile,
           sponsor_name: this.sponsorName,
           sponsor_description: this.sponsorDescription,
         });
-        if (this.sponsorsStore.createdSuccesfully) {
+        if (this.sponsorsStore.createdSuccessfully) {
           this.$emit("close");
         }
       }
@@ -152,15 +153,17 @@ export default {
       } else if (this.sponsorDescription) {
         this.sponsorName = document.getElementsByName("name")[0].value;
       }
+      console.log(this.sponsorName);
+      console.log(this.sponsorDescription);
       if (this.sponsorName && this.sponsorDescription) {
         await this.sponsorsStore.updateSponsor(
           {
-            sponsor_name: this.newsTitle,
-            sponsor_description: this.newsDescription,
+            sponsor_name: this.sponsorName,
+            sponsor_description: this.sponsorDescription,
           },
           this.sponsorId
         );
-        if (this.sponsorsStore.updatedSuccesfully) {
+        if (this.sponsorsStore.updatedSuccessfully) {
           this.$emit("close");
         }
       }
@@ -174,7 +177,14 @@ export default {
     },
     // get img from form and make it url
     onFileSelected(event) {
+      // console.log(event.target.files[0]);
+      // const reader = new FileReader();
+      // reader.readAsDataURL(event.target.files[0]);
+      // console.log(reader.result);
+      // let data = new FormData();
+      console.log(event);
       this.selectedFile = event.target.files[0];
+
       this.url = URL.createObjectURL(this.selectedFile);
       console.log(this.selectedFile);
     },
@@ -212,7 +222,7 @@ export default {
   height: fit-content;
   left: calc(50% - 12rem);
   top: 20vh;
-  position: absolute;
+  position: fixed;
   box-shadow: 0px 0px 5px 3px rgb(0, 0, 0, 0.2);
   border-radius: 5px;
 }
