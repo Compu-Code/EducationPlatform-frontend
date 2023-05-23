@@ -6,7 +6,7 @@ export const useContactusStore = defineStore("contactusStore", {
   state: () => ({
     AuthStore: useAuthStore(),
     contactUsData: [],
-    contactUsDetails: null,
+    contactUsDetails: [],
   }),
   actions: {
     async deleteContactUs(id) {
