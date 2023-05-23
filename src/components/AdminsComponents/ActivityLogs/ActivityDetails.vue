@@ -16,12 +16,12 @@
       <div class="mb-5">
         <span class="font-bold">Activity created at :</span>
         <!-- TODO: activityDetails instead of activityLogsData -->
-        {{ activitylogsStore.activityLogsData[0].created_at }}
+        {{ activitylogsStore.activityDetails.created_at }}
       </div>
       <div class="">
         <span class="font-bold">Activity updated at :</span>
         <!-- TODO: activityDetails instead of errorLogsData -->
-        {{ activitylogsStore.activityLogsData[0].updated_at }}
+        {{ activitylogsStore.activityDetails.updated_at }}
       </div>
     </div>
     <div
@@ -36,32 +36,32 @@
         <span class="font-bold">User ID :</span>
 
         <!-- TODO: activityDetails instead of activityLogsData -->
-        {{ activitylogsStore.activityLogsData[0].user_id }}
+        {{ activitylogsStore.activityDetails.user_id }}
       </div>
       <div class="mb-5">
         <span class="font-bold"> User Name :</span>
         <!-- TODO: activityDetails instead of activityLogsData -->
-        {{ activitylogsStore.activityLogsData[0].name }}
+        {{ activitylogsStore.activityDetails.name }}
       </div>
       <div class="mb-5">
         <span class="font-bold"> Subject :</span>
         <!-- TODO: activityDetails instead of activityLogsData -->
-        {{ activitylogsStore.activityLogsData[0].subject }}
+        {{ activitylogsStore.activityDetails.subject }}
       </div>
       <div class="mb-5">
         <span class="font-bold"> URL :</span>
         <!-- TODO: activityDetails instead of activityLogsData -->
-        {{ activitylogsStore.activityLogsData[0].url }}
+        {{ activitylogsStore.activityDetails.url }}
       </div>
       <div class="mb-5">
         <span class="font-bold"> Method :</span>
         <!-- TODO: activityDetails instead of activityLogsData -->
-        {{ activitylogsStore.activityLogsData[0].method }}
+        {{ activitylogsStore.activityDetails.method }}
       </div>
       <div class="">
         <span class="font-bold"> IP Address :</span>
         <!-- TODO: activityDetails instead of activityLogsData -->
-        {{ activitylogsStore.activityLogsData[0].ip }}
+        {{ activitylogsStore.activityDetails.ip }}
       </div>
     </div>
     <div class="btns flex justify-between mt-24 mb-5">
@@ -100,9 +100,9 @@ export default {
     const navbarStore = useNavbarStore();
     return { activitylogsStore, navbarStore };
   },
-  // mounted() {
-  //   this.errorlogsStore.showErrorData();
-  // },
+  mounted() {
+    this.activitylogsStore.showActivityData(Number(this.activityID));
+  },
 };
 </script>
 

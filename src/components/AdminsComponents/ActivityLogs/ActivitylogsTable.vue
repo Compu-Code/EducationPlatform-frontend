@@ -66,9 +66,7 @@
       <tbody class="">
         <tr
           class="border-b"
-          v-for="activity in activitylogsStore.activityLogsData
-            .slice()
-            .reverse()"
+          v-for="activity in activitylogsStore.activityLogsData"
           :key="activity.id"
         >
           <!-- <td class="px-4 text-sm"><input type="checkbox" name="" id="" /></td> -->
@@ -188,6 +186,7 @@ export default {
 table,
 thead {
   background-color: v-bind(changeTableColor);
+  white-space: nowrap;
 }
 .view-btn,
 .delete-btn {
