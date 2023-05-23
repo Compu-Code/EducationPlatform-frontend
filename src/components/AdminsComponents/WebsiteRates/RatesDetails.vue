@@ -88,7 +88,7 @@ export default {
     const navbarStore = useNavbarStore();
     return { ratesStore, navbarStore };
   },
-  beforeMount() {
+  mounted() {
     this.ratesStore.showRateData(Number(this.rateID));
   },
 };

@@ -6,7 +6,7 @@ export const useRatesStore = defineStore("ratesStore", {
   state: () => ({
     AuthStore: useAuthStore(),
     ratesData: [],
-    rateDetails: null,
+    rateDetails: [],
   }),
   actions: {
     async deleteRate(id) {
