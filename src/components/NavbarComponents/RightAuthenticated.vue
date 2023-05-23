@@ -26,8 +26,8 @@
                 {{ UserStore.userFullName }}
               </p>
               <p class="font-normal text-xs mt-[0.125rem]">
-                <div v-for="role in UserStore.userRoles">
-                  {{ role }}
+                <div v-for="(value,key) in UserStore.userRoles">
+                  {{ key }}
                 </div>
               </p>
             </div>
