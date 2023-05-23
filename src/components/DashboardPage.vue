@@ -50,6 +50,12 @@ export default {
       }
     },
   },
+  mounted() {
+    document.title = "UniHub Dashboard";
+  },
+  unmounted() {
+    document.title = "UniHub";
+  },
 };
 </script>
 
