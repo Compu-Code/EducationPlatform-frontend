@@ -92,7 +92,7 @@ export default {
           title: this.newsTitle,
           description: this.newsDescription,
         });
-        if (this.ournewsStore.createdSuccesfully) {
+        if (this.ournewsStore.createdSuccessfully) {
           this.$emit("close");
         }
       }
@@ -113,7 +113,7 @@ export default {
           },
           this.newsId
         );
-        if (this.ournewsStore.updatedSuccesfully) {
+        if (this.ournewsStore.updatedSuccessfully) {
           this.$emit("close");
         }
       }
@@ -151,7 +151,7 @@ export default {
   height: fit-content;
   left: calc(50% - 12rem);
   top: 25vh;
-  position: absolute;
+  position: fixed;
   box-shadow: 0px 0px 5px 3px rgb(0, 0, 0, 0.2);
   border-radius: 5px;
 }

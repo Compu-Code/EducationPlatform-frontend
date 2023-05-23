@@ -87,7 +87,7 @@
       <tbody class="">
         <tr
           class="border-b"
-          v-for="news in ournewsStore.ourNewsData.slice().reverse()"
+          v-for="news in ournewsStore.ourNewsData"
           :key="news.id"
         >
           <!-- <td class="px-4 text-sm"><input type="checkbox" name="" id="" /></td> -->
@@ -289,6 +289,7 @@ export default {
 table,
 thead {
   background-color: v-bind(changeTableColor);
+  white-space: nowrap;
 }
 .view-btn,
 .delete-btn {

@@ -16,12 +16,12 @@
       <div class="mb-5">
         <span class="font-bold">News created at :</span>
         <!-- TODO: newsDetails instead of ourNewsData -->
-        {{ ournewsStore.ourNewsData[0].created_at }}
+        {{ ournewsStore.newsDetails.created_at }}
       </div>
       <div class="">
         <span class="font-bold">News updated at :</span>
         <!-- TODO: newsDetails instead of errorLogsData -->
-        {{ ournewsStore.ourNewsData[0].updated_at }}
+        {{ ournewsStore.newsDetails.updated_at }}
       </div>
     </div>
     <div
@@ -36,12 +36,12 @@
         <span class="font-bold">News Title :</span>
 
         <!-- TODO: newsDetails instead of ourNewsData -->
-        {{ ournewsStore.ourNewsData[0].title }}
+        {{ ournewsStore.newsDetails.title }}
       </div>
       <div class="">
         <span class="font-bold">News Description :</span>
         <!-- TODO: newsDetails instead of ourNewsData -->
-        {{ ournewsStore.ourNewsData[0].description }}
+        {{ ournewsStore.newsDetails.description }}
       </div>
     </div>
     <div class="btns flex justify-between mt-24 mb-5">
@@ -53,14 +53,14 @@
           @click="
             {
               //TODO: newsDetails instead of ourNewsData
-              openEditPopup(ournewsStore.ourNewsData[0]);
+              openEditPopup(ournewsStore.newsDetails);
             }
           "
           class="edit-btn mr-4"
           >Edit</normal-deflated
         >
         <normal-deflated
-          @click="ournewsStore.deleteNews(newsID)"
+          @click="ournewsStore.deleteNews(Number(newsID))"
           class="delete-btn"
           >Delete</normal-deflated
         >
@@ -149,9 +149,9 @@ export default {
       this.isEditPopupOpened = true;
     },
   },
-  // mounted() {
-  //   this.ournewsStore.showNewsData();
-  // },
+  mounted() {
+    this.ournewsStore.showNewsData(Number(this.newsID));
+  },
 };
 </script>
 

@@ -5,70 +5,18 @@ import { useAuthStore } from "./AuthStore";
 export const useOurnewsStore = defineStore("ournewsStore", {
   state: () => ({
     AuthStore: useAuthStore(),
-    ourNewsData: [
-      {
-        id: 1,
-        title:
-          "Quisquam quis sunt suscipit nihil qui odio qui accusantium quo at quo quidem accusamus.",
-        description:
-          "Omnis facere qui maxime iste consequatur dicta voluptatibus est. Eveniet ut rerum sit corrupti officia. Magnam doloremque qui sint quasi error.",
-        created_at: "2023-05-11T11:40:23.000000Z",
-        updated_at: "2023-05-11T11:40:23.000000Z",
-        isMenuActive: false,
-      },
-      {
-        id: 2,
-        title:
-          "Aut neque velit incidunt suscipit minima incidunt accusantium asperiores quibusdam iusto vero.",
-        description:
-          "Optio accusantium incidunt quo non. Provident assumenda quaerat quo provident odio. Nostrum architecto unde suscipit perspiciatis perspiciatis.",
-        created_at: "2023-05-11T11:40:23.000000Z",
-        updated_at: "2023-05-11T11:40:23.000000Z",
-        isMenuActive: false,
-      },
-      {
-        id: 3,
-        title:
-          "Qui culpa ut qui assumenda odit voluptatem pariatur excepturi reprehenderit.",
-        description:
-          "Aut dolorem architecto nobis recusandae neque cum. Sapiente et quas at optio perspiciatis.",
-        created_at: "2023-05-11T11:40:23.000000Z",
-        updated_at: "2023-05-11T11:40:23.000000Z",
-        isMenuActive: false,
-      },
-      {
-        id: 4,
-        title:
-          "Ipsam veniam distinctio magni pariatur aperiam quis provident delectus quo aliquam.",
-        description:
-          "Mollitia ut veniam perferendis est sint recusandae quis ut. Est et ut itaque expedita similique veritatis. Sunt vitae sunt et saepe.",
-        created_at: "2023-05-11T11:40:23.000000Z",
-        updated_at: "2023-05-11T11:40:23.000000Z",
-        isMenuActive: false,
-      },
-      {
-        id: 5,
-        title:
-          "Voluptatem qui provident quisquam voluptatibus voluptatem sint sequi ullam.",
-        description:
-          "Suscipit voluptas ut in. Doloremque velit maiores tenetur sed excepturi neque omnis. Non possimus possimus qui eum dignissimos tempore et. Culpa et quis dolorem distinctio omnis.",
-        created_at: "2023-05-11T11:40:23.000000Z",
-        updated_at: "2023-05-11T11:40:23.000000Z",
-        isMenuActive: false,
-      },
-    ],
-    newsDetails: null,
+    ourNewsData: [],
+    newsDetails: [],
     createLoading: false,
-    createdSuccesfully: false,
+    createdSuccessfully: false,
     editLoading: false,
-    updatedSuccesfully: false,
+    updatedSuccessfully: false,
   }),
   actions: {
     // CRUD
     async getourNewsData() {
       try {
         const response = await axios.get(
-          //TODO: update URL (error-logs) => (News)
           this.AuthStore.baseURL + "/api/admin/our-news?page=1",
           {
             headers: {
@@ -81,38 +29,39 @@ export const useOurnewsStore = defineStore("ournewsStore", {
         console.log(response);
         console.log(response.data);
         // to add isMenuActive into all to check later if popup menu open or not
-        this.ourNewsData = response.data.forEach((news) => {
-          isMenuActive = false;
-        });
-        this.ourNewsData = response.data;
+        // this.ourNewsData = response.data.forEach((news) => {
+        //   isMenuActive = false;
+        // });
+        this.ourNewsData = response.data.data;
       } catch (error) {
         console.log(error);
       }
     },
     async showNewsData(id) {
+      await this.getourNewsData();
       const news = this.ourNewsData.find((news) => news.id === id);
       console.log("news id" + news.id);
-      // try {
-      //   const response = await axios.get(
-      //     this.AuthStore.baseURL + `/api/admin/our-news/${news.id}`,
-      //     {
-      //       headers: {
-      //         "Access-Control-Allow-Origin": "*",
-      //         Authorization: `Bearer ${this.AuthStore.userToken}`,
-      //         "content-type": "application/json",
-      //       },
-      //     }
-      //   );
-      this.$router.push({
-        name: "newsDetails",
-        params: { newsID: news.id },
-      });
-      //   console.log(response);
-      //   console.log(response.data);
-      //   this.errorDetails = response.data;
-      // } catch (error) {
-      //   console.log(error);
-      // }
+      try {
+        const response = await axios.get(
+          this.AuthStore.baseURL + `/api/admin/our-news/${news.id}`,
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              Authorization: `Bearer ${this.AuthStore.userToken}`,
+              "content-type": "application/json",
+            },
+          }
+        );
+        this.$router.push({
+          name: "newsDetails",
+          params: { newsID: news.id },
+        });
+        console.log(response);
+        console.log(response.data);
+        this.newsDetails = response.data.data;
+      } catch (error) {
+        console.log(error);
+      }
     },
     async createNews(payload) {
       console.log(payload);
@@ -132,7 +81,10 @@ export const useOurnewsStore = defineStore("ournewsStore", {
         this.createLoading = false;
         console.log(response);
         console.log(response.data);
-        this.createdSuccesfully = response.success;
+        if (response.data) {
+          this.createdSuccessfully = true;
+        }
+        this.getourNewsData();
       } catch (error) {
         console.log(error);
       }
@@ -157,7 +109,11 @@ export const useOurnewsStore = defineStore("ournewsStore", {
         this.editLoading = false;
         console.log(response);
         console.log(response.data);
-        this.updatedSuccesfully = response.success;
+        if (response.data) {
+          this.updatedSuccessfully = true;
+        }
+        this.getourNewsData();
+        this.showNewsData();
       } catch (error) {
         console.log(error);
       }
@@ -177,8 +133,13 @@ export const useOurnewsStore = defineStore("ournewsStore", {
             },
           }
         );
+        this.ourNewsData.splice(
+          this.ourNewsData.map((news) => news.id).indexOf(news.id),
+          1
+        );
         console.log(response);
         console.log(response.data);
+        this.$router.replace({ name: "admin-news-events" });
       } catch (error) {
         console.log(error);
       }
