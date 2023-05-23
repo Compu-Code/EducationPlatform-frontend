@@ -102,7 +102,7 @@ export const useUsersStore = defineStore("usersStore", {
         console.log(error);
       }
     },
-    async assignRoleUser(payload, id) {
+    async assignRoleUser(payload, id, path) {
       console.log(id);
       const user = this.usersData.find((user) => user.user.id === id);
       console.log(user);
@@ -127,7 +127,11 @@ export const useUsersStore = defineStore("usersStore", {
           this.updatedSuccessfully = true;
         }
         this.userDetails = response.data.data;
-        this.showUserData(user.user.id);
+        if (path === "/dashboard/users") {
+          this.getUsersData();
+        } else {
+          this.showUserData(user.user.id);
+        }
       } catch (error) {
         console.log(error);
       }

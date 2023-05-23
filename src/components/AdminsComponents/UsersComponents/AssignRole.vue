@@ -89,7 +89,8 @@ export default {
           {
             roles: this.selectedRoles,
           },
-          this.userId
+          this.userId,
+          this.$route.fullPath
         );
         if (this.usersStore.updatedSuccessfully) {
           this.$emit("close");
