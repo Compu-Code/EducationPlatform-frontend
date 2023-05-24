@@ -380,6 +380,9 @@ export default {
       this.$router.replace({ name: "signup-step2" });
     }
   },
+  unmounted() {
+    this.authStore.$reset();
+  },
 };
 </script>
 

@@ -126,13 +126,10 @@ export default {
   },
   methods: {
     //create flow
+    // this.selectedFile &&
+    // this.selectedFile.type.startsWith("image/")
     async createSponsor() {
-      if (
-        this.sponsorName &&
-        this.sponsorDescription &&
-        this.selectedFile &&
-        this.selectedFile.type.startsWith("image/")
-      ) {
+      if (this.sponsorName && this.sponsorDescription) {
         console.log(this.selectedFile);
         await this.sponsorsStore.createSponsor({
           // TODO: ask backend how he want to receive img
