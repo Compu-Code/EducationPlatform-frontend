@@ -163,13 +163,13 @@ export const useSidebarStore = defineStore("sidebarStore", {
     allMenus: [
       {
         title: "Dashboard",
-        name: "dashboard-home",
+        name: "admin-dashboard-home",
         icon: "IconDashboard",
       },
-      { title: "Users", name: "admin-users", icon: "IconUsers" },
+      { title: "Users", name: "admin-users-list", icon: "IconUsers" },
       {
         title: "Courses",
-        name: "admin-courses",
+        name: "admin-courses-list",
         icon: "IconCourses",
       },
       {
@@ -208,7 +208,7 @@ export const useSidebarStore = defineStore("sidebarStore", {
       },
       {
         title: "Error Logs",
-        name: "admin-error-logs",
+        name: "admin-error-logs-list",
         icon: "IconErrors",
       },
       {
@@ -219,11 +219,11 @@ export const useSidebarStore = defineStore("sidebarStore", {
         submenuItem: [
           {
             title: "Roles",
-            name: "admin-roles",
+            name: "admin-roles-list",
           },
           {
             title: "Permissions",
-            name: "admin-permissions",
+            name: "admin-permissions-list",
           },
         ],
       },
@@ -235,30 +235,30 @@ export const useSidebarStore = defineStore("sidebarStore", {
         submenuItem: [
           {
             title: "Contact us",
-            name: "admin-contact-forms",
+            name: "admin-contact-us-list",
           },
           {
             title: "Volunteer",
-            name: "admin-volunteer-forms",
+            name: "admin-volunteer-with-us-list",
           },
         ],
       },
 
-      { title: "Rating", name: "admin-rating", icon: "IconRating" },
+      { title: "Rating", name: "admin-ratings-list", icon: "IconRating" },
       {
         title: "News & Events",
-        name: "admin-news-events",
+        name: "admin-news-list",
         icon: "IconNews",
       },
       { title: "Chat", name: "admin-support", icon: "IconChat" },
       {
         title: "Activity Logs",
-        name: "admin-activity-logs",
+        name: "admin-activity-logs-list",
         icon: "IconActivity",
       },
       {
         title: "Sponsors",
-        name: "admin-sponsors",
+        name: "admin-sponsors-list",
         icon: "IconSponsors",
       },
       //lecturers

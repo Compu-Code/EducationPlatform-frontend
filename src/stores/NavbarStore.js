@@ -5,9 +5,9 @@ export const useNavbarStore = defineStore("navbarStore", {
   state: () => ({
     navbarMenus: [
       { id: 1, title: "Home", link: "/home" },
-      { id: 2, title: "About us", link: "/about" },
+      { id: 2, title: "About us", link: "/about-us" },
       { id: 3, title: "Lecturers", link: "/lecturers" },
-      { id: 4, title: "Contact", link: "/contact" },
+      { id: 4, title: "Contact us", link: "/contact-us" },
       { id: 5, title: "FAQs", link: "/FAQs" },
     ],
     darkMode: useLocalStorage("darkMode", false),

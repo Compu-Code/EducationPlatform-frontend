@@ -1,28 +1,19 @@
 import { createApp, markRaw } from "vue";
 import App from "./App.vue";
-
-//vue cookies
 import VueCookies from "vue-cookies";
-
-// pinia
 import { createPinia } from "pinia";
-
-//router
-import router from "./router/router";
-
-// axios
+import router from "./router";
 import axios from "axios";
 
-// trios
-// import { TroisJSVuePlugin } from "troisjs";
+// TODO: install moment js
 
 // navbar navbar sidebar
-import "./styles/main.css";
-import TheSidebar from "./components/SidebarComponents/TheSidebar.vue";
-import TheNavbar from "./components/NavbarComponents/TheNavbar.vue";
+import "@/assets/styles/main.css";
+// import TheSidebar from "./components/SidebarComponents/TheSidebar.vue";
+// import TheNavbar from "./components/NavbarComponents/TheNavbar.vue";
 
 const app = createApp(App);
-app.component("TheSidebar", TheSidebar).component("TheNavbar", TheNavbar);
+// app.component("TheSidebar", TheSidebar).component("TheNavbar", TheNavbar);
 
 app.use(router, axios, VueCookies);
 app.use(
@@ -30,4 +21,6 @@ app.use(
     store.$router = markRaw(router);
   })
 );
+// router.isReady().then(function () {
+// });
 app.mount("#app");

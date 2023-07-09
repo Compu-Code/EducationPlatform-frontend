@@ -5,13 +5,17 @@ module.exports = {
     extend: {
       colors: {
         // colors for light mode (BG & text)
-        "light-primary-color": "#F0F4FF",
+        // "light-primary-color": "#F0F4FF",
+        "light-primary-color": "#F4F7FE",
         "light-secondary-color": "#C8DDFF",
         "light-navbar-border-bottom": "#B2C4E4",
         "light-text-color": "#01041B",
 
         // colors for dark mode (BG & text)
-        "dark-primary-color": "#01041B",
+        // gray
+        // "dark-primary-color": "#2B2B2B",
+        // second gray
+        "dark-primary-color": "#26292B",
         "dark-secondary-color": "#01062D",
         "dark-navbar-border-bottom": "#313b4b",
         "dark-text-color": "#F0F4FF",

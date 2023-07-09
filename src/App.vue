@@ -3,43 +3,23 @@
 </template>
 
 <script>
-// function to get token from cookies
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(";");
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == " ") {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
 
-import { useAuthStore } from "../src/stores/AuthStore";
-import { useUserStore } from "./stores/UserStore";
-import { useNavbarStore } from "./stores/NavbarStore";
+// import { useAuthStore } from "@/stores/AuthStore";
+// import { useUserStore } from "@/stores/UserStore";
+// import { useNavbarStore } from "@/stores/NavbarStore";
 import { storeToRefs } from "pinia";
-import VueCookies from "vue-cookies";
-import TheSidebar from "./components/SidebarComponents/TheSidebar.vue";
-import TheNavbar from "./components/NavbarComponents/TheNavbar.vue";
+// import VueCookies from "vue-cookies";
+// import TheSidebar from "./components/SidebarComponents/TheSidebar.vue";
+// import TheNavbar from "./components/NavbarComponents/TheNavbar.vue";
 
 export default {
-  components: {
-    TheSidebar,
-    TheNavbar,
-  },
-  setup() {
-    const navbarStore = useNavbarStore();
-    const AuthStore = useAuthStore();
-    const UserStore = useUserStore();
-    const { darkMode } = storeToRefs(navbarStore);
-    return { AuthStore, UserStore, navbarStore, darkMode };
-  },
+  // setup() {
+  //   const navbarStore = useNavbarStore();
+  //   const AuthStore = useAuthStore();
+  //   const UserStore = useUserStore();
+  //   const { darkMode } = storeToRefs(navbarStore);
+  //   return { AuthStore, UserStore, navbarStore, darkMode };
+  // },
   methods: {
     // getCookie(name) {
     //   const value = `; ${document.cookie}`;
@@ -92,15 +72,12 @@ export default {
       document.body.classList.add("bg-light-primary-color");
     }
   },
-  unmounted() {
-    // this.AuthStore.logout();
-  },
 };
 </script>
 
 <style>
-@import "./styles/main.css";
-@import "./styles/variables.css/";
+@import "@/assets/styles/main.css";
+@import "@/assets/styles/variables.css/";
 
 * {
   font-family: "Inter";
