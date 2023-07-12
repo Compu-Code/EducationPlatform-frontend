@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper relative" ref="target">
+  <div class="wrapper relative font-inter" ref="target">
     <div
       class="select relative flex items-center outline rounded-[7px]"
       id="slc"
